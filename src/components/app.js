@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PortfolioContainer from './portfolio-container';
 
 export default class App extends Component {
   render() {
@@ -8,7 +9,12 @@ export default class App extends Component {
         <h2>Devcamp React Course 2025</h2><br></br>
         <p>Python version: 2.7.x</p>
         <p>Node version: 12.13.0</p>
+        <br></br>
+        <PortfolioContainer />
+        <PortfolioContainer />
+        <PortfolioContainer />
       </div>
     );
+
   }
 }
