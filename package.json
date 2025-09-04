@@ -1,7 +1,8 @@
 {
-  "name": "react-redux-router",
+  "name": "alexandr-react-portfolio",
   "version": "1.0.0",
-  "description": "Basic skeleton codebase for React/Redux/Router applications.",
+  "description": "Personal portfolio app built in react",
+  "author": "Alexandr Gomez",
   "scripts": {
     "preinstall": "npm set audit false",
     "start": "CHOKIDAR_USEPOLLING=true webpack-dev-server --config webpack/dev.config.js --watch",
