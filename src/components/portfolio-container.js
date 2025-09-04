@@ -18,14 +18,45 @@ export default class PortfolioContainer extends Component {
 
             pageTitle: "Welcome to my Portfolio!",
 
+            isLoading: false, // Lo agregamos desde guia 07 JSX y STATE, como ejemplo
+
             data: [
-                { title: "Portfolio Item 1 ..."},
-                { title: "Portfolio Item 2 ..."},
-                { title: "Portfolio Item 3 ..."},
-                { title: "Portfolio Item 4 ..."},
-                { title: "Item 5 ..."}
+                { id: 1, title: "Portfolio Item 1 ...", url: "https://google.com"},
+                { id: 2, title: "Portfolio Item 2 ...", url: "https://github.com"},
+                { id: 3, title: "Portfolio Item 3 ...", url: "https://devcamp.com"},
+                { id: 4, title: "Portfolio Item 4 ...", url: "https://yahoo.com"},
+                { id: 5, title: "Item 5 ...", url: "https://google.com"},
             ]
         };
+
+        // De 07 STATE, veremos si es necesario por no usar () =>
+        this.handleFilter = this.handleFilter.bind(this);
+
+    }
+
+    // De 07 STATE, veremos si es necesario por no usar () =>
+    handleFilter() {
+        console.log("[NOTICE] HandleFiltering en USO")
+
+        this.setState({
+
+            // Vamos a filtrar el item 5 (que es, precisamente, el item del elvis)
+            data: this.state.data.filter( item =>  {
+
+                return item.title !== 'Item 5 ...'
+
+            })
+
+        });
+    }
+
+    handleToggleLoading = () => {
+
+        this.setState( prevState => ({
+
+            isLoading: !prevState.isLoading
+        }));
+    
     }
 
 
@@ -45,11 +76,30 @@ export default class PortfolioContainer extends Component {
 
     }
 
+    /* De 07 STATE:
+
+        A partir de aquí, hacemos un Loading... inicial tipico
+
+    */
     render() {
+
+        console.log('[DEBUG render()] -> PortfolioContainer invoked')
+        
+        if (this.state.isLoading) {
+            <div>Loading site ...</div>;
+        }
+
         return (
-            
             <div>
                 <h2>{this.state.pageTitle}</h2>
+                
+                <button onClick={this.handleFilter}>
+                    Filter Items
+                </button>
+
+                <button onClick={this.handleToggleLoading}>
+                    Reload render() items
+                </button>
                 {this.PortfolioItems()}
             </div>
         );
