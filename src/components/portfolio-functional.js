@@ -20,7 +20,7 @@ const PortfolioFunctional = () => {
     return (
         <div>
             <br></br>
-            <h3>Los items FUNCIONALES irán aquí ...</h3>
+            <h3>Los items FUNCIONALES irán aquí (Mantenemos esta visual sólo para comprender la diferencia entre componente funcional y componente de Class) ...</h3>
         </div>
     )
 }

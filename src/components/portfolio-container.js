@@ -10,7 +10,7 @@ export default class PortfolioContainer extends Component {
         console.log("[NOTICE] Estamos usando nuestor primer CONSTURCTOR" )
         console.log("Muestra de cada super(props):", this.props)
 
-        
+
         this.state = {
 
             pageTitle: "Welcome to my Portfolio!",
@@ -25,10 +25,43 @@ export default class PortfolioContainer extends Component {
     }
 
 
+    /* Refactorizar PortfolioContainer para NO meter lógica en render()
+
+        - Usando map() -> Se itera sobre datos, retorna nuevo array SIN modificar, mejor que loops
+
+    */
+    PortfolioItems() {
+
+        return this.state.data.map( (item) => {
+            return(
+
+                <div key={item.title}>
+                    {item.title}
+                </div>
+            );
+        });
+    }
+    /*
+    También podemos usar el mapeo dentro de los propios callcbacks,
+    por ejemplo para Ordered Lists,
+        PortfolioItems() {
+            return (
+            <div>
+                <ol>
+                    {this.state.data.map( (item) => (
+                        <li key={item.title}>{item.title}</li>
+                    ))}
+                </ol>
+            </div>
+        )};
+    */
+
     render() {
         return (
+            
             <div>
-                <h2>Los items portfolio CLASS, del nuevo componente, irán aquí:</h2>
+                <h2>{this.state.pageTitle}</h2>
+                {this.PortfolioItems()}
             </div>
         );
     }

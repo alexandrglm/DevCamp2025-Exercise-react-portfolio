@@ -12,10 +12,6 @@ export default class App extends Component {
         <p>Node version: 12.13.0</p>
         <br></br>
         <PortfolioContainer />
-        <PortfolioContainer />
-        <PortfolioContainer />
-        <PortfolioFunctional />
-        <PortfolioFunctional />
         <PortfolioFunctional />
       </div>
     );
