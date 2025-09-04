@@ -40,11 +40,31 @@ const PortfolioItem = (props) => {
 
     console.log("[NOTICE] --> Props recibidos:", props)
 
+    // De la guia 07 JSX/Babel, demostramos expresiones JSX
+    const itemClass = "portfolio-item-wrapper"
+    const isActive = true
+    const backgroundColor = props.title.length > 10 ? "lightblue" : "limegreen"
+
+
     return (
 
-        <div>
-            <h3>{props.title}</h3>
-            <p>{props.url}</p>
+        <div 
+            className="portfolio-item-wrapper"
+            style={{ backgroundColor }}    
+        >
+            <h3>{props.title.toUpperCase()}</h3>
+            <p>
+                <a href={props.url} target="_blank">
+                    {props.url}
+                </a>
+            </p>
+
+            {/* Comentarios en JS pasados a JSX */}
+            {isActive && <span>Active</span>}
+
+            {/* Ejemplo para Expresiones complejas */ }
+            <small> Length: {props.title.length} chars.</small>
+
         </div>
     );
 }

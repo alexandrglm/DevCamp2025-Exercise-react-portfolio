@@ -22,7 +22,8 @@ export default class PortfolioContainer extends Component {
                 { title: "Portfolio Item 1 ..."},
                 { title: "Portfolio Item 2 ..."},
                 { title: "Portfolio Item 3 ..."},
-                { title: "Portfolio Item 4 ..."}
+                { title: "Portfolio Item 4 ..."},
+                { title: "Item 5 ..."}
             ]
         };
     }
