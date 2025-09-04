@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PortfolioContainer from './portfolio-container';
+import PortfolioFunctional from './portfolio-functional';
 
 export default class App extends Component {
   render() {
@@ -13,6 +14,9 @@ export default class App extends Component {
         <PortfolioContainer />
         <PortfolioContainer />
         <PortfolioContainer />
+        <PortfolioFunctional />
+        <PortfolioFunctional />
+        <PortfolioFunctional />
       </div>
     );
 
