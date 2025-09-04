@@ -1,5 +1,8 @@
 import React,{ Component } from "react";
 
+// Nuestro propios imports, empieza con el del primer PROPS
+import PortfolioItem from "./portfolio-item";
+
 export default class PortfolioContainer extends Component {
     
     // Primer CONSTRUCTOR!
@@ -25,36 +28,21 @@ export default class PortfolioContainer extends Component {
     }
 
 
-    /* Refactorizar PortfolioContainer para NO meter lógica en render()
-
-        - Usando map() -> Se itera sobre datos, retorna nuevo array SIN modificar, mejor que loops
-
-    */
     PortfolioItems() {
 
-        return this.state.data.map( (item) => {
-            return(
+        return this.state.data.map( item => {
+            
+            return (
+                <PortfolioItem
 
-                <div key={item.title}>
-                    {item.title}
-                </div>
+                    key={item.title}
+                    title={item.title}
+                    url={item.url}
+                />
             );
         });
+
     }
-    /*
-    También podemos usar el mapeo dentro de los propios callcbacks,
-    por ejemplo para Ordered Lists,
-        PortfolioItems() {
-            return (
-            <div>
-                <ol>
-                    {this.state.data.map( (item) => (
-                        <li key={item.title}>{item.title}</li>
-                    ))}
-                </ol>
-            </div>
-        )};
-    */
 
     render() {
         return (
