@@ -13,7 +13,10 @@
 
 # Manual Fixes Applied for using this in 2025:
 
-#### 1. `npm run start` script won't work in many Linux setups while using Py2.x
+#### 1. Don't update packages, as required.
+Try not to perform a `npm i <package>`. This venv is intended for these old versions.
+
+#### 2. `npm run start` script won't work in many Linux setups while using Py2.x
 
 Due to system-sec hardening, changes need to be applied in order to fix Chokidar watchers:
 - Add `CHOKIDAR_USEPOLLING=true' 
