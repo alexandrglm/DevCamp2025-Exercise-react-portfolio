@@ -57,20 +57,22 @@ const PortfolioItem = (props) => {
         // Mantenemos los debugs, pero es posible que haya que ir quitándolos
         <div 
             className="portfolio-item-wrapper"
-            style={{ backgroundColor }}    
+            style={{ backgroundColor }} 
         >
-            <h3>
+            <div>
+                <h3>{props.title}</h3>
+                <h4>{props.url}</h4>
                 <Link to={`/portfolio/${props.slug}`}>
                 
                     {props.title.toUpperCase()}
                 </Link>
-            </h3>
+            </div>
             
-            <p>
+            {/* <p>
                 <a href={props.url} target="_blank" rel="noopener noreferrer">
                     {props.url}
                 </a>
-            </p>
+            </p> */}
 
             {/* Comentarios en JS pasados a JSX */}
             {isActive && <span>Active</span>}

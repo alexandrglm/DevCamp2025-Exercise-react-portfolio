@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationComponent from './navigation/navigation-container';
 
-import PortfolioContainer from './portfolio-container';
-import PortfolioFunctional from './portfolio-functional';
+import PortfolioContainer from './portfolio/portfolio-container';
+// OLD import PortfolioFunctional from './portfolio/portfolio-functional';
 
 // Desde guia 07-031 Basic Router setup, importación de las pages
 import Home from './pages/home';

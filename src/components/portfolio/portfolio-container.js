@@ -28,13 +28,9 @@ export default class PortfolioContainer extends Component {
             // isLoading: false, // Lo agregamos desde guia 07 JSX y STATE, como ejemplo
             isLoading: false,     // Lo reañadimos desde 07-29 Conditionals 1, para short-circuit en true
 
-            data: [
-                { id: 1, title: "Google", category: "eCommerce", slug: 'google', url: "https://google.com"},
-                { id: 2, title: "GitHub", category: "Scheduling", slug: 'github', url: "https://github.com"},
-                { id: 3, title: "DevCamp", category: "Enterprise", slug: 'devcamp', url: "https://devcamp.com"},
-                { id: 4, title: "Yahoo", category: "eCommerce", slug: 'yahoo', url: "https://yahoo.com"},
-                { id: 5, title: "GoogleFR", category: "Enterprise", slug: 'googlefr', url: "https://google.fr"},
-            ]
+
+            // De 07-042, vaciamos el array hardcoded para trabajar con la API
+            data: []
         };
 
         // De 07 STATE, veremos si es necesario por no usar () =>
@@ -49,14 +45,24 @@ export default class PortfolioContainer extends Component {
         this.getPortfolioItems = this.getPortfolioItems.bind(this)
     }
 
-    // De 07 STATE a 07-28 Data Filter
+    // De 07-042
+    componentDidMount() {
+
+        this.getPortfolioItems()
+
+    }
+
+    // 07-042 DEPRECATED
+    // // De 07 STATE a 07-28 Data Filter
     handleFilter(filter) {
         console.log("[NOTICE] NEW HandleFilter en USO")
         
         this.setState({
-        data: this.state.data.filter(item => {
-            return item.category === filter;
-        })
+            data: this.state.data.filter( item => {
+
+                return item.category === filter;
+            
+            })
         });
     }
 
@@ -67,24 +73,6 @@ export default class PortfolioContainer extends Component {
             isLoading: !prevState.isLoading
         }));
     
-    }
-
-
-    PortfolioItems() {
-
-        return this.state.data.map( item => {
-            
-            return (
-                <PortfolioItem
-
-                    key={item.title}
-                    title={item.title}
-                    url={item.url}
-                    slug={item.slug}
-                />
-            );
-        });
-
     }
 
     /* 07-027 Guia manejar valores de STATE, añadimos un handlePageTitleUpdate */
@@ -108,6 +96,13 @@ export default class PortfolioContainer extends Component {
 
             console.log('[AXIOS] GET ALL data response: ', response)
 
+            // AÑADIMOS setState para actualizar la data/el render
+            this.setState( {
+
+                data:   response.data.portfolio_items
+
+            })
+
         })
         .catch( error => {
 
@@ -117,6 +112,23 @@ export default class PortfolioContainer extends Component {
 
     }
 
+
+    PortfolioItems() {
+
+        return this.state.data.map( item => {
+            
+            return (
+                <PortfolioItem
+
+                    key={item.id}
+                    title={item.name}
+                    url={item.url}
+                    slug={item.id}
+                />
+            );
+        });
+
+    }
 
     /* De 07 STATE:
 
@@ -133,8 +145,9 @@ export default class PortfolioContainer extends Component {
             return <div>Loading site ...</div>
         }
 
-        // De 07-041, movimos el callback de AXIOS GET ALL, aquí
-        this.getPortfolioItems();
+        // En 07-042 es DEPRECATED, ya que estamos implementando las API request en didComponentMount
+        // // De 07-041, movimos el callback de AXIOS GET ALL, aquí
+        // this.getPortfolioItems();
 
         return (
             <div>
@@ -151,18 +164,19 @@ export default class PortfolioContainer extends Component {
                 {this.PortfolioItems()}
                 <br />
 
-                <button onClick={ () => this.handleFilter('eCommerce') }>
-                    eCommerce
+                
+                <button onClick={ () => this.handleFilter('Pigments') }>
+                    Pigments
                 </button>
 
-                <button onClick={ () => this.handleFilter('Scheduling') }>
-                    Scheduling
+                <button onClick={ () => this.handleFilter('Hanko') }>
+                    Hanko
                 </button>
 
-                <button onClick={ () => this.handleFilter('Enterprise') }>
-                    Enterprise
+                <button onClick={ () => this.handleFilter('Sentai') }>
+                    Sentai
                 </button>
-
+                    
             </div>
         );
     }
