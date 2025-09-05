@@ -21,10 +21,10 @@ export default class PortfolioContainer extends Component {
             isLoading: false, // Lo agregamos desde guia 07 JSX y STATE, como ejemplo
 
             data: [
-                { id: 1, title: "Portfolio Item 1 ...", url: "https://google.com"},
-                { id: 2, title: "Portfolio Item 2 ...", url: "https://github.com"},
-                { id: 3, title: "Portfolio Item 3 ...", url: "https://devcamp.com"},
-                { id: 4, title: "Portfolio Item 4 ...", url: "https://yahoo.com"},
+                { id: 1, title: "Portfolio Item 1 ...", category: "eCommerce", url: "https://google.com"},
+                { id: 2, title: "Portfolio Item 2 ...", category: "Scheduling", url: "https://github.com"},
+                { id: 3, title: "Portfolio Item 3 ...", category: "Enterprise", url: "https://devcamp.com"},
+                { id: 4, title: "Portfolio Item 4 ...", category: "eCommerce", url: "https://yahoo.com"},
                 { id: 5, title: "Item 5 ...", url: "https://google.com"},
             ]
         };
@@ -38,20 +38,14 @@ export default class PortfolioContainer extends Component {
 
     }
 
-    // De 07 STATE, veremos si es necesario por no usar () =>
-    handleFilter() {
-        console.log("[NOTICE] HandleFiltering en USO")
+    // De 07 STATE a 07-28 Data Filter
+    handleFilter(filter) {
+        console.log("[NOTICE] NEW HandleFilter en USO")
         
         this.setState({
-
-            // Vamos a filtrar el item 5 (que es, precisamente, el item del elvis)
-            // He tenid problemas para implementar un elvis que restaure el title
-            data: this.state.data.filter( item =>  {
-
-                return item.title !== 'Item 5 ...'
-
-            })
-
+        data: this.state.data.filter(item => {
+            return item.category === filter;
+        })
         });
     }
 
@@ -113,16 +107,24 @@ export default class PortfolioContainer extends Component {
                 <button onClick={this.handlePageTitleUpdate}> 
                     Change Title
                 </button>
+                <button onClick={this.handleToggleLoading}>
+                    Reload render() items
+                </button>
                 <hr />
 
                 {this.PortfolioItems()}
                 <br />
-                <button onClick={this.handleFilter}>
-                    Filter Items
+
+                <button onClick={ () => this.handleFilter('eCommerce') }>
+                    eCommerce
                 </button>
 
-                <button onClick={this.handleToggleLoading}>
-                    Reload render() items
+                <button onClick={ () => this.handleFilter('Scheduling') }>
+                    Scheduling
+                </button>
+
+                <button onClick={ () => this.handleFilter('Enterprise') }>
+                    Enterprise
                 </button>
 
             </div>
