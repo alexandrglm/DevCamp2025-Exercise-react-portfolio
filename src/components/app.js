@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 
+// Desde guia 07-031 Basic Router setup
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationComponent from './navigation/navigation-container';
 
 import PortfolioContainer from './portfolio-container';
 import PortfolioFunctional from './portfolio-functional';
+
+// Desde guia 07-031 Basic Router setup, importación de las pages
+import Home from './pages/home';
+import About from './pages/about';
+
+
 
 export default class App extends Component {
   
@@ -20,7 +29,19 @@ export default class App extends Component {
         <p>Node version: 12.13.0</p>
         <hr />
         <br />
-        <NavigationComponent />
+
+        { /* Desde guia 07-031 Basic Router setup */ }
+        <Router>
+          <div>          
+            <NavigationComponent />
+
+            <Switch>  
+              <Route exact path="/" component={Home} />
+              <Route exatct path="/about-me" component={About} />
+            </Switch>
+          </div>
+        </Router>
+        
         <br />
         <PortfolioContainer />
         <PortfolioFunctional />
