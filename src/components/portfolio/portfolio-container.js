@@ -120,7 +120,7 @@ export default class PortfolioContainer extends Component {
             return (
                 <PortfolioItem
 
-                    key={item.id}
+                    key={item.id}   // La adicion real es en la 07-043
                     title={item.name}
                     url={item.url}
                     slug={item.id}
