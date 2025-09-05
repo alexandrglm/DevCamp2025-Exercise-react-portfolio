@@ -1,6 +1,11 @@
 // De 07-30 Elvis
-
 import React, { Component } from "react";
+
+
+// De 07-032 NavLinks
+// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom";
+
 
 export default class NavigationComponent extends Component {
 
@@ -14,13 +19,25 @@ export default class NavigationComponent extends Component {
         return (
 
             <div>
-                <button> Home</button>
-                <button> About</button>
-                <button> Contact</button>
-                <button> Blog</button>
+                {/* Los botones serán reemplazados por Navlinks */}
+                <NavLink exact to="/">
+                    Home
+                </NavLink>
+
+                <NavLink exact to="/about-me">
+                    About
+                </NavLink>
+
+                <NavLink exact to="/contact">
+                    Contact
+                </NavLink>
+
+                <NavLink exact to="/blog">
+                    Blog
+                </NavLink>
                 
                 {/* Aquí comienzan las ternary para discernir qué mostrar */ }
-                { true ? <button> Add blog</button> : null }
+                { false ? <button> Add blog</button> : null }
             </div>
 
         )
