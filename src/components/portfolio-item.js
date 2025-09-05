@@ -33,8 +33,15 @@ function Hola (props) {
 
 !!! PARA EL CAMBIO, EVIDENTEMENTE, HAY QUE MODIFICAR EL RENDER()!!!!
 */
+/*
+Desde la 07-035 Accessing URL Values, añadimos componete Link,
+y modificamos para crear los links dinámicos de Portfolio
 
+De momento seguimos dejando los debugs de otrsa guías, pero esto cambiará.
+*/
 import React from "react";
+import { Link } from 'react-router-dom'
+
 
 const PortfolioItem = (props) => {
 
@@ -52,9 +59,14 @@ const PortfolioItem = (props) => {
             className="portfolio-item-wrapper"
             style={{ backgroundColor }}    
         >
-            <h3>{props.title.toUpperCase()}</h3>
+            <h3>
+                <Link to={`/portfolio/${props.slug}`}>
+                    {props.title.toUpperCase()}
+                </Link>
+            </h3>
+            
             <p>
-                <a href={props.url} target="_blank">
+                <a href={props.url} target="_blank" rel="noopener noreferrer">
                     {props.url}
                 </a>
             </p>

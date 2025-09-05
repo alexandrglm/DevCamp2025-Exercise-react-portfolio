@@ -22,11 +22,11 @@ export default class PortfolioContainer extends Component {
             isLoading: false,     // Lo reañadimos desde 07-29 Conditionals 1, para short-circuit en true
 
             data: [
-                { id: 1, title: "Portfolio Item 1 ...", category: "eCommerce", url: "https://google.com"},
-                { id: 2, title: "Portfolio Item 2 ...", category: "Scheduling", url: "https://github.com"},
-                { id: 3, title: "Portfolio Item 3 ...", category: "Enterprise", url: "https://devcamp.com"},
-                { id: 4, title: "Portfolio Item 4 ...", category: "eCommerce", url: "https://yahoo.com"},
-                { id: 5, title: "Item 5 ...", category: "Enterprise", url: "https://google.com"},
+                { id: 1, title: "Google", category: "eCommerce", slug: 'google', url: "https://google.com"},
+                { id: 2, title: "GitHub", category: "Scheduling", slug: 'github', url: "https://github.com"},
+                { id: 3, title: "DevCamp", category: "Enterprise", slug: 'devcamp', url: "https://devcamp.com"},
+                { id: 4, title: "Yahoo", category: "eCommerce", slug: 'yahoo', url: "https://yahoo.com"},
+                { id: 5, title: "GoogleFR", category: "Enterprise", slug: 'googlefr', url: "https://google.fr"},
             ]
         };
 
@@ -70,6 +70,7 @@ export default class PortfolioContainer extends Component {
                     key={item.title}
                     title={item.title}
                     url={item.url}
+                    slug={item.slug}
                 />
             );
         });
