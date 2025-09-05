@@ -18,28 +18,34 @@ export default class NavigationComponent extends Component {
 
         return (
 
-            <div>
-                {/* Los botones serán reemplazados por Navlinks */}
-                <NavLink exact to="/" activeClassName="nav-link-active">
-                    Home
-                </NavLink>
 
-                <NavLink exact to="/about-me" activeClassName="nav-link-active">
-                    About
-                </NavLink>
+            // De 08-053: FLEXBOX, le damos ya la estructura final
+            <div className="nav-wrapper">
+
+                <div className="left-side">
+                    
+                    {/* Los botones serán reemplazados por Navlinks */}
+                    <NavLink exact to="/" activeClassName="nav-link-active">
+                        Home
+                    </NavLink>
+
+                    <NavLink exact to="/about-me" activeClassName="nav-link-active">
+                        About
+                    </NavLink>
 
 
-                {/* Quitamos el cambio a activeClassName para ver diferencias */ }
-                <NavLink exact to="/contact" >
-                    Contact
-                </NavLink>
+                    {/* Quitamos el cambio a activeClassName para ver diferencias */ }
+                    <NavLink exact to="/contact" >
+                        Contact
+                    </NavLink>
 
-                <NavLink exact to="/blog">
-                    Blog
-                </NavLink>
-                
-                {/* Aquí comienzan las ternary para discernir qué mostrar */ }
-                { false ? <button> Add blog</button> : null }
+                    <NavLink exact to="/blog">
+                        Blog
+                    </NavLink>
+                    
+                    {/* Aquí comienzan las ternary para discernir qué mostrar */ }
+                    { false ? <button> Add blog</button> : null }
+                </div>
             </div>
 
         )

@@ -1,0 +1,18 @@
+// De 08-053: FLEXBOX to NavLinks
+
+.nav-wrapper {
+
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+
+    // Vamos pensando en los responsives
+    @media (max-width: 768px) {
+
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+    }
+
+}
