@@ -26,3 +26,22 @@ body {
     display: grid;
     justify-items: center;
 }
+
+// NavLink Styles
+.active {
+
+    font-size: 2rem;
+    border-bottom: 2px solid black;
+    color: black;
+    font-weight: bold;
+    border: 2px dotted purple;
+
+}
+
+.nav-link-active {
+
+    font-size: 3rem;
+    border-bottom: 2px solid lime;
+    color: lime;
+    border: 2px dotted coral;
+}

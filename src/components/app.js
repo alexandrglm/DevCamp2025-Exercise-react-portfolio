@@ -12,7 +12,8 @@ import PortfolioFunctional from './portfolio-functional';
 // Desde guia 07-031 Basic Router setup, importación de las pages
 import Home from './pages/home';
 import About from './pages/about';
-
+import Contact from './pages/contact';
+import Blog from './pages/blog';
 
 
 export default class App extends Component {
@@ -38,6 +39,8 @@ export default class App extends Component {
             <Switch>  
               <Route exact path="/" component={Home} />
               <Route exatct path="/about-me" component={About} />
+              <Route exact path="/contact" component={Contact} />
+              <Route exact path="/blog" component={Blog} />
             </Switch>
           </div>
         </Router>
