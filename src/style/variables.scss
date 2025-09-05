@@ -1,0 +1,25 @@
+// De 08-055, SCSS Vars
+
+// COLOURS
+// colour vars from STAC pigments 
+
+// primary colours
+$teal: #00988D;         // STAC I-3
+$dark-teal: #005C6E;   // STAC I-5
+$charcoal: #1E3138;    // STAC X-6 
+
+$blue: #0246A8;         // STAC CB-5
+$warning: #D72B08;      // STAC B-3
+$grey: #727A7C;         // STAC GREY 5
+
+
+// neutrals
+$offwhite: #EBEADB;    // STAC White
+$black: #131414;        // STAC Black
+
+
+
+// FONT SIZES
+$base-font-size: 16px;
+$small-font: $base-font-size * 0.875;   // 14
+$large-font: $base-font-size * 1.75     // 20
