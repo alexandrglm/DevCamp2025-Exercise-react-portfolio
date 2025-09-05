@@ -54,13 +54,14 @@ const PortfolioItem = (props) => {
 
 
     return (
-
+        // Mantenemos los debugs, pero es posible que haya que ir quitándolos
         <div 
             className="portfolio-item-wrapper"
             style={{ backgroundColor }}    
         >
             <h3>
                 <Link to={`/portfolio/${props.slug}`}>
+                
                     {props.title.toUpperCase()}
                 </Link>
             </h3>

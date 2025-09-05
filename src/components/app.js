@@ -16,6 +16,9 @@ import Contact from './pages/contact';
 import Blog from './pages/blog';
 import PortfolioDetail from './portfolio/portfolio-detail';
 
+// De 07-036 Catch All Routes, No Match -> 404 alike
+import NoMatch from './pages/no-match';
+
 
 export default class App extends Component {
   
@@ -43,7 +46,10 @@ export default class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
               {/* // De 07-035 - URL values,slug, sublinks propios */}
-              <Route path="/portfolio/:slug" component={PortfolioDetail} />
+              <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
+
+              {/* Los CATCH-ALL..:SIEMPRE AL FINAL */}
+              <Route component={NoMatch} />
             </Switch>
           </div>
         </Router>
