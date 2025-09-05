@@ -38,16 +38,13 @@ export default class App extends Component {
 
             <Switch>  
               <Route exact path="/" component={Home} />
-              <Route exatct path="/about-me" component={About} />
+              <Route exact path="/about-me" component={About} />
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/blog" component={Blog} />
             </Switch>
           </div>
         </Router>
-        
-        <br />
-        <PortfolioContainer />
-        <PortfolioFunctional />
+
       </div>
     
     );
