@@ -1,47 +1,12 @@
-html {
-    font-size: 62.5%; // 1rem is 10px
-}
+/* 
+De 08-051:
 
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-    font-family: 'montserrat';
-}
+ - Convertimos main.scss en el organizador de estilos/files
+ -  **Por features, no por tipo**:
 
-body {
-    overflow-x: hidden;
-    font-weight: normal;
+        - **portfolio-items.scss** - todo lo relacionado con portfolio
+        - **navigation.scss** - estilos de navegación
+        - **variables.scss** - colores, fonts, spacing
 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.app {
-    margin-top: 2rem;
-    display: grid;
-    justify-items: center;
-}
-
-// NavLink Styles
-.active {
-
-    font-size: 2rem;
-    border-bottom: 2px solid black;
-    color: black;
-    font-weight: bold;
-    border: 2px dotted purple;
-
-}
-
-.nav-link-active {
-
-    font-size: 3rem;
-    border-bottom: 2px solid lime;
-    color: lime;
-    border: 2px dotted coral;
-}
+ */
+ @import './base.scss'
