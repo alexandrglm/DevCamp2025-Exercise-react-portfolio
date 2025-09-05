@@ -1,7 +1,14 @@
 import React,{ Component } from "react";
 
+// De 07-041
+import axios from "axios";
+
 // Nuestro propios imports, empieza con el del primer PROPS
 import PortfolioItem from "./portfolio-item";
+
+
+
+
 
 export default class PortfolioContainer extends Component {
     
@@ -37,6 +44,9 @@ export default class PortfolioContainer extends Component {
         // De 07-027 Valores STATE, explicación explícita para crear binds en sintaxis antigua
         this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this)
 
+
+        // De 07-041 (movimos axios de app.js al componente)
+        this.getPortfolioItems = this.getPortfolioItems.bind(this)
     }
 
     // De 07 STATE a 07-28 Data Filter
@@ -89,6 +99,25 @@ export default class PortfolioContainer extends Component {
 
     }
 
+
+    // De 07-041, movemos axios api get all de app.js aquí
+    getPortfolioItems() {
+
+        axios.get('https://apialexandr.devcamp.space/portfolio/portfolio_items')
+        .then( response =>{
+
+            console.log('[AXIOS] GET ALL data response: ', response)
+
+        })
+        .catch( error => {
+
+            console.log('[ERROR AXIOS] GET ALL error:', error)
+
+        })
+
+    }
+
+
     /* De 07 STATE:
 
         A partir de aquí, hacemos un Loading... inicial tipico
@@ -103,6 +132,9 @@ export default class PortfolioContainer extends Component {
         if (this.state.isLoading) {
             return <div>Loading site ...</div>
         }
+
+        // De 07-041, movimos el callback de AXIOS GET ALL, aquí
+        this.getPortfolioItems();
 
         return (
             <div>

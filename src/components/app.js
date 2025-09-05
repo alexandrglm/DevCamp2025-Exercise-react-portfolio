@@ -19,10 +19,13 @@ import PortfolioDetail from './portfolio/portfolio-detail';
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
+// De 07-040 Axios GET
+import axios from 'axios'
 
 export default class App extends Component {
-  
+
   render() {
+
     
     return (
       
