@@ -31,16 +31,21 @@ export default class PortfolioContainer extends Component {
 
         // De 07 STATE, veremos si es necesario por no usar () =>
         this.handleFilter = this.handleFilter.bind(this);
+        this.handleToggleLoading = this.handleToggleLoading.bind(this)
+
+        // De 07-027 Valores STATE, explicación explícita para crear binds en sintaxis antigua
+        this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this)
 
     }
 
     // De 07 STATE, veremos si es necesario por no usar () =>
     handleFilter() {
         console.log("[NOTICE] HandleFiltering en USO")
-
+        
         this.setState({
 
             // Vamos a filtrar el item 5 (que es, precisamente, el item del elvis)
+            // He tenid problemas para implementar un elvis que restaure el title
             data: this.state.data.filter( item =>  {
 
                 return item.title !== 'Item 5 ...'
@@ -76,6 +81,18 @@ export default class PortfolioContainer extends Component {
 
     }
 
+    /* 07-027 Guia manejar valores de STATE, añadimos un handlePageTitleUpdate */
+    handlePageTitleUpdate() {
+
+        this.setState({  
+            
+            // pageTitle: 'Title cambiado usando State' (le metemos randoms para ver cada update ademas de en console)
+            pageTitle: String(Math.random().toString(15).substring(2, 12) )
+        
+        })
+
+    }
+
     /* De 07 STATE:
 
         A partir de aquí, hacemos un Loading... inicial tipico
@@ -92,7 +109,14 @@ export default class PortfolioContainer extends Component {
         return (
             <div>
                 <h2>{this.state.pageTitle}</h2>
-                
+                <hr />
+                <button onClick={this.handlePageTitleUpdate}> 
+                    Change Title
+                </button>
+                <hr />
+
+                {this.PortfolioItems()}
+                <br />
                 <button onClick={this.handleFilter}>
                     Filter Items
                 </button>
@@ -100,7 +124,7 @@ export default class PortfolioContainer extends Component {
                 <button onClick={this.handleToggleLoading}>
                     Reload render() items
                 </button>
-                {this.PortfolioItems()}
+
             </div>
         );
     }
