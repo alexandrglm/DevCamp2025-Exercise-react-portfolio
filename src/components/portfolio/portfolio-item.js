@@ -43,16 +43,10 @@ import React from "react";
 import { Link } from 'react-router-dom'
 
 
-const PortfolioItem = (props) => {
+export default function(props) {
 
     console.log("[NOTICE] --> Props recibidos:", props)
 
-    // DEPRECATED:  De la guia 07 JSX/Babel, demostramos expresiones JSX
-    // const itemClass = "portfolio-item-wrapper"
-    const isActive = true
-    // const backgroundColor = props.title.length > 5 ? "lightblue" : "limegreen"
-
-    // De 088-049 -> DESTRUCTURING components' keys into var
     /*
     Valores documentados usando Object.keys(item) con debugger
         [
@@ -71,14 +65,16 @@ const PortfolioItem = (props) => {
     const {
         id,
         description,
-        thumb_img_url,
+        thumb_image_url,
         logo_url
     } = props.item
 
 
     return (
-        // Se retiraron los debugs backgroundColour y la logica elvis length
+
         <div>
+            <img src={thumb_image_url} />
+            <img src={logo_url} />
             <h3>
                 <Link to={`/portfolio/${id}`}>
                     {props.item.name}
@@ -90,5 +86,3 @@ const PortfolioItem = (props) => {
 
     );
 }
-
-export default PortfolioItem;
