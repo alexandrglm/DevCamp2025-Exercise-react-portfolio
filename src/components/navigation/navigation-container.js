@@ -23,28 +23,39 @@ export default class NavigationComponent extends Component {
             <div className="nav-wrapper">
 
                 <div className="left-side">
+
+                    <div className="nav-link-wrapper">
+                        {/* 08-054, ENVOLVEMOS CADA LINK EN SU nav-link-wrapper */}
+                        <NavLink exact to="/" activeClassName="nav-link-active">
+                            Home
+                        </NavLink>
+                    </div>
                     
-                    {/* Los botones serán reemplazados por Navlinks */}
-                    <NavLink exact to="/" activeClassName="nav-link-active">
-                        Home
-                    </NavLink>
 
-                    <NavLink exact to="/about-me" activeClassName="nav-link-active">
-                        About
-                    </NavLink>
+                    <div className="nav-link-wrapper">
+                        <NavLink exact to="/about-me" activeClassName="nav-link-active">
+                            About
+                        </NavLink>
+                    </div>
 
+                    <div className="nav-link-wrapper">
+                        <NavLink exact to="/contact" activeClassName="nav-link-active">
+                            Contact
+                        </NavLink>
+                    </div>
 
-                    {/* Quitamos el cambio a activeClassName para ver diferencias */ }
-                    <NavLink exact to="/contact" >
-                        Contact
-                    </NavLink>
-
-                    <NavLink exact to="/blog">
-                        Blog
-                    </NavLink>
+                    <div className="nav-link-wrapper">
+                        <NavLink exact to="/blog" activeClassName="nav-link-active">
+                            Blog
+                        </NavLink>
+                    </div>
                     
-                    {/* Aquí comienzan las ternary para discernir qué mostrar */ }
-                    { false ? <button> Add blog</button> : null }
+                    <div className="right-side">
+                        Alexandr Gomez
+                    </div>
+
+                    {/* {/* Aquí comienzan las ternary para discernir qué mostrar */ }
+                    { /* false ? <button> Add blog</button> : null } */ }
                 </div>
             </div>
 
