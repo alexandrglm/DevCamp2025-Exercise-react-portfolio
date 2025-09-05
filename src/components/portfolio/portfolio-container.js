@@ -116,6 +116,13 @@ export default class PortfolioContainer extends Component {
     PortfolioItems() {
 
         return this.state.data.map( item => {
+
+            // De 08-045
+            console.log('[AXIOS API] Portfolio item: ', item)
+
+            // De 08-046, JS Debugger, Vamos a añadir breakpoint debugger
+            // Esto romperá la ejecución. Al terminar guía, lo quitamos
+            // debugger;
             
             return (
                 <PortfolioItem
@@ -124,6 +131,13 @@ export default class PortfolioContainer extends Component {
                     title={item.name}
                     url={item.url}
                     slug={item.id}
+
+                    // Vamos a extender antes de tiempo los items
+                    description={item.description}
+                    category={item.category}
+                    bannerImage={item.banner_image_url}
+                    thumbImage={item.thumb_image_url}
+                    logo={item.logo_url}
                 />
             );
         });
@@ -165,16 +179,16 @@ export default class PortfolioContainer extends Component {
                 <br />
 
                 
-                <button onClick={ () => this.handleFilter('Pigments') }>
-                    Pigments
+                <button onClick={ () => this.handleFilter('Technology') }>
+                    Technology
                 </button>
 
-                <button onClick={ () => this.handleFilter('Hanko') }>
-                    Hanko
+                <button onClick={ () => this.handleFilter('eLearning') }>
+                    eLearning
                 </button>
 
-                <button onClick={ () => this.handleFilter('Sentai') }>
-                    Sentai
+                <button onClick={ () => this.handleFilter('Services') }>
+                    Services
                 </button>
                     
             </div>

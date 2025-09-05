@@ -50,7 +50,7 @@ const PortfolioItem = (props) => {
     // De la guia 07 JSX/Babel, demostramos expresiones JSX
     const itemClass = "portfolio-item-wrapper"
     const isActive = true
-    const backgroundColor = props.title.length > 10 ? "lightblue" : "limegreen"
+    const backgroundColor = props.title.length > 5 ? "lightblue" : "limegreen"
 
 
     return (
