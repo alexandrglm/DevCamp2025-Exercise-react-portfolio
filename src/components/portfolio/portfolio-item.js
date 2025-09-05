@@ -47,40 +47,47 @@ const PortfolioItem = (props) => {
 
     console.log("[NOTICE] --> Props recibidos:", props)
 
-    // De la guia 07 JSX/Babel, demostramos expresiones JSX
-    const itemClass = "portfolio-item-wrapper"
+    // DEPRECATED:  De la guia 07 JSX/Babel, demostramos expresiones JSX
+    // const itemClass = "portfolio-item-wrapper"
     const isActive = true
-    const backgroundColor = props.title.length > 5 ? "lightblue" : "limegreen"
+    // const backgroundColor = props.title.length > 5 ? "lightblue" : "limegreen"
+
+    // De 088-049 -> DESTRUCTURING components' keys into var
+    /*
+    Valores documentados usando Object.keys(item) con debugger
+        [
+        "id",
+        "name",
+        "description",
+        "url",
+        "category",
+        "position",
+        "thumb_image_url",
+        "banner_image_url",
+        "logo_url",
+        "column_names_merged_with_images"
+        ]
+    */
+    const {
+        id,
+        description,
+        thumb_img_url,
+        logo_url
+    } = props.item
 
 
     return (
-        // Mantenemos los debugs, pero es posible que haya que ir quitándolos
-        <div 
-            className="portfolio-item-wrapper"
-            style={{ backgroundColor }} 
-        >
-            <div>
-                <h3>{props.title}</h3>
-                <h4>{props.url}</h4>
-                <Link to={`/portfolio/${props.slug}`}>
-                
-                    {props.title.toUpperCase()}
+        // Se retiraron los debugs backgroundColour y la logica elvis length
+        <div>
+            <h3>
+                <Link to={`/portfolio/${id}`}>
+                    {props.item.name}
                 </Link>
-            </div>
-            
-            {/* <p>
-                <a href={props.url} target="_blank" rel="noopener noreferrer">
-                    {props.url}
-                </a>
-            </p> */}
-
-            {/* Comentarios en JS pasados a JSX */}
-            {isActive && <span>Active</span>}
-
-            {/* Ejemplo para Expresiones complejas */ }
-            <small> Length: {props.title.length} chars.</small>
-
+            </h3>
+            <div>{description}</div>
         </div>
+            
+
     );
 }
 

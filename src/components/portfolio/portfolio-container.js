@@ -35,7 +35,7 @@ export default class PortfolioContainer extends Component {
 
         // De 07 STATE, veremos si es necesario por no usar () =>
         this.handleFilter = this.handleFilter.bind(this);
-        this.handleToggleLoading = this.handleToggleLoading.bind(this)
+        // DEPRECATED this.handleToggleLoading = this.handleToggleLoading.bind(this)
 
         // De 07-027 Valores STATE, explicación explícita para crear binds en sintaxis antigua
         this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this)
@@ -66,14 +66,15 @@ export default class PortfolioContainer extends Component {
         });
     }
 
-    handleToggleLoading = () => {
+    // DEPRECATED since 08-049, nos adaptamos al desarrollo
+    // handleToggleLoading = () => {
 
-        this.setState( prevState => ({
+    //     this.setState( prevState => ({
 
-            isLoading: !prevState.isLoading
-        }));
+    //         isLoading: !prevState.isLoading
+    //     }));
     
-    }
+    // }
 
     /* 07-027 Guia manejar valores de STATE, añadimos un handlePageTitleUpdate */
     handlePageTitleUpdate() {
@@ -124,41 +125,14 @@ export default class PortfolioContainer extends Component {
             // Esto romperá la ejecución. Al terminar guía, lo quitamos
             // debugger;
             
-            /*
-            Valores documentados usando Object.keys(item) con debugger
-                [
-                "id",
-                "name",
-                "description",
-                "url",
-                "category",
-                "position",
-                "thumb_image_url",
-                "banner_image_url",
-                "logo_url",
-                "column_names_merged_with_images"
-                ]
-            */
+
 
             return (
                 <PortfolioItem
 
-                    key={item.id}   // La adicion real es en la 07-043
-                    title={item.name}
-                    url={item.url}
-                    slug={item.id}
-
-                    /* 
-                    Vamos a extender antes de tiempo los items
-
-                    No se renderizarán aún, pero tenemos la lógica aquí para ello
-                    */
-                    description={item.description}
-                    category={item.category}
-                    bannerImage={item.banner_image_url}
-                    thumbImage={item.thumb_image_url}
-                    logo={item.logo_url}
-                    position={item.position}
+                    // De 088-049 -> Hemos limpiado, usando Object COMPLETO
+                    key={item.id}
+                    item={item}
                 />
             );
         });
@@ -190,9 +164,6 @@ export default class PortfolioContainer extends Component {
                 <hr />
                 <button onClick={this.handlePageTitleUpdate}> 
                     Change Title
-                </button>
-                <button onClick={this.handleToggleLoading}>
-                    Reload render() items
                 </button>
                 <hr />
 
