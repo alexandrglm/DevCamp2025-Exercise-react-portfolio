@@ -124,6 +124,22 @@ export default class PortfolioContainer extends Component {
             // Esto romperá la ejecución. Al terminar guía, lo quitamos
             // debugger;
             
+            /*
+            Valores documentados usando Object.keys(item) con debugger
+                [
+                "id",
+                "name",
+                "description",
+                "url",
+                "category",
+                "position",
+                "thumb_image_url",
+                "banner_image_url",
+                "logo_url",
+                "column_names_merged_with_images"
+                ]
+            */
+
             return (
                 <PortfolioItem
 
@@ -132,12 +148,17 @@ export default class PortfolioContainer extends Component {
                     url={item.url}
                     slug={item.id}
 
-                    // Vamos a extender antes de tiempo los items
+                    /* 
+                    Vamos a extender antes de tiempo los items
+
+                    No se renderizarán aún, pero tenemos la lógica aquí para ello
+                    */
                     description={item.description}
                     category={item.category}
                     bannerImage={item.banner_image_url}
                     thumbImage={item.thumb_image_url}
                     logo={item.logo_url}
+                    position={item.position}
                 />
             );
         });
