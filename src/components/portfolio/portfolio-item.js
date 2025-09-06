@@ -72,12 +72,29 @@ export default function(props) {
 
     return (
 
+        /* De 08-059*/
         <div className="portfolio-item-wrapper">
 
             <div className="portfolio-img-background" 
                 style={{ backgroundImage: `url(${thumb_image_url})` }} /> {/* No era mejor usar backtips? */ }
-            <img src={logo_url} /> 
-            <div>{description}</div>
+            
+            {/* De 08-060:  overlaying img, text, overr bg img */}
+            <div className="img-text-wrapper">
+
+                <div className="logo-wrapper">
+                    
+                    <img src={logo_url} /> 
+                
+                </div>
+            
+            </div>
+
+            <div className="subtitle">
+                {description}
+            </div>
+            
+
+            {/* De 08-060   Removing direct link */}
             <Link to={`/portfolio/${id}`}></Link>
             {/* props.item.name */ }
 

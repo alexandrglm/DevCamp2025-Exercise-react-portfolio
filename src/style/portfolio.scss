@@ -22,4 +22,51 @@
 
     }
 
+    // De 08-060
+    .img-text-wrapper {
+
+        position: absolute;
+        top:    0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        text-align: center;
+        padding-left: 100px;
+        padding-right: 100px;
+
+
+        .subtitle {
+
+            transform: translateY(20px);
+            transition: 1s ease-in-out;
+            color: transparent;
+
+        }
+
+        .img-text-wrapper:hover .subtitle{
+
+            transform: translateY(0);
+            opacity: 1;
+            color: lime;
+            font-weight: 400;
+
+        }
+
+    }
+
+    .logo-wrapper{
+        img {
+
+            width: 50%;
+            margin-bottom: 20px;
+            border: 1px solid $black;
+            border-radius: 300% 300% / 350% 200%; //LO quitaremos, es para diferenciar el logo
+            background-color: $PB-4;
+
+
+        }
+    }
+
 }
