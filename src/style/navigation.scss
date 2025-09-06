@@ -7,13 +7,17 @@
     padding: 30px;
     width: 100%;
     
-    border: 1px solid $black;
+    border: 1px dotted $black;
 
     .left-side {
 
         display: flex;
 
         font-size: $large-font;
+        font-family: 'Glory', sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: bold;
 
     }
     .right-side {
@@ -24,7 +28,7 @@
         color: $charcoal;
         text-transform: lowercase;
         a {
-            font-family: 'Glory', sans-serif;
+
         }
 
     }
@@ -62,7 +66,7 @@
     transition: 0.5s ease-in-out;
 
     margin-right: 20px;
-    text-transform: uppercase;
+    text-transform:capitalize;
     font-size: $large-font;
 
     a {
