@@ -73,9 +73,10 @@ export default function(props) {
     return (
 
         <div className="portfolio-item-wrapper">
-            
-            {/* <img src={thumb_image_url} />
-            <img src={logo_url} /> */ }
+
+            <div className="portfolio-img-background" 
+                style={{ backgroundImage: `url(${thumb_image_url})` }} /> {/* No era mejor usar backtips? */ }
+            <img src={logo_url} /> 
             <div>{description}</div>
             <Link to={`/portfolio/${id}`}></Link>
             {/* props.item.name */ }
