@@ -2,12 +2,14 @@
 
 .nav-wrapper {
 
-    //  display: flex;
+    display: flex;
     justify-content: space-between;
     padding: 30px;
     width: 100%;
     
     border: 1px dotted $black;
+    background-image: url('../../static/assets/pattern1.png');
+    background-color: $CB-1;
 
     .left-side {
 
@@ -27,6 +29,7 @@
         position: absolute;
         color: $charcoal;
         text-transform: lowercase;
+        font-family: 'Xanh Mono', monospace;
 
     }
 
@@ -64,11 +67,11 @@
 
     margin-right: 20px;
     text-transform:capitalize;
-    font-size: $large-font;
+    font-size: 40px;
 
     a {
 
-        color: $BO-1;
+        color: $BO-2;
         text-decoration: none;
 
         &:hover {
@@ -93,7 +96,9 @@
     .nav-link-active {
 
         border-bottom: 1px solid $teal;
-        color: $A-19real;
+        background-color: $BO-1;
+        border-radius: 150% 20% / 110% 40%;
+        color: $A-5;
         padding: 0 0 5px 0;
 
     }

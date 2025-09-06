@@ -16,12 +16,12 @@ export default class NavigationContainer extends Component {
 
     render() {
 
+        const elPattern = '../../../static/assets/pattern1.png'
         return (
 
 
             // De 08-053: FLEXBOX, le damos ya la estructura final
-            <div className="nav-wrapper">
-
+            <div className="nav-wrapper" style={{ backgroundImage: `url(${elPattern})` }} >
                 <div className="left-side">
 
                     <div className="nav-link-wrapper">
