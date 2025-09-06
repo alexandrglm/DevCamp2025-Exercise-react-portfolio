@@ -29,7 +29,7 @@ export default class App extends Component {
     
     return (
       
-      <div className='app'>
+      <div className='container'>
 
 
         {/* De 08-057: CleanUp, vamos retirando cosas no finales

@@ -60,3 +60,9 @@ body {
 //     color: lime;
 //     border: 2px dotted coral;
 // }
+
+.container {
+
+    display: grid;
+    grid-template-columns: 1fr;
+}

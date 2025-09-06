@@ -72,15 +72,14 @@ export default function(props) {
 
     return (
 
-        <div>
-            <img src={thumb_image_url} />
-            <img src={logo_url} />
-            <h3>
-                <Link to={`/portfolio/${id}`}>
-                    {props.item.name}
-                </Link>
-            </h3>
+        <div className="portfolio-item-wrapper">
+            
+            {/* <img src={thumb_image_url} />
+            <img src={logo_url} /> */ }
             <div>{description}</div>
+            <Link to={`/portfolio/${id}`}></Link>
+            {/* props.item.name */ }
+
         </div>
             
 

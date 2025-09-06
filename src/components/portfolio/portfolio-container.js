@@ -169,7 +169,9 @@ export default class PortfolioContainer extends Component {
                 </button>
                 <hr />
 
-                {this.PortfolioItems()}
+                <div className="portfolio-items-wrapper">
+                    {this.PortfolioItems()}                    
+                </div>
                 <br />
 
                 
