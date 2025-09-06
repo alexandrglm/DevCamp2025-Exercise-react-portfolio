@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 
-export default class NavigationComponent extends Component {
+export default class NavigationContainer extends Component {
 
     constructor() {
         super()
@@ -49,13 +49,15 @@ export default class NavigationComponent extends Component {
                             Blog
                         </NavLink>
                     </div>
-                    
-                    <div className="right-side">
-                        Alexandr Gomez
-                    </div>
 
                     {/* {/* Aquí comienzan las ternary para discernir qué mostrar */ }
                     { /* false ? <button> Add blog</button> : null } */ }
+
+                    <div className="right-side">
+                        <a>
+                            Alexandr Gomez
+                        </a>
+                    </div>
                 </div>
             </div>
 
