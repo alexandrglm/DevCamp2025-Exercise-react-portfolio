@@ -29,7 +29,12 @@ export default class Login extends Component{
 
     handleSubmit(event) {
 
+        // De 08-068, enforce form data submit
+        event.preventDefault()
+
         console.log('[DEBUG Forms] Handle submit: ', event)
+        // PRueba de concepto para acceder a la data de manera segura
+        console.log('[TEST preventDefault()]', this.state.email) // La pass tmb se podría acceder, pero jamas usando event.target.X.value
 
     }
 
