@@ -53,6 +53,8 @@ export default class Login extends Component{
             if ( response.data.status === 'created' ) {
 
                 console.log('[AXIOS SESSIONS DEBUG] WELCOME!')
+                /* De 08-073 - linkamos las handle...Login() a las responses específicas */
+                this.props.handleSuccesfulAuth()
             
             } else {
 
@@ -61,6 +63,7 @@ export default class Login extends Component{
                     errorText: 'WRONG EMAIL or PASSWORD!'
 
                 })
+                this.handleUnsuccesfulAuth();
             }
 
         })
@@ -69,7 +72,8 @@ export default class Login extends Component{
             this.setState( {
 
                 errorText: 'An erroro ocurred! Check API'
-            })
+            });
+            this.handleUnsuccesfulAuth();
         })
 
         // De 08-068, enforce form data submit
