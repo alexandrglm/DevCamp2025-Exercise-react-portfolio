@@ -1,6 +1,9 @@
 // De 08-066
 import React, { Component } from "react";
 
+// 08-069
+import axios from "axios";
+
 export default class Login extends Component{
 
     constructor(props) {
@@ -9,7 +12,8 @@ export default class Login extends Component{
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            errorText: ''
             
         }
 
@@ -23,11 +27,50 @@ export default class Login extends Component{
 
         this.setState( {
 
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            errorText: ''
         })
     }
 
     handleSubmit(event) {
+
+        axios
+        .post(
+            'https://api.devcamp.space/sessions',
+            {
+                client: {
+                    email:  this.state.email,
+                    password: this.state.password
+                }
+            }, 
+
+            { withCredentials: true }
+        )
+        .then( response => {
+
+            //Elvis: response.data.status === 'created' ? console.log(['axios debug, WELCOME!']) : this.setState( { errorText: 'WRONG PASS'})
+            // De 08-070, implementamos a nivel de api el errorHandling
+            if ( response.data.status === 'created' ) {
+
+                console.log('[AXIOS SESSIONS DEBUG] WELCOME!')
+            
+            } else {
+
+                this.setState({
+
+                    errorText: 'WRONG EMAIL or PASSWORD!'
+
+                })
+            }
+
+        })
+        .catch( error => {
+            console.log('[DEBUG GUIA 08-069]:', error)
+            this.setState( {
+
+                errorText: 'An erroro ocurred! Check API'
+            })
+        })
 
         // De 08-068, enforce form data submit
         event.preventDefault()
@@ -45,6 +88,8 @@ export default class Login extends Component{
             <div>
 
                 <h1>Login to access your dashboard</h1>
+
+                <div>{this.state.errorText}</div>
 
                 <form onSubmit={this.handleSubmit}>
 
