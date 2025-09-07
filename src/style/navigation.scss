@@ -33,6 +33,53 @@
 
     }
 
+    .nav-link-wrapper {
+
+        height: 22px;
+        border-bottom: 1px solid transparent;
+        transition: 0.5s ease-in-out;
+
+        margin-right: 20px;
+        text-transform:capitalize;
+        font-size: 40px;
+
+        a {
+
+            color: $BO-2;
+            text-decoration: none;
+
+            &:hover {
+
+                color: $I-2;
+                background-color: $PB-4;
+                border-radius: 150% 20% / 110% 40%;
+                border-bottom: 2px solid $black;
+
+
+            }
+
+        }
+
+        &:hover {
+
+            transform: translateY(-10px);
+
+
+        }
+
+        .nav-link-active {
+
+            border-bottom: 1px solid $teal;
+            background-color: $BO-1;
+            border-radius: 150% 20% / 110% 40%;
+            color: $A-5;
+            padding: 0 0 5px 0;
+
+        }
+
+    }
+
+
     // // Vamos pensando en los responsives
     // @media (max-width: 800px) {
 
@@ -59,48 +106,3 @@
 }
 
 
-.nav-link-wrapper {
-
-    height: 22px;
-    border-bottom: 1px solid transparent;
-    transition: 0.5s ease-in-out;
-
-    margin-right: 20px;
-    text-transform:capitalize;
-    font-size: 40px;
-
-    a {
-
-        color: $BO-2;
-        text-decoration: none;
-
-        &:hover {
-
-            color: $I-2;
-            background-color: $PB-4;
-            border-radius: 150% 20% / 110% 40%;
-            border-bottom: 2px solid $black;
-            
-
-        }
-
-    }
-
-    &:hover {
-
-        transform: translateY(-10px);
-
-
-    }
-
-    .nav-link-active {
-
-        border-bottom: 1px solid $teal;
-        background-color: $BO-1;
-        border-radius: 150% 20% / 110% 40%;
-        color: $A-5;
-        padding: 0 0 5px 0;
-
-    }
-
-}

@@ -111,19 +111,26 @@ export default class PortfolioContainer extends Component {
         // // De 07-041, movimos el callback de AXIOS GET ALL, aquí
         // this.getPortfolioItems();
 
+        /* De 08-062, finalizando styles parte 1, mixins para botones,
+        consolidamos y refactgorizamos código/diseño */
         return (
             <div>
-                <h2>{this.state.pageTitle}</h2>
-                <hr />
-                <button onClick={() => this.handleFilter('Technology')}>
+
+                <button 
+                onClick={() => this.handleFilter('Technology')} 
+                className="btn" >
                     Technology
                 </button>
 
-                <button onClick={() => this.handleFilter('eLearning')}>
+                <button 
+                onClick={() => this.handleFilter('eLearning')} 
+                className="btn" >
                     eLearning
                 </button>
 
-                <button onClick={() => this.handleFilter('Services')}>
+                <button 
+                onClick={() => this.handleFilter('Services')} 
+                className="btn" >
                     Services
                 </button>
                 <br />
