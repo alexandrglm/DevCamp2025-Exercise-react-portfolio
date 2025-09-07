@@ -6,28 +6,28 @@ import Login from "../auth/login";
 import loginImg from '../../../static/assets/images/auth/login.jpg'
 
 export default class Auth extends Component {
+    
+    constructor(props) {
+        super(props);
 
-    /* De 08-073 - Adding debugging VISUAL component, creamos el constructor */
-    constructor(props){
-
-        super(props)
-
-        this.handleSuccesfulAuth = this.handleSuccesfulAuth.bind(this)
-        this.handleUnsuccesfulAuth = this.handleUnsuccesfulAuth.bind(this)
-
-
+        this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+        this.handleUnsuccessfulAuth = this.handleUnsuccessfulAuth.bind(this);
     }
-    handleSuccesfulAuth() {
 
-        this.props.handleSuccesfulLogin()
-        this.props.history.push('/')
-
+    handleSuccessfulAuth() {
+    
+        this.props.handleSuccessfulLogin();
+        this.props.history.push("/");
+    
     }
-    handleUnsuccesfulAuth() {
 
-        this.props.handleUnsuccesfulLogin()
-
+    handleUnsuccessfulAuth() {
+    
+        this.props.handleUnsuccessfulLogin();
+    
     }
+
+
 
 
     render() {
@@ -48,7 +48,10 @@ export default class Auth extends Component {
                 
                 <div className="right-column">
 
-                    <Login />
+                    <Login
+                    handleSuccessfulAuth={this.handleSuccessfulAuth} 
+                    handleUnsuccesfulAuth={this.handleUnsuccesfulAuth} 
+                    />
 
                 </div>
             </div>

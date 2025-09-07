@@ -20,20 +20,31 @@ import Auth from './pages/auth';
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
-// De 07-040 Axios GET
-import axios from 'axios'
 
 export default class App extends Component {
 
+  /* De 08-073 - Adding debugging VISUAL component, creamos el constructor */
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loggedInStatus: "NOT_LOGGED_IN"
+    };
+
+    this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
+    this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
+  }
+
+
   // De 08-072
-  handleSuccesfulLogin() {
+  handleSuccessfulLogin() {
 
     this.setState({
       loggedInStatus: 'LOGGED_IN'
     })
 
   }
-  handleUnsuccesfulLogin(){
+  handleUnsuccessfulLogin(){
     
     this.setState({
       loggedInStatus: 'NOT_LOGGED_IN'
@@ -73,8 +84,8 @@ export default class App extends Component {
 
                 <Auth
                 {...props} 
-                handleSuccesfulLogin={this.handleSuccesfulLogin} 
-                handleUnsuccesfulLogin={this.handleUnsuccesfulLogin} 
+                handleSuccessfulLogin={this.handleSuccessfulLogin} 
+                handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} 
                 />
               )}
               />
