@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationContainer from './navigation/navigation-container';
 
-import PortfolioContainer from './portfolio/portfolio-container';
+// OLD import PortfolioContainer from './portfolio/portfolio-container';
 // OLD import PortfolioFunctional from './portfolio/portfolio-functional';
 
 // Desde guia 07-031 Basic Router setup, importación de las pages
@@ -20,12 +20,27 @@ import Auth from './pages/auth';
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
-
-
 // De 07-040 Axios GET
 import axios from 'axios'
 
 export default class App extends Component {
+
+  // De 08-072
+  handleSuccesfulLogin() {
+
+    this.setState({
+      loggedInStatus: 'LOGGED_IN'
+    })
+
+  }
+  handleUnsuccesfulLogin(){
+    
+    this.setState({
+      loggedInStatus: 'NOT_LOGGED_IN'
+    })
+  
+  }
+
 
   render() {
 
@@ -33,19 +48,6 @@ export default class App extends Component {
     return (
       
       <div className='container'>
-
-
-        {/* De 08-057: CleanUp, vamos retirando cosas no finales
-
-        <h1>Alexandr Gomez - React Portfolio</h1>
-        <h2>Devcamp React Course 2025</h2>
-        <hr />
-        <p>Python version: 2.7.x</p>
-        <p>Node version: 12.13.0</p>
-        <hr />
-        <br /> 
-        */}
-
         { /* Desde guia 07-031 Basic Router setup */ }
         <Router>
           <div>          
@@ -53,7 +55,28 @@ export default class App extends Component {
 
             <Switch>  
               <Route exact path="/" component={Home} />
-              <Route path="/auth" component={Auth} />
+
+
+              {/* 
+              Pasamos del compopnente basico prop, al RENDER PROPS
+              
+                - Patron RENDER PROPS ... pasa FUNCIONES a COMPONENTES
+                - ...props, el spread preserva toda la funcionalidad de Router
+               
+               
+               */}
+              <Route path="/auth"
+              render={ props =>  (
+
+                <Auth
+                {...props} 
+                handleSuccesfulLogin={this.handleSuccesfulLogin} 
+                handleUnsuccesfulLogin={this.handleUnsuccesfulLogin} 
+                />
+              )}
+              />
+              
+              
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
