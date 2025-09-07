@@ -6,6 +6,8 @@ import React, { Component } from "react";
 // import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { NavLink } from "react-router-dom";
 
+import elPattern from '../../../static/assets/pattern1.png'
+
 
 export default class NavigationContainer extends Component {
 
@@ -16,7 +18,6 @@ export default class NavigationContainer extends Component {
 
     render() {
 
-        const elPattern = '../../../static/assets/pattern1.png'
         return (
 
 
