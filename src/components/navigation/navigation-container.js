@@ -1,70 +1,55 @@
-// De 07-30 Elvis
-import React, { Component } from "react";
+/*
+ * Desde 08-075 Refactorizamos de ClassComponent a FunctionaComponent. 
+ * Aprovechamops para limpiar
+*/ 
+import React, { useState } from "react";
 
-
-// De 07-032 NavLinks
-// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { NavLink } from "react-router-dom";
-
+// Mantenemos esto para el bg del nav
 import elPattern from '../../../static/assets/pattern1.png'
 
+const NavigationContainer = () => {
 
-export default class NavigationContainer extends Component {
+    /* Nuestro constructor se convirtió en esto
+     *
+     * const [stateName, setStateName] = useState(initialValue);
+     * 
+    */ 
+    const [menuTitle, setMenuTitle] = useState('Navigation Wrapper')
 
-    constructor() {
-        super()
+    return(
 
-    }
+        <div className="nav-wrapper" style={{ backgroundImage: `url(${elPattern})` }} >
+            <div className="left-side">
 
-    render() {
-
-        return (
-
-
-            // De 08-053: FLEXBOX, le damos ya la estructura final
-            <div className="nav-wrapper" style={{ backgroundImage: `url(${elPattern})` }} >
-                <div className="left-side">
-
-                    <div className="nav-link-wrapper">
-                        {/* 08-054, ENVOLVEMOS CADA LINK EN SU nav-link-wrapper */}
-                        <NavLink exact to="/" activeClassName="nav-link-active">
-                            Home
-                        </NavLink>
-                    </div>
-                    
-
-                    <div className="nav-link-wrapper">
-                        <NavLink exact to="/about-me" activeClassName="nav-link-active">
-                            About
-                        </NavLink>
-                    </div>
-
-                    <div className="nav-link-wrapper">
-                        <NavLink exact to="/contact" activeClassName="nav-link-active">
-                            Contact
-                        </NavLink>
-                    </div>
-
-                    <div className="nav-link-wrapper">
-                        <NavLink exact to="/blog" activeClassName="nav-link-active">
-                            Blog
-                        </NavLink>
-                    </div>
-
-                    {/* {/* Aquí comienzan las ternary para discernir qué mostrar */ }
-                    { /* false ? <button> Add blog</button> : null } */ }
-
-                    <div className="right-side">
-                        <a>
-                            Alexandr Gomez
-                        </a>
-                    </div>
+                <div className="nav-link-wrapper">
+                    <a href="/">Home</a>
                 </div>
+                
+                <div className="nav-link-wrapper">
+                    <a href="/about">About</a>
+                </div>
+
+                <div className="nav-link-wrapper">
+                    <a href="/contact">Contact Us</a>
+                </div>
+
+                <div className="nav-link-wrapper">
+                    <a href="/blog">Blog</a>
+                </div>
+
             </div>
 
-        )
+            <div className="right-side">
+                <a>
+                    Alexandr Gomez
+                </a>
+            </div>
 
+        </div>
 
-    }
+    )
 
 }
+
+export default NavigationContainer;
+
