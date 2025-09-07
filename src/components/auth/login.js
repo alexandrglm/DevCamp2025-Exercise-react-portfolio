@@ -14,7 +14,6 @@ export default class Login extends Component{
             email: '',
             password: '',
             errorText: ''
-            
         }
 
         // Bind a los handlers
@@ -54,26 +53,25 @@ export default class Login extends Component{
 
                 console.log('[AXIOS SESSIONS DEBUG] WELCOME!')
                 /* De 08-073 - linkamos las handle...Login() a las responses específicas */
-                this.props.handleSuccesfulAuth()
+                this.props.handleSuccessfulAuth()
             
             } else {
 
                 this.setState({
-
                     errorText: 'WRONG EMAIL or PASSWORD!'
-
                 })
-                this.handleUnsuccesfulAuth();
+                this.props.handleUnsuccessfulAuth();
             }
 
         })
         .catch( error => {
             console.log('[DEBUG GUIA 08-069]:', error)
+            
             this.setState( {
-
                 errorText: 'An erroro ocurred! Check API'
             });
-            this.handleUnsuccesfulAuth();
+            
+            this.props.handleUnsuccesfulAuth();
         })
 
         // De 08-068, enforce form data submit

@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 // Desde guia 07-031 Basic Router setup
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+// De 08-074 Cookies checking
+import axios from 'axios';
+
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationContainer from './navigation/navigation-container';
-
 // OLD import PortfolioContainer from './portfolio/portfolio-container';
 // OLD import PortfolioFunctional from './portfolio/portfolio-functional';
-
 // Desde guia 07-031 Basic Router setup, importación de las pages
 import Home from './pages/home';
 import About from './pages/about';
@@ -50,6 +51,59 @@ export default class App extends Component {
       loggedInStatus: 'NOT_LOGGED_IN'
     })
   
+  }
+
+  // De 08-074: Cookies-Logged In Status
+  checkLoginStatus() {
+    
+    return axios
+      
+      .get("https://api.devcamp.space/logged_in", {
+      
+         withCredentials: true,
+      
+       })
+      
+      .then((response) => {
+      
+        console.log("[AXIOS COOKIES CHECK] logged_in response:", response);
+
+        const loggedIn = response.data.logged_in;
+        const loggedInStatus = this.state.loggedInStatus;
+
+      
+        if (loggedIn && loggedInStatus === "LOGGED_IN") {
+      
+          return loggedIn;
+      
+        } else if (loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+      
+          this.setState({
+      
+            loggedInStatus: "LOGGED_IN",
+      
+          });
+      
+      
+        } else if (!loggedIn && loggedInStatus === "LOGGED_IN") {
+      
+          this.setState({
+      
+            loggedInStatus: "NOT_LOGGED_IN",
+      
+          });
+      
+      
+        }
+      })
+      .catch((error) => {
+        console.log("[AXIOS COOKIES ERROR] Error:", error);
+      });
+  }
+
+  componentDidMount(){
+
+    this.checkLoginStatus()
   }
 
 
