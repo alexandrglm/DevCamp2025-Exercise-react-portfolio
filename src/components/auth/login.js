@@ -60,7 +60,7 @@ export default class Login extends Component{
                 this.setState({
                     errorText: 'WRONG EMAIL or PASSWORD!'
                 })
-                this.props.handleUnsuccessfulAuth();
+                this.handleUnsuccessfulAuth();
             }
 
         })

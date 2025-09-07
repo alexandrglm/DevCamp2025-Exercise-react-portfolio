@@ -3,11 +3,31 @@
  * Aprovechamops para limpiar
 */ 
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom"
+
 
 // Mantenemos esto para el bg del nav
 import elPattern from '../../../static/assets/pattern1.png'
 
-const NavigationContainer = () => {
+const NavigationContainer = props => {
+
+    // De o8-076, primera LOGICA del LINK CONDICIONAL a AUTH
+    const dynamicLink = (route, linkText) => {
+
+        return(
+
+            <div className="nav-link-wrapper">
+
+                <NavLink to={route} activeClassName="nav-link-active">
+                    {linkText}
+                </NavLink>
+
+            </div>
+
+        )
+
+    }
+
 
     /* Nuestro constructor se convirtió en esto
      *
@@ -22,20 +42,25 @@ const NavigationContainer = () => {
             <div className="left-side">
 
                 <div className="nav-link-wrapper">
-                    <a href="/">Home</a>
+                    <NavLink exact to="/" activeClassName="nav-link-active">
+                        Home
+                    </NavLink>
                 </div>
                 
                 <div className="nav-link-wrapper">
-                    <a href="/about">About</a>
+                    <NavLink to="/about" activeClassName="nav-link-active">
+                        About Us
+                    </NavLink>
                 </div>
 
                 <div className="nav-link-wrapper">
-                    <a href="/contact">Contact Us</a>
+                    <NavLink exact to="/contact" activeClassName="nav-link-active">
+                        Contact
+                    </NavLink>
                 </div>
 
-                <div className="nav-link-wrapper">
-                    <a href="/blog">Blog</a>
-                </div>
+                {/* // De o8-076, segunda LOGICA para LINK CONDICIONAL a AUTH */} 
+                {props.loggedInStatus === 'LOGGED_IN' ? (dynamicLink('/blog', 'Blog')) : null}
 
             </div>
 

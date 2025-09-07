@@ -34,6 +34,7 @@ export default class App extends Component {
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
+    this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
   }
 
 
@@ -51,6 +52,14 @@ export default class App extends Component {
       loggedInStatus: 'NOT_LOGGED_IN'
     })
   
+  }
+
+  //De 08-078 LOGOUT
+  handleSuccessfulLogout(){
+
+    this.setState( {
+      loggedInStatus: 'NOT_LOGGED_IN'
+    } )
   }
 
   // De 08-074: Cookies-Logged In Status
@@ -107,6 +116,22 @@ export default class App extends Component {
   }
 
 
+  //De 08-077 ROUTE GUARDS
+  authorisedPages() {
+
+    return [
+
+      <Route key="blog" path="/blog" component={Blog}  />
+      /*
+        Agregamos key props para evitar bugs
+
+        Todas las rutas protegigas irían aqui, es el análogo al def isAdmin: de flask
+      */
+
+    ]
+
+  }
+
   render() {
 
     
@@ -116,7 +141,12 @@ export default class App extends Component {
         { /* Desde guia 07-031 Basic Router setup */ }
         <Router>
           <div>          
-            <NavigationContainer />
+
+            { /* De o8-076, tercera LOGICA del LINK CONDICIONAL a AUTH, pasando props al callback */}
+            <NavigationContainer  
+            loggedInStatus={this.state.loggedInStatus}
+            handleSuccessfulLogout={this.state.handleSuccessfulLogout}
+            />
 
             {/* De 08-073 - Adding debugging VISUAL component*/}
             <h2>{this.state.loggedInStatus}</h2>
@@ -147,7 +177,12 @@ export default class App extends Component {
               
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route path="/blog" component={Blog} />
+              
+              {/*   //De 08-077 ROUTE GUARDS */}
+              { this.state.loggedInStatus === 'LOGGED_IN' ? ( this.authorisedPages() ) : null }
+              
+              
+              
               {/* // De 07-035 - URL values,slug, sublinks propios */}
               <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
 
