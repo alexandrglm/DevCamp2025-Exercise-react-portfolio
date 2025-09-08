@@ -7,11 +7,16 @@ export default class PortfolioManager extends Component {
 
         return(
 
-            <div>
-                <h1>Portfolio Manager</h1>
-                <h1>Portfolio Manager</h1>
-            </div>
+            <div className="portfolio-manager-wrapper">
 
+                <div className="left-column">
+                    <h1>Portfolio Form ...</h1>
+                </div>
+
+                <div className="right-column">
+                    <h1>Portfolio Sidebar...</h1>
+                </div>
+            </div>
         )
     }   
 }
