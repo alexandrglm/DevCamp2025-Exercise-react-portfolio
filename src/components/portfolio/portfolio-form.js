@@ -21,11 +21,30 @@ export default class PortfolioForm extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(event){
 
+        // de 08-88
+        this.setState( {
+
+            [event.target.name]: event.target.value
+
+        })
+
         console.log('[PORTFOLIO FORM] Handle change', event)
+
+
+    }
+
+    // De 08-088
+    handleSubmit(event) {
+
+        console.log('[PORTFOLIO FORM SUBMIT] Submit portfolio item', event)
+
+        // te acuerdas de como proteger data? preventDefault()
+        event.preventDefault()
     }
 
 
