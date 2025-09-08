@@ -3,6 +3,11 @@
  * Aprovechamops para limpiar
 */ 
 import React, { useState } from "react";
+
+// De 08-079, axios.delete, HOC
+import axios from 'axios';
+import { withRouter } from 'react-router'
+
 import { NavLink } from "react-router-dom"
 
 
@@ -28,6 +33,29 @@ const NavigationContainer = props => {
 
     }
 
+    // De 08-079, axios.delete, HOC
+    const handleSignOut = () => {
+
+        axios
+        .delete('https://api.devcamp.space/logout',
+            { withCredentials: true} )
+            .then( response => {
+                if ( response.status === 200 ) {
+
+                    props.history.push("/")
+                    props.handleSuccessfulLogout();
+
+                }
+                return response.data
+            })
+            .catch( error => {
+
+                console.log('[AXIOS LOGOUT] Error: ', error)
+
+            })
+
+    }
+
 
     /* Nuestro constructor se convirtió en esto
      *
@@ -39,6 +67,7 @@ const NavigationContainer = props => {
     return(
 
         <div className="nav-wrapper" style={{ backgroundImage: `url(${elPattern})` }} >
+            
             <div className="left-side">
 
                 <div className="nav-link-wrapper">
@@ -64,10 +93,11 @@ const NavigationContainer = props => {
 
             </div>
 
+            
             <div className="right-side">
-                <a>
-                    Alexandr Gomez
-                </a>
+                ALEXANDRGLM
+                {/* De 08-079, axios.delete, HOC */}
+                { props.loggedInStatus === 'LOGGED_IN' ? ( <a onClick={handleSignOut}>Sign Out</a> ): null }
             </div>
 
         </div>
@@ -76,5 +106,7 @@ const NavigationContainer = props => {
 
 }
 
-export default NavigationContainer;
+
+/* De 08-079, axios.delete, la implementación HOC */
+export default withRouter(NavigationContainer);
 
