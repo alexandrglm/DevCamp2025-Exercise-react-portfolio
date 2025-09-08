@@ -21,6 +21,9 @@ import Auth from './pages/auth';
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
+// De 08-081, SecureClass Component
+import PortfolioManager from './portfolio/portfolio-manager';
+
 
 export default class App extends Component {
 
@@ -121,15 +124,9 @@ export default class App extends Component {
 
     return [
 
-      <Route key="blog" path="/blog" component={Blog}  />
-      /*
-        Agregamos key props para evitar bugs
-
-        Todas las rutas protegigas irían aqui, es el análogo al def isAdmin: de flask
-      */
+      <Route key="portfolio-manager" path="/portfolio-manager" component={PortfolioManager} />
 
     ]
-
   }
 
   render() {
@@ -177,6 +174,7 @@ export default class App extends Component {
               
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
+              <Route path="/blog" component={Blog}  />
               
               {/*   //De 08-077 ROUTE GUARDS */}
               { this.state.loggedInStatus === 'LOGGED_IN' ? ( this.authorisedPages() ) : null }

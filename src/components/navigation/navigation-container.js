@@ -88,8 +88,15 @@ const NavigationContainer = props => {
                     </NavLink>
                 </div>
 
-                {/* // De o8-076, segunda LOGICA para LINK CONDICIONAL a AUTH */} 
-                {props.loggedInStatus === 'LOGGED_IN' ? (dynamicLink('/blog', 'Blog')) : null}
+                {/* // De o8-081, */}
+                <div className="nav-link-wrapper">
+                    <NavLink exact to="/blog" activeClassName="nav-link-active">
+                        Blog
+                    </NavLink>
+                </div>                
+
+                
+                {props.loggedInStatus === 'LOGGED_IN' ? (dynamicLink('/portfolio-manager', 'Portfolio Manager')) : null}
 
             </div>
 
