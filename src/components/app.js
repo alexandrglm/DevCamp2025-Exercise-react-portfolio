@@ -22,7 +22,7 @@ import Auth from './pages/auth';
 import NoMatch from './pages/no-match';
 
 // De 08-081, SecureClass Component
-import PortfolioManager from './portfolio/portfolio-manager';
+import PortfolioManager from './pages/portfolio-manager';
 
 
 export default class App extends Component {
