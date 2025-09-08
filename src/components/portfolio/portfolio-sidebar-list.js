@@ -12,11 +12,14 @@ const PortfolioSidebarList = ( props ) => {
 
             return ( 
 
-                <div>
+                <div className="portfolio-item-thumb">
 
-                    <img src={portfolioItem.thumb_image_url} /> 
-                    <h1>{portfolioItem.name}</h1>
-                    <h2>{portfolioItem.id}</h2>
+                    <div className="portfolio-thumb-img">
+                        <img src={portfolioItem.thumb_image_url} /> 
+                    </div>
+
+                    <h1 className="title">{portfolioItem.name}</h1>
+                    <h2 className="id">ID: {portfolioItem.id}</h2>
 
                 </div>
 
@@ -26,7 +29,9 @@ const PortfolioSidebarList = ( props ) => {
 
     return (
 
-        <div>{ portfolioList() } </div>
+        <div className="portfolio-sidebar-list-wrapper">
+            { portfolioList() } 
+        </div>
         
     )
 }
