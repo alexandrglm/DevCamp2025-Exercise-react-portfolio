@@ -33,7 +33,7 @@ export default class PortfolioManager extends Component {
     getPortfolioItems() {
 
         axios
-        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', { withCredential: true  } )
+        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', { withCredentials: true  } )
         .then( response => {
 
             console.log('[AXIOS GET PORTFOLIO-ITEMS] Response: ', response )

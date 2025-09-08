@@ -4,33 +4,40 @@ import React, { Component } from "react";
 
 const PortfolioSidebarList = ( props ) => {
 
-    const portfolioList = () => {
+    const portfolioList = props.data.map( portfolioItem => {
 
+        /*
+        Con MAP estamos transformando datos, de array a array-tipoJSX
+        
+        (De 08-090) PEEEEEEEEEEERO, si ponemos el .map() en el return, 
+        cada child de la lista NO tendrá key unicas, 
+        Funcionará, pero con warnings. 
+        
+        NO !!--> return props.data.map( portfolioItem => {
+        SI!!! -> Pasado como argumento
+        */
 
-        // con MAP estamos transformando datos, de array a array-tipoJSX
-        return props.data.map( portfolioItem => {
+        return ( 
 
-            return ( 
+            <div key={portfolioItem.id} className="portfolio-item-thumb">
 
-                <div className="portfolio-item-thumb">
-
-                    <div className="portfolio-thumb-img">
-                        <img src={portfolioItem.thumb_image_url} /> 
-                    </div>
-
-                    <h1 className="title">{portfolioItem.name}</h1>
-                    <h2 className="id">ID: {portfolioItem.id}</h2>
-
+                <div className="portfolio-thumb-img">
+                    <img src={portfolioItem.thumb_image_url} /> 
                 </div>
 
-            )
-        })
-    }
+                <h1 className="title">{portfolioItem.name}</h1>
+                <h2 className="id">ID: {portfolioItem.id}</h2>
+
+            </div>
+
+        )
+    })
+
 
     return (
 
         <div className="portfolio-sidebar-list-wrapper">
-            { portfolioList() } 
+            { portfolioList } 
         </div>
         
     )

@@ -2,27 +2,24 @@ import React, { Component } from 'react';
 
 // Desde guia 07-031 Basic Router setup
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 // De 08-074 Cookies checking
 import axios from 'axios';
 
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationContainer from './navigation/navigation-container';
-// OLD import PortfolioContainer from './portfolio/portfolio-container';
-// OLD import PortfolioFunctional from './portfolio/portfolio-functional';
-// Desde guia 07-031 Basic Router setup, importación de las pages
+
 import Home from './pages/home';
 import About from './pages/about';
 import Contact from './pages/contact';
 import Blog from './pages/blog';
+// De 08-081, SecureClass Component
+import PortfolioManager from './pages/portfolio-manager';
 import PortfolioDetail from './portfolio/portfolio-detail';
 import Auth from './pages/auth';
 
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
-// De 08-081, SecureClass Component
-import PortfolioManager from './pages/portfolio-manager';
 
 
 export default class App extends Component {
@@ -121,12 +118,16 @@ export default class App extends Component {
 
   //De 08-077 ROUTE GUARDS
   authorisedPages() {
-
+    
     return [
-
-      <Route key="portfolio-manager" path="/portfolio-manager" component={PortfolioManager} />
-
-    ]
+      
+      <Route
+        key="portfolio-manager"
+        path="/portfolio-manager"
+        component={PortfolioManager}
+      />
+    
+    ];
   }
 
   render() {

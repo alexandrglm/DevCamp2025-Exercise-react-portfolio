@@ -1,5 +1,6 @@
 // De 08-086
 import React, { Component } from "react";
+import axios from 'axios'
 
 
 export default class PortfolioForm extends Component {
@@ -39,15 +40,34 @@ export default class PortfolioForm extends Component {
     }
 
     // De 08-088
+    // De 08-091 ya implementamos la lógica api
     handleSubmit(event) {
 
-        console.log('[PORTFOLIO FORM SUBMIT] Submit portfolio item', event)
-
         // te acuerdas de como proteger data? preventDefault()
+        // preventDefault() SIEMPRE ANTES DE AXIOS; SIEMPRE ANTES DE TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         event.preventDefault()
+
+        // POST -> url, data, { options }
+        axios
+        .post(
+            'https://apialexandr.devcamp.space/portfolio/portfolio_items',
+            
+            this.buildForm(),
+            
+            { withCredentials: true }
+        )
+        .then( response => {
+            console.log('[PORTFOLIO ITEM POST]:', response )
+        } )
+        .catch( error => {
+
+            console.log('[PORTFOLIO ITEM POST ERROR] Error:', error )
+        })
+
+
         
-        // de 08-089 FormData
-        this.buildForm()
     }
 
     buildForm() {
@@ -83,7 +103,8 @@ export default class PortfolioForm extends Component {
             <div>
                 <h1> Portfolio Form Test Title</h1>
 
-                <form>
+                {/* Al Formg object hay que meterle las acciones!!!! onSubmit -> Función que maneja el submit....etc*/}
+                <form onSubmit={this.handleSubmit} >
                     <div>
                         <input
                         type="text"
