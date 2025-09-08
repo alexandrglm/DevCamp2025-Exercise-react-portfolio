@@ -1,9 +1,15 @@
 // de 08-081, SecureClass Component
+
+/*
+Portfolio-Manager es una PAGE, por lo tanto
+debemos mover el componente directamente a pages,
+y rhacer los imports posibles.
+*/
 import React, { Component } from "react";
 import axios from 'axios'
 
-import PortfolioSidebarList from "./portfolio-sidebar-list";
-import PortfolioForm from "./portfolio-form";
+import PortfolioSidebarList from "../portfolio/portfolio-sidebar-list";
+import PortfolioForm from "../portfolio/portfolio-form";
 
 
 export default class PortfolioManager extends Component {
