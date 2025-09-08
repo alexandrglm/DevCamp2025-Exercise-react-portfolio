@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import axios from 'axios'
 
-
 import PortfolioSidebarList from "./portfolio-sidebar-list";
+import PortfolioForm from "./portfolio-form";
 
 
 export default class PortfolioManager extends Component {
@@ -18,6 +18,10 @@ export default class PortfolioManager extends Component {
 
             portfolioItems: []
         }
+
+        
+        this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
+        this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
 
     }
     getPortfolioItems() {
@@ -49,6 +53,22 @@ export default class PortfolioManager extends Component {
     }
 
 
+    // De 08-086, hay q bind this
+    handleSuccessfulFormSubmission( portfolioItem ){
+
+        console.log('Estoy un poco hasta la polla')
+
+    }
+    handleFormSubmissionError(error) {
+
+        console.log('[FORM SUBMUSSION ERROR!]:', error)
+
+    }
+
+
+
+
+
     render() {
 
         return(
@@ -56,7 +76,13 @@ export default class PortfolioManager extends Component {
             <div className="portfolio-manager-wrapper">
 
                 <div className="left-column">
-                    <h1>Portfolio Form ...</h1>
+
+                    {/* De 08-086, sañadimos el componenten PortfolioForm*/}
+                    <PortfolioForm 
+                    handleFormSubmissionError={this.handleFormSubmissionError}
+                    handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
+                    />   
+
                 </div>
 
                 <div className="right-column">
