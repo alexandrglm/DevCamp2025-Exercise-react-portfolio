@@ -104,7 +104,7 @@ const NavigationContainer = props => {
             <div className="right-side">
                 ALEXANDRGLM
                 {/* De 08-079, axios.delete, HOC */}
-                { props.loggedInStatus === 'LOGGED_IN' ? ( <a onClick={handleSignOut}>Sign Out</a> ): null }
+                { props.loggedInStatus === 'LOGGED_IN' ? ( <button className="btn" onClick={handleSignOut}>Sign Out</button> ): null }
             </div>
 
         </div>

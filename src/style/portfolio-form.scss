@@ -7,6 +7,8 @@
 
     padding: 42px;
 
+    grid-gap: 21px;
+
     @include input-element();
 
 }

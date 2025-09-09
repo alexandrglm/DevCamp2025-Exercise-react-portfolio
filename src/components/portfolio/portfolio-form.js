@@ -185,7 +185,8 @@ export default class PortfolioForm extends Component {
         return(
             // Desde 09-101, reajustamos el form
             <form className="portfolio-form-wrapper" onSubmit={this.handleSubmit} >
-                <div>
+                
+                <div className="two-column">
                     <input
                     type="text"
                     name="name"
@@ -203,7 +204,8 @@ export default class PortfolioForm extends Component {
                     />
                 </div>
 
-                <div>
+                <div className="two-column">
+                    
                     <input
                     type="text"
                     name="position"
@@ -229,7 +231,8 @@ export default class PortfolioForm extends Component {
 
                 </div>
 
-                <div>
+                <div className="one-column">
+
                     {/* De 09-093, Parsing "input" -> react textarea /> */}
                     <textarea
                     name="description"
@@ -241,7 +244,7 @@ export default class PortfolioForm extends Component {
 
                 {/* De 09-097, Dropzone Integration*/}
                 { /* THUMB */ }
-                <div className="image-uploaders">
+                <div className="image-uploaders three-column">
 
                     <DropzoneComponent 
                     ref={this.thumbRef}
@@ -251,10 +254,6 @@ export default class PortfolioForm extends Component {
                     >
                     </DropzoneComponent>
 
-                </div>
-                { /* BANNER */ }
-                <div className="image-uploaders">
-
                     <DropzoneComponent 
                     ref={this.bannerRef}
                     config={this.componentConfig()} 
@@ -262,10 +261,6 @@ export default class PortfolioForm extends Component {
                     eventHandlers={this.handleBannerDrop()} 
                     >
                     </DropzoneComponent>
-
-                </div>
-                { /* LOGO */ }
-                <div className="image-uploaders">
 
                     <DropzoneComponent 
                     ref={this.logoRef} 
