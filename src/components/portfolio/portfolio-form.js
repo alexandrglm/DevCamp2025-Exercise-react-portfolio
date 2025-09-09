@@ -24,6 +24,7 @@ export default class PortfolioForm extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+
     }
 
     handleChange(event){
@@ -60,7 +61,12 @@ export default class PortfolioForm extends Component {
             { withCredentials: true }
         )
         .then( response => {
+
+        this.props.handleSuccessfulFormSubmission(  response.data.portfolio_item )
+
             console.log('[PORTFOLIO ITEM POST]:', response )
+
+
         } )
         .catch( error => {
 
@@ -95,6 +101,8 @@ export default class PortfolioForm extends Component {
         return formData;
 
     }
+
+
 
 
     render() {

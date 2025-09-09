@@ -60,9 +60,31 @@ export default class PortfolioManager extends Component {
 
 
     // De 08-086, hay q bind this
+        // De 09-095, Hacemos Child to Paretn populating dataflow
     handleSuccessfulFormSubmission( portfolioItem ){
 
-        console.log('Estoy un poco hasta la polla')
+        this.setState({
+
+            /*
+            NUNCA USAR Array.push() !
+            
+            - La data del array debe preservarse tal cual, inmutable
+            - El componente NUNCA se actualizará o re-renderizará
+            - No es una buena práctica para react 
+
+            El patrón correcto es .concat().
+
+            - Crea un nuevo array, no muta el existente
+            - React detecta el cambio, re-renderiza de nuevo
+
+            Tambiéjn podría usarse ...SPREAD, o unshift()
+
+            */
+
+            portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+
+        })
+
 
     }
     handleFormSubmissionError(error) {
