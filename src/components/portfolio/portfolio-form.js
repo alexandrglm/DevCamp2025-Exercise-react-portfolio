@@ -34,7 +34,113 @@ export default class PortfolioForm extends Component {
         this.handleBannerDrop = this.handleBannerDrop.bind(this)
         this.handleLogoDrop = this.handleLogoDrop.bind(this)
 
+
+        // De 09-100, incluir REFs para clear form
+        this.thumbRef = React.createRef()
+        this.bannerRef = React.createRef()
+        this.logoRef = React.createRef()
+
     }
+
+        // De 09-098
+    handleThumbDrop() {
+
+        return {
+
+            addedfile: file => this.setState( { thumb_image: file })
+
+        }
+
+    }   
+    // De 09-099, lo mismo para BANNER y LOGO
+    handleBannerDrop() {
+
+        return {
+
+            addedfile: file => this.setState( { banner_image: file })
+
+        }
+
+    }
+    handleLogoDrop() {
+
+        return {
+
+            addedfile: file => this.setState( { logo: file })
+
+        }
+
+    }
+
+    // De 09-097, Dropzone Integration
+    componentConfig(){
+
+        return {
+
+            iconFiletypes: ['.jpg', '.png', '.svg'],
+            showFiletypeIcon: true,
+            postUrl: 'https://httpbin.org/post'
+
+
+        }
+
+    }
+    djsConfig() {
+
+        return {
+
+            addRemoveLinks: true,
+            maxFiles: 1
+
+        }
+
+    }
+
+
+    buildForm() {
+
+        let formData = new FormData()
+
+        /*
+            API REQUIERE:
+
+            - portfolio_item : {
+                name: value
+                description: valie
+                url: value
+                ...
+            }
+        */
+
+        formData.append('portfolio_item[name]', this.state.name)
+        formData.append('portfolio_item[description]', this.state.description)
+        formData.append('portfolio_item[url]', this.state.url)
+        formData.append('portfolio_item[category]', this.state.category)
+        formData.append('portfolio_item[position]', this.state.position)
+
+        {/* De 09-098, actualizar componente para Thumb, de manera condicional*/}
+        if ( this.state.thumb_image ) {
+
+            formData.append('portfolio_item[thumb_image]', this.state.thumb_image)
+
+        }        
+        {/* De 09-099, resto */}
+        if ( this.state.banner_image ) {
+
+            formData.append('portfolio_item[banner_image]', this.state.banner_image)
+
+        }
+                {/* De 09-099, resto */}
+        if ( this.state.logo ) {
+
+            formData.append('portfolio_item[logo]', this.state.logo)
+
+        }
+
+        return formData;
+
+    }
+
 
     handleChange(event){
 
@@ -71,7 +177,26 @@ export default class PortfolioForm extends Component {
         )
         .then( response => {
 
-        this.props.handleSuccessfulFormSubmission(  response.data.portfolio_item )
+            this.props.handleSuccessfulFormSubmission(  response.data.portfolio_item )
+
+            // 09-100 CLEAR FORM
+            [this.thumbRef, this.bannerRef, this.logoRef].forEach( ref =>{
+
+                ref.current.dropzone.removeAllFiles()
+
+            })
+            // RESET STATUS CONF
+            this.setState( {
+
+                name: '',
+                description: '',
+                category: 'Services',
+                position: '',
+                url: '',
+                thumb_image: '',
+                banner_image: '',
+                logo: ''
+            })
 
             console.log('[PORTFOLIO ITEM POST]:', response )
 
@@ -81,107 +206,7 @@ export default class PortfolioForm extends Component {
 
             console.log('[PORTFOLIO ITEM POST ERROR] Error:', error )
         })
-
-
         
-    }
-
-    buildForm() {
-
-        let formData = new FormData()
-
-        /*
-            API REQUIERE:
-
-            - portfolio_item : {
-                name: value
-                description: valie
-                url: value
-                ...
-            }
-        */
-
-        formData.append('portfolio_item[name]', this.state.name)
-        formData.append('portfolio_item[description]', this.state.description)
-        formData.append('portfolio_item[url]', this.state.url)
-        formData.append('portfolio_item[category]', this.state.category)
-        formData.append('portfolio_item[position]', this.state.position)
-
-        {/* De 09-098, actualizar componente para Thumb, de manera condicional*/}
-        if ( this.state.thumb_image ) {
-
-            formData.append('portfolio_item[thumb_image', this.state.thumb_image)
-
-        }        
-        {/* De 09-099, resto */}
-        if ( this.state.banner_image ) {
-
-            formData.append('portfolio_item[banner_image', this.state.banner_image)
-
-        }
-                {/* De 09-099, resto */}
-        if ( this.state.logo ) {
-
-            formData.append('portfolio_item[logo', this.state.logo)
-
-        }
-
-        return formData;
-
-    }
-
-    // De 09-097, Dropzone Integration
-    componentConfig(){
-
-        return {
-
-            iconFiletypes: ['.jpg', '.png', '.svg'],
-            showFiletypeIcon: true,
-            postUrl: 'https://httpbin.org/post'
-
-
-        }
-
-    }
-    djsConfig() {
-
-        return {
-
-            addRemoveLinks: true,
-            maxFiles: 1
-
-        }
-
-    }
-    
-    // De 09-098
-    handleThumbDrop() {
-
-        return {
-
-            addedfile: file => this.setState( { thumb_image: file })
-
-        }
-
-    }
-    // De 09-099, lo mismo para BANNER y LOGO
-    handleBannerDrop() {
-
-        return {
-
-            addedfile: file => this.setState( { banner_image: file })
-
-        }
-
-    }
-    handleLogoDrop() {
-
-        return {
-
-            addedfile: file => this.setState( { logo: file })
-
-        }
-
     }
 
 
@@ -252,10 +277,10 @@ export default class PortfolioForm extends Component {
                     { /* THUMB */ }
                     <div className="image-uploaders">
 
-                        <DropzoneComponent
+                        <DropzoneComponent 
+                        ref={this.thumbRef}
                         config={this.componentConfig()} 
                         djsConfig={this.djsConfig()}
-                    
                         eventHandlers={this.handleThumbDrop()}
                         >
                         </DropzoneComponent>
@@ -264,22 +289,22 @@ export default class PortfolioForm extends Component {
                     { /* BANNER */ }
                     <div className="image-uploaders">
 
-                        <DropzoneComponent
+                        <DropzoneComponent 
+                        ref={this.bannerRef}
                         config={this.componentConfig()} 
-                        djsConfig={this.djsConfig()}
-                    
-                        eventHandlers={this.handleBannerDrop()}
+                        djsConfig={this.djsConfig()} 
+                        eventHandlers={this.handleBannerDrop()} 
                         >
                         </DropzoneComponent>
 
                     </div>
-                    { /* THUMB */ }
+                    { /* LOGO */ }
                     <div className="image-uploaders">
 
-                        <DropzoneComponent
-                        config={this.componentConfig()} 
-                        djsConfig={this.djsConfig()}
-                    
+                        <DropzoneComponent 
+                        ref={this.logoRef} 
+                        config={this.componentConfig()}  
+                        djsConfig={this.djsConfig()} 
                         eventHandlers={this.handleLogoDrop()}
                         >
                         </DropzoneComponent>

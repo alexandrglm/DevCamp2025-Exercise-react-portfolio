@@ -25,39 +25,11 @@ export default class PortfolioManager extends Component {
             portfolioItems: []
         }
 
-        
-        this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
+        this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
+
 
     }
-    getPortfolioItems() {
-
-        axios
-        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', { withCredentials: true  } )
-        .then( response => {
-
-            console.log('[AXIOS GET PORTFOLIO-ITEMS] Response: ', response )
-            
-            this.setState( {
-
-
-                // !!! con SPREAD obtenemos un array LIMPIO, sin spread obtenemos arrays dentro de arrays por objteo
-                portfolioItems: [...response.data.portfolio_items]
-            })
-
-                })
-        .catch( error => {
-
-            console.log('AXIOS ERROR] Error: ', error)
-
-        })
-    }
-
-    componentDidMount() {
-
-        this.getPortfolioItems()
-    }
-
 
     // De 08-086, hay q bind this
         // De 09-095, Hacemos Child to Paretn populating dataflow
@@ -95,6 +67,35 @@ export default class PortfolioManager extends Component {
 
 
 
+    getPortfolioItems() {
+
+        axios
+        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', { withCredentials: true  } )
+        .then( response => {
+
+            console.log('[AXIOS GET PORTFOLIO-ITEMS] Response: ', response )
+            
+            this.setState( {
+
+
+                // !!! con SPREAD obtenemos un array LIMPIO, sin spread obtenemos arrays dentro de arrays por objteo
+                portfolioItems: [...response.data.portfolio_items]
+            })
+
+        })
+        .catch( error => {
+
+            console.log('AXIOS ERROR] Error: ', error)
+
+        })
+    }
+
+    componentDidMount() {
+
+        this.getPortfolioItems()
+    }
+
+
 
 
     render() {
@@ -107,8 +108,8 @@ export default class PortfolioManager extends Component {
 
                     {/* De 08-086, sañadimos el componenten PortfolioForm*/}
                     <PortfolioForm 
+                    handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} 
                     handleFormSubmissionError={this.handleFormSubmissionError}
-                    handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
                     />   
 
                 </div>
