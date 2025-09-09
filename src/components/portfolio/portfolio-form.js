@@ -175,6 +175,7 @@ export default class PortfolioForm extends Component {
                 console.log("portfolio form handleSubmit error", error);
             });
 
+        // preventDefault() debe ir al mismo nivel que axios, Muchiiiiiisimo cuidado con la identacion
         event.preventDefault();
     }
 
@@ -182,110 +183,103 @@ export default class PortfolioForm extends Component {
     render() {
 
         return(
+            // Desde 09-101, reajustamos el form
+            <form className="portfolio-form-wrapper" onSubmit={this.handleSubmit} >
+                <div>
+                    <input
+                    type="text"
+                    name="name"
+                    placeholder="Portfolio Item Name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    />
 
-            <div>
-                <h1> Portfolio Form Test Title</h1>
+                    <input
+                    type="text"
+                    name="url"
+                    placeholder="URL"
+                    value={this.state.url}
+                    onChange={this.handleChange}
+                    />
+                </div>
 
-                {/* Al Formg object hay que meterle las acciones!!!! onSubmit -> Función que maneja el submit....etc*/}
-                <form onSubmit={this.handleSubmit} >
-                    <div>
-                        <input
-                        type="text"
-                        name="name"
-                        placeholder="Portfolio Item Name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                        />
+                <div>
+                    <input
+                    type="text"
+                    name="position"
+                    placeholder="Position"
+                    value={this.state.position}
+                    onChange={this.handleChange}
+                    />
+                    
+                    {/* De 09-092, Convertimos el category en SelectDropdown con lo que la api tenga*/}
+                    <select
+                    name="category"
+                    value={this.state.category}
+                    onChange={this.handleChange}
+                    >
 
-                        <input
-                        type="text"
-                        name="url"
-                        placeholder="URL"
-                        value={this.state.url}
-                        onChange={this.handleChange}
-                        />
-                    </div>
+                        {/* De momento van a ser hardcoded*/}
+                        <option value="Technology">Technology</option>
+                        <option value="eLearning">eLearning</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Services">Services</option>
+                    </select>
 
-                    <div>
-                        <input
-                        type="text"
-                        name="position"
-                        placeholder="Position"
-                        value={this.state.position}
-                        onChange={this.handleChange}
-                        />
-                        
-                        {/* De 09-092, Convertimos el category en SelectDropdown con lo que la api tenga*/}
-                        <select
-                        name="category"
-                        value={this.state.category}
-                        onChange={this.handleChange}
-                        >
+                </div>
 
-                            {/* De momento van a ser hardcoded*/}
-                            <option value="Technology">Technology</option>
-                            <option value="eLearning">eLearning</option>
-                            <option value="Social Media">Social Media</option>
-                            <option value="Services">Services</option>
-                        </select>
+                <div>
+                    {/* De 09-093, Parsing "input" -> react textarea /> */}
+                    <textarea
+                    name="description"
+                    placeholder="Description (this is a <textarea /> element)..."
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                    />
+                </div>
 
-                    </div>
+                {/* De 09-097, Dropzone Integration*/}
+                { /* THUMB */ }
+                <div className="image-uploaders">
 
-                    <div>
-                        {/* De 09-093, Parsing "input" -> react textarea /> */}
-                        <textarea
-                        name="description"
-                        placeholder="Description (this is a <textarea /> element)..."
-                        value={this.state.description}
-                        onChange={this.handleChange}
-                        />
-                    </div>
+                    <DropzoneComponent 
+                    ref={this.thumbRef}
+                    config={this.componentConfig()} 
+                    djsConfig={this.djsConfig()}
+                    eventHandlers={this.handleThumbDrop()}
+                    >
+                    </DropzoneComponent>
 
-                    {/* De 09-097, Dropzone Integration*/}
-                    { /* THUMB */ }
-                    <div className="image-uploaders">
+                </div>
+                { /* BANNER */ }
+                <div className="image-uploaders">
 
-                        <DropzoneComponent 
-                        ref={this.thumbRef}
-                        config={this.componentConfig()} 
-                        djsConfig={this.djsConfig()}
-                        eventHandlers={this.handleThumbDrop()}
-                        >
-                        </DropzoneComponent>
+                    <DropzoneComponent 
+                    ref={this.bannerRef}
+                    config={this.componentConfig()} 
+                    djsConfig={this.djsConfig()} 
+                    eventHandlers={this.handleBannerDrop()} 
+                    >
+                    </DropzoneComponent>
 
-                    </div>
-                    { /* BANNER */ }
-                    <div className="image-uploaders">
+                </div>
+                { /* LOGO */ }
+                <div className="image-uploaders">
 
-                        <DropzoneComponent 
-                        ref={this.bannerRef}
-                        config={this.componentConfig()} 
-                        djsConfig={this.djsConfig()} 
-                        eventHandlers={this.handleBannerDrop()} 
-                        >
-                        </DropzoneComponent>
+                    <DropzoneComponent 
+                    ref={this.logoRef} 
+                    config={this.componentConfig()}  
+                    djsConfig={this.djsConfig()} 
+                    eventHandlers={this.handleLogoDrop()}
+                    >
+                    </DropzoneComponent>
 
-                    </div>
-                    { /* LOGO */ }
-                    <div className="image-uploaders">
+                </div>
 
-                        <DropzoneComponent 
-                        ref={this.logoRef} 
-                        config={this.componentConfig()}  
-                        djsConfig={this.djsConfig()} 
-                        eventHandlers={this.handleLogoDrop()}
-                        >
-                        </DropzoneComponent>
-
-                    </div>
-
-                    <div>
-                        <button type="submit">Save</button>
-                    </div>
-                </form>
-            </div>
-
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
         )
     }
-
 }
