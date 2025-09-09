@@ -149,10 +149,10 @@ export default class PortfolioForm extends Component {
                     </div>
 
                     <div>
-                        <input
-                        type="text"
+                        {/* De 09-093, Parsing "input" -> react textarea /> */}
+                        <textarea
                         name="description"
-                        placeholder="Description"
+                        placeholder="Description (this is a <textarea /> element)..."
                         value={this.state.description}
                         onChange={this.handleChange}
                         />
