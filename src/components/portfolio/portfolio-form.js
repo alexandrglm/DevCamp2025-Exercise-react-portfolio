@@ -31,6 +31,8 @@ export default class PortfolioForm extends Component {
         this.componentConfig = this.componentConfig.bind(this)
         this.djsConfig = this.djsConfig.bind(this)
         this.handleThumbDrop = this.handleThumbDrop.bind(this)
+        this.handleBannerDrop = this.handleBannerDrop.bind(this)
+        this.handleLogoDrop = this.handleLogoDrop.bind(this)
 
     }
 
@@ -110,6 +112,18 @@ export default class PortfolioForm extends Component {
 
             formData.append('portfolio_item[thumb_image', this.state.thumb_image)
 
+        }        
+        {/* De 09-099, resto */}
+        if ( this.state.banner_image ) {
+
+            formData.append('portfolio_item[banner_image', this.state.banner_image)
+
+        }
+                {/* De 09-099, resto */}
+        if ( this.state.logo ) {
+
+            formData.append('portfolio_item[logo', this.state.logo)
+
         }
 
         return formData;
@@ -146,6 +160,25 @@ export default class PortfolioForm extends Component {
         return {
 
             addedfile: file => this.setState( { thumb_image: file })
+
+        }
+
+    }
+    // De 09-099, lo mismo para BANNER y LOGO
+    handleBannerDrop() {
+
+        return {
+
+            addedfile: file => this.setState( { banner_image: file })
+
+        }
+
+    }
+    handleLogoDrop() {
+
+        return {
+
+            addedfile: file => this.setState( { logo: file })
 
         }
 
@@ -216,6 +249,7 @@ export default class PortfolioForm extends Component {
                     </div>
 
                     {/* De 09-097, Dropzone Integration*/}
+                    { /* THUMB */ }
                     <div className="image-uploaders">
 
                         <DropzoneComponent
@@ -223,6 +257,30 @@ export default class PortfolioForm extends Component {
                         djsConfig={this.djsConfig()}
                     
                         eventHandlers={this.handleThumbDrop()}
+                        >
+                        </DropzoneComponent>
+
+                    </div>
+                    { /* BANNER */ }
+                    <div className="image-uploaders">
+
+                        <DropzoneComponent
+                        config={this.componentConfig()} 
+                        djsConfig={this.djsConfig()}
+                    
+                        eventHandlers={this.handleBannerDrop()}
+                        >
+                        </DropzoneComponent>
+
+                    </div>
+                    { /* THUMB */ }
+                    <div className="image-uploaders">
+
+                        <DropzoneComponent
+                        config={this.componentConfig()} 
+                        djsConfig={this.djsConfig()}
+                    
+                        eventHandlers={this.handleLogoDrop()}
                         >
                         </DropzoneComponent>
 
