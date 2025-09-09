@@ -1,10 +1,4 @@
 // de 08-081, SecureClass Component
-
-/*
-Portfolio-Manager es una PAGE, por lo tanto
-debemos mover el componente directamente a pages,
-y rhacer los imports posibles.
-*/
 import React, { Component } from "react";
 import axios from 'axios'
 
@@ -25,33 +19,16 @@ export default class PortfolioManager extends Component {
             portfolioItems: []
         }
 
-        this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
-        this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
-
+        this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
+        this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
 
     }
 
     // De 08-086, hay q bind this
         // De 09-095, Hacemos Child to Paretn populating dataflow
-    handleSuccessfulFormSubmission( portfolioItem ){
+    handleSuccessfulFormSubmission(portfolioItem) {
 
         this.setState({
-
-            /*
-            NUNCA USAR Array.push() !
-            
-            - La data del array debe preservarse tal cual, inmutable
-            - El componente NUNCA se actualizará o re-renderizará
-            - No es una buena práctica para react 
-
-            El patrón correcto es .concat().
-
-            - Crea un nuevo array, no muta el existente
-            - React detecta el cambio, re-renderiza de nuevo
-
-            Tambiéjn podría usarse ...SPREAD, o unshift()
-
-            */
 
             portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
 
@@ -65,19 +42,19 @@ export default class PortfolioManager extends Component {
 
     }
 
-
-
     getPortfolioItems() {
 
         axios
-        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', { withCredentials: true  } )
+        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', 
+            { 
+                withCredentials: true  
+            }
+        )
         .then( response => {
 
             console.log('[AXIOS GET PORTFOLIO-ITEMS] Response: ', response )
             
             this.setState( {
-
-
                 // !!! con SPREAD obtenemos un array LIMPIO, sin spread obtenemos arrays dentro de arrays por objteo
                 portfolioItems: [...response.data.portfolio_items]
             })
@@ -96,8 +73,6 @@ export default class PortfolioManager extends Component {
     }
 
 
-
-
     render() {
 
         return(
@@ -107,18 +82,16 @@ export default class PortfolioManager extends Component {
                 <div className="left-column">
 
                     {/* De 08-086, sañadimos el componenten PortfolioForm*/}
-                    <PortfolioForm 
-                    handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} 
-                    handleFormSubmissionError={this.handleFormSubmissionError}
-                    />   
+                    <PortfolioForm
+                        handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
+                        handleFormSubmissionError={this.handleFormSubmissionError}
+                    />  
 
                 </div>
 
                 <div className="right-column">
-
-                {/* De 08-084, integramos el sidebarlist como propio componete*/}
-                <PortfolioSidebarList data={this.state.portfolioItems} />
-                
+                    {/* De 08-084, integramos el sidebarlist como propio componete*/}
+                    <PortfolioSidebarList data={this.state.portfolioItems} />
                 </div>
             </div>
         )

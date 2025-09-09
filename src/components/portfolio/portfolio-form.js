@@ -15,7 +15,6 @@ export default class PortfolioForm extends Component {
         super(props)
 
         this.state = {
-
             name: '',
             description: '',
             category: 'Services',
@@ -26,13 +25,13 @@ export default class PortfolioForm extends Component {
             logo: ''
         }
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.componentConfig = this.componentConfig.bind(this)
-        this.djsConfig = this.djsConfig.bind(this)
-        this.handleThumbDrop = this.handleThumbDrop.bind(this)
-        this.handleBannerDrop = this.handleBannerDrop.bind(this)
-        this.handleLogoDrop = this.handleLogoDrop.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.componentConfig = this.componentConfig.bind(this);
+        this.djsConfig = this.djsConfig.bind(this);
+        this.handleThumbDrop = this.handleThumbDrop.bind(this);
+        this.handleBannerDrop = this.handleBannerDrop.bind(this);
+        this.handleLogoDrop = this.handleLogoDrop.bind(this);
 
 
         // De 09-100, incluir REFs para clear form
@@ -73,15 +72,12 @@ export default class PortfolioForm extends Component {
     }
 
     // De 09-097, Dropzone Integration
-    componentConfig(){
+    componentConfig() {
 
         return {
-
             iconFiletypes: ['.jpg', '.png', '.svg'],
             showFiletypeIcon: true,
             postUrl: 'https://httpbin.org/post'
-
-
         }
 
     }
@@ -101,22 +97,11 @@ export default class PortfolioForm extends Component {
 
         let formData = new FormData()
 
-        /*
-            API REQUIERE:
-
-            - portfolio_item : {
-                name: value
-                description: valie
-                url: value
-                ...
-            }
-        */
-
-        formData.append('portfolio_item[name]', this.state.name)
-        formData.append('portfolio_item[description]', this.state.description)
-        formData.append('portfolio_item[url]', this.state.url)
-        formData.append('portfolio_item[category]', this.state.category)
-        formData.append('portfolio_item[position]', this.state.position)
+        formData.append("portfolio_item[name]", this.state.name);
+        formData.append("portfolio_item[description]", this.state.description);
+        formData.append("portfolio_item[url]", this.state.url);
+        formData.append("portfolio_item[category]", this.state.category);
+        formData.append("portfolio_item[position]", this.state.position);
 
         {/* De 09-098, actualizar componente para Thumb, de manera condicional*/}
         if ( this.state.thumb_image ) {
@@ -130,7 +115,7 @@ export default class PortfolioForm extends Component {
             formData.append('portfolio_item[banner_image]', this.state.banner_image)
 
         }
-                {/* De 09-099, resto */}
+        {/* De 09-099, resto */}
         if ( this.state.logo ) {
 
             formData.append('portfolio_item[logo]', this.state.logo)
@@ -143,7 +128,7 @@ export default class PortfolioForm extends Component {
 
 
     handleChange(event){
-
+        
         // de 08-88
         this.setState( {
 
@@ -159,56 +144,39 @@ export default class PortfolioForm extends Component {
     // De 08-088
     // De 08-091 ya implementamos la lógica api
     handleSubmit(event) {
-
-        // te acuerdas de como proteger data? preventDefault()
-        // preventDefault() SIEMPRE ANTES DE AXIOS; SIEMPRE ANTES DE TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        event.preventDefault()
-
-        // POST -> url, data, { options }
-        axios
-        .post(
-            'https://apialexandr.devcamp.space/portfolio/portfolio_items',
-            
-            this.buildForm(),
-            
-            { withCredentials: true }
-        )
-        .then( response => {
-
-            this.props.handleSuccessfulFormSubmission(  response.data.portfolio_item )
-
-            // 09-100 CLEAR FORM
-            [this.thumbRef, this.bannerRef, this.logoRef].forEach( ref =>{
-
-                ref.current.dropzone.removeAllFiles()
-
-            })
-            // RESET STATUS CONF
-            this.setState( {
-
-                name: '',
-                description: '',
-                category: 'Services',
-                position: '',
-                url: '',
-                thumb_image: '',
-                banner_image: '',
-                logo: ''
-            })
-
-            console.log('[PORTFOLIO ITEM POST]:', response )
-
-
-        } )
-        .catch( error => {
-
-            console.log('[PORTFOLIO ITEM POST ERROR] Error:', error )
-        })
         
-    }
+        // MUCHISIMO CUIDADO CON LOS INDENTS DEL PUTO AXIOS DE LOS COJONES!
+        axios
 
+            .post(
+                "https://apialexandr.devcamp.space/portfolio/portfolio_items",
+                this.buildForm(),
+                { withCredentials: true }
+            )
+            .then(response => {
+                this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
+
+                this.setState({
+                    name: "",
+                    description: "",
+                    category: "Services",
+                    position: "",
+                    url: "",
+                    thumb_image: "",
+                    banner_image: "",
+                    logo: ""
+                });
+
+                [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
+                    ref.current.dropzone.removeAllFiles();
+                });
+            })
+            .catch(error => {
+                console.log("portfolio form handleSubmit error", error);
+            });
+
+        event.preventDefault();
+    }
 
 
     render() {
