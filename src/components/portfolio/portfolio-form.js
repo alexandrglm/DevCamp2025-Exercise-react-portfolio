@@ -6,6 +6,7 @@ import axios from 'axios'
 export default class PortfolioForm extends Component {
 
     // De 08-087
+    /* En 09-094, hacemos el default value del category: '', hardcoded */
     constructor(props){
         super(props)
 
@@ -13,7 +14,7 @@ export default class PortfolioForm extends Component {
 
             name: '',
             description: '',
-            category: '',
+            category: 'Services',
             position: '',
             url: '',
             thumb_image: '',
