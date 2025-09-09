@@ -21,6 +21,7 @@ export default class PortfolioManager extends Component {
 
         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
         this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
+        this.handleDeleteClick = this.handleDeleteClick.bind(this)
 
     }
 
@@ -39,6 +40,12 @@ export default class PortfolioManager extends Component {
     handleFormSubmissionError(error) {
 
         console.log('[FORM SUBMUSSION ERROR!]:', error)
+
+    }
+
+    handleDeleteClick(portfolioItem) {
+
+        console.log('[AXIOS Portfolio DELETE]:', portfolioItem)
 
     }
 
@@ -90,8 +97,13 @@ export default class PortfolioManager extends Component {
                 </div>
 
                 <div className="right-column">
-                    {/* De 08-084, integramos el sidebarlist como propio componete*/}
-                    <PortfolioSidebarList data={this.state.portfolioItems} />
+
+                    <PortfolioSidebarList 
+                    
+                    handleDeleteClick={this.handleDeleteClick}
+                    data={this.state.portfolioItems} s
+                    
+                    />
                 </div>
             </div>
         )
