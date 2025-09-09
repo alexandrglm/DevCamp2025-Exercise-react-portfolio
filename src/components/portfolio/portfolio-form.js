@@ -1,7 +1,11 @@
 // De 08-086
 import React, { Component } from "react";
 import axios from 'axios'
+// De 09-097, dropzone intehgration
+import DropzoneComponent from 'react-dropzone-component'
 
+import '../../../node_modules/react-dropzone-component/styles/filepicker.css'
+import '../../../node_modules/dropzone/dist/min/dropzone.min.css'
 
 export default class PortfolioForm extends Component {
 
@@ -24,6 +28,8 @@ export default class PortfolioForm extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.componentConfig = this.componentConfig.bind(this)
+        this.djsConfig = this.djsConfig.bind(this)
 
     }
 
@@ -102,6 +108,30 @@ export default class PortfolioForm extends Component {
 
     }
 
+    // De 09-097, Dropzone Integration
+    componentConfig(){
+
+        return {
+
+            iconFiletypes: ['.jpg', '.png', '.svg'],
+            showFiletypeIcon: true,
+            postUrl: 'https://httpbin.org/post'
+
+
+        }
+
+    }
+    djsConfig() {
+
+        return {
+
+            addRemoveLinks: true,
+            maxFiles: 1
+
+        }
+
+    }
+
 
 
 
@@ -165,6 +195,17 @@ export default class PortfolioForm extends Component {
                         value={this.state.description}
                         onChange={this.handleChange}
                         />
+                    </div>
+
+                    {/* De 09-097, Dropzone Integration*/}
+                    <div className="image-uploaders">
+
+                        <DropzoneComponent
+                        config={this.componentConfig()} 
+                        djsConfig={this.djsConfig()}
+                        >
+                        </DropzoneComponent>
+
                     </div>
 
                     <div>
