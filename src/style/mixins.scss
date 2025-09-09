@@ -54,8 +54,13 @@
             border-bottom: 3px solid $teal;
 
         }
-
     }
+}
+
+@mixin base-grid() {
+
+    display: grid;
+    grid-gap: 21px;
 
 
 }
