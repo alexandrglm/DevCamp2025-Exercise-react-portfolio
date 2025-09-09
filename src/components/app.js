@@ -5,6 +5,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // De 08-074 Cookies checking
 import axios from 'axios';
 
+// De 09-107
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faSignOutAlt, faSign } from "@fortawesome/free-solid-svg-icons";
+
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationContainer from './navigation/navigation-container';
 
@@ -20,6 +25,8 @@ import Auth from './pages/auth';
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
+// De 09-107 IMPORTATISIMO
+library.add(faTrash, faSignOutAlt)
 
 
 export default class App extends Component {

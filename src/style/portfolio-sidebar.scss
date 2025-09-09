@@ -1,35 +1,36 @@
 // de 08-085
-
 .portfolio-sidebar-list-wrapper {
 
-
     .portfolio-item-thumb {
-
         padding: 21px;
 
+        .portfolio-thumb-img img {
+    
+            width: 100%;
+    
+        }
 
-        .portfolio-thumb-img {
+        .text-content {
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    
+            .title {
+                color: $offwhite;
+                font-size: 1.5em;
+            }
 
-            img {
+            .delete-icon {
+                cursor: pointer;
+                color: $offwhite;
+                font-size: 1.5em;
+                transition: 0.5s ease-in-out;
 
-                width: 100%;
-
+                &:hover {
+                color: $warning;
+                }
             }
         }
-
-        .title {
-
-            color: $WHITE;
-
-        }
-
-
-        .id{
-
-            color: $WHITEtaiyo;
-
-
-        }
     }
-
 }

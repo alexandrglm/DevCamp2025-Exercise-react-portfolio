@@ -1,21 +1,14 @@
 // De 08-084
 import React, { Component } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// COMPATIBILITY ISSUES ---> Load ICONS' .svg explicitely
+// import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 const PortfolioSidebarList = ( props ) => {
 
     const portfolioList = props.data.map( portfolioItem => {
-
-        /*
-        Con MAP estamos transformando datos, de array a array-tipoJSX
-        
-        (De 08-090) PEEEEEEEEEEERO, si ponemos el .map() en el return, 
-        cada child de la lista NO tendrá key unicas, 
-        Funcionará, pero con warnings. 
-        
-        NO !!--> return props.data.map( portfolioItem => {
-        SI!!! -> Pasado como argumento
-        */
 
         return ( 
 
@@ -26,20 +19,15 @@ const PortfolioSidebarList = ( props ) => {
                 </div>
 
                 <div className="text-content">
-                    
-                    <div className="title">{portfolioItem.name}</div>
-                    <div className="id">ID: {portfolioItem.id}</div> 
-                    <div className="description">{portfolioItem.description}</div>
-
-                    <a onClick={ () => props.handleDeleteClick(  portfolioItem ) }>
-                        Delete This
-                    </a>
-                
+                <div className="title">{portfolioItem.name}</div>
+                <a
+                    className="delete-icon"
+                    onClick={() => props.handleDeleteClick(portfolioItem)}
+                >
+                    <FontAwesomeIcon icon="trash" />
+                </a>
                 </div>
-
-
             </div>
-
         )
     })
 
