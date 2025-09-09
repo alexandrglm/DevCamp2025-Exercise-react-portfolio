@@ -5,6 +5,8 @@ import axios from 'axios'
 import PortfolioSidebarList from "../portfolio/portfolio-sidebar-list";
 import PortfolioForm from "../portfolio/portfolio-form";
 
+// Esto lo arrreglaré después según scope
+const miApi = 'https://apialexandr.devcamp.space'
 
 export default class PortfolioManager extends Component {
 
@@ -45,14 +47,47 @@ export default class PortfolioManager extends Component {
 
     handleDeleteClick(portfolioItem) {
 
-        console.log('[AXIOS Portfolio DELETE]:', portfolioItem)
+        // console.log('[AXIOS Portfolio DELETE]:', portfolioItem)
+        axios
+            .delete( `${miApi}/portfolio/portfolio_items/${portfolioItem.id}`, { withCredentials: true } 
 
+            )
+            .then( response => {
+
+                this.setState({
+
+
+                    /*
+                        Por qué usamos .filter() en vez de map() ?????????
+
+                        - Filter itera por cada elemento del array
+                        - El callback que hagamos se ejecuta POR CADA ELEMENTO
+                        - Crea UN NUEVO ARRAY con la data y/o elimina algun item EN UN NUEVO ARRAY
+                        - Es decir, mantiene INMUTABLE la data
+                    
+                    */
+                    portfolioItems: this.state.portfolioItems.filter( item => {
+
+                        console.log('[AXIOS DELETE]: ', response)
+                        return item.id !== portfolioItem.id;
+
+                    })
+
+                })
+
+                return response.data
+
+            })
+            .catch( error =>{ 
+
+                console.log('[AXIOS DELETE ERROR] handleClickDelete ERROR: ', error)
+            })
     }
 
     getPortfolioItems() {
 
         axios
-        .get('https://apialexandr.devcamp.space/portfolio/portfolio_items', 
+        .get( `${miApi}/portfolio/portfolio_items?order_by=created_at&direction=desc`, 
             { 
                 withCredentials: true  
             }
