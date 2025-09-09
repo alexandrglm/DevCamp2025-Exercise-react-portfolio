@@ -9,14 +9,15 @@ De 08-051:
         - **variables.scss** - colores, fonts, spacing
 
  */
- @import './variables.scss';
- @import './anime-colours.scss';
- @import './mixins.scss';
- @import './base.scss';
- @import './navigation.scss';
- @import './portfolio.scss';
- @import './button.scss';
- @import './auth.scss';
- @import './portfolio-manager.scss';
- @import './portfolio-sidebar.scss';
- @import './portfolio-form.scss';
+@import './variables.scss';
+@import './anime-colours.scss';
+@import './mixins.scss';
+@import './base.scss';
+@import './forms.scss';
+@import './button.scss';
+@import './navigation.scss';
+@import './portfolio.scss';
+@import './portfolio-manager.scss';
+@import './portfolio-form.scss';
+@import './portfolio-sidebar.scss';
+@import './auth.scss';

@@ -216,7 +216,8 @@ export default class PortfolioForm extends Component {
                     <select
                     name="category"
                     value={this.state.category}
-                    onChange={this.handleChange}
+                    onChange={this.handleChange} 
+                    className="select-element" 
                     >
 
                         {/* De momento van a ser hardcoded*/}
@@ -232,7 +233,7 @@ export default class PortfolioForm extends Component {
                     {/* De 09-093, Parsing "input" -> react textarea /> */}
                     <textarea
                     name="description"
-                    placeholder="Description (this is a <textarea /> element)..."
+                    placeholder="Add a description ..."
                     value={this.state.description}
                     onChange={this.handleChange}
                     />
@@ -277,7 +278,7 @@ export default class PortfolioForm extends Component {
                 </div>
 
                 <div>
-                    <button type="submit">Save</button>
+                    <button className="btn" type="submit">Save</button>
                 </div>
             </form>
         )
