@@ -131,14 +131,21 @@ export default class PortfolioForm extends Component {
                         value={this.state.position}
                         onChange={this.handleChange}
                         />
-
-                        <input
-                        type="text"
+                        
+                        {/* De 09-092, Convertimos el category en SelectDropdown con lo que la api tenga*/}
+                        <select
                         name="category"
-                        placeholder="Category"
                         value={this.state.category}
                         onChange={this.handleChange}
-                        />
+                        >
+
+                            {/* De momento van a ser hardcoded*/}
+                            <option value="Technology">Technology</option>
+                            <option value="eLearning">eLearning</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Services">Services</option>
+                        </select>
+
                     </div>
 
                     <div>

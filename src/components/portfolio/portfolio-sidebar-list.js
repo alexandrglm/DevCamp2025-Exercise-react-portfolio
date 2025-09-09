@@ -26,7 +26,8 @@ const PortfolioSidebarList = ( props ) => {
                 </div>
 
                 <h1 className="title">{portfolioItem.name}</h1>
-                <h2 className="id">ID: {portfolioItem.id}</h2>
+                <h2 className="id">ID: {portfolioItem.id}</h2> 
+                <p className="description">{portfolioItem.description}</p>
 
             </div>
 
