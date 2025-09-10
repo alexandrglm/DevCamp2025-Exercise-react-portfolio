@@ -8,7 +8,7 @@ import axios from 'axios';
 // De 09-107
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faSignOutAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationContainer from './navigation/navigation-container';
@@ -26,7 +26,7 @@ import Auth from './pages/auth';
 import NoMatch from './pages/no-match';
 
 // De 09-107 IMPORTATISIMO
-library.add(faTrash, faSignOutAlt)
+library.add(faTrash, faSignOutAlt, faEdit)
 
 
 export default class App extends Component {

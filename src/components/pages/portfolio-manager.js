@@ -18,30 +18,24 @@ export default class PortfolioManager extends Component {
 
         this.state = {
 
-            portfolioItems: []
+            portfolioItems: [],
+            portfolioToEdit: {}
         }
 
         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
         this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
         this.handleDeleteClick = this.handleDeleteClick.bind(this)
+        this.handleEditClick = this.handleEditClick.bind(this)
 
     }
 
-    // De 08-086, hay q bind this
-        // De 09-095, Hacemos Child to Paretn populating dataflow
-    handleSuccessfulFormSubmission(portfolioItem) {
+    handleEditClick(portfolioItem) {
 
         this.setState({
 
-            portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+            portfolioToEdit: portfolioItem
 
         })
-
-
-    }
-    handleFormSubmissionError(error) {
-
-        console.log('[FORM SUBMUSSION ERROR!]:', error)
 
     }
 
@@ -84,6 +78,25 @@ export default class PortfolioManager extends Component {
             })
     }
 
+
+    handleSuccessfulFormSubmission(portfolioItem) {
+
+        this.setState({
+
+            portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+
+        })
+
+
+    }
+    handleFormSubmissionError(error) {
+
+        console.log('[FORM SUBMUSSION ERROR!]:', error)
+
+    }
+
+
+
     getPortfolioItems() {
 
         axios
@@ -116,31 +129,28 @@ export default class PortfolioManager extends Component {
 
 
     render() {
+        return (
 
-        return(
-
-            <div className="portfolio-manager-wrapper">
-
-                <div className="left-column">
-
-                    {/* De 08-086, sañadimos el componenten PortfolioForm*/}
-                    <PortfolioForm
-                        handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
-                        handleFormSubmissionError={this.handleFormSubmissionError}
-                    />  
-
-                </div>
-
-                <div className="right-column">
-
-                    <PortfolioSidebarList 
-                    
-                    handleDeleteClick={this.handleDeleteClick}
-                    data={this.state.portfolioItems} s
-                    
-                    />
-                </div>
+        <div className="portfolio-manager-wrapper">
+            
+            <div className="left-column">
+            
+            <PortfolioForm
+                handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
+                handleFormSubmissionError={this.handleFormSubmissionError}
+            />
             </div>
-        )
-    }   
+
+            <div className="right-column">
+            
+            <PortfolioSidebarList
+                handleDeleteClick={this.handleDeleteClick}
+                data={this.state.portfolioItems}
+                handleEditClick={this.handleEditClick}
+            />
+            
+            </div>
+        </div>
+        );
+    }
 }
