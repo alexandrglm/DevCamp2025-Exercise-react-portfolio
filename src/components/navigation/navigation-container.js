@@ -10,9 +10,12 @@ import { withRouter } from 'react-router'
 
 import { NavLink } from "react-router-dom"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 // Mantenemos esto para el bg del nav
 import elPattern from '../../../static/assets/pattern1.png'
+
 
 const NavigationContainer = props => {
 
@@ -104,7 +107,13 @@ const NavigationContainer = props => {
             <div className="right-side">
                 ALEXANDRGLM
                 {/* De 08-079, axios.delete, HOC */}
-                { props.loggedInStatus === 'LOGGED_IN' ? ( <button className="btn" onClick={handleSignOut}>Sign Out</button> ): null }
+                { props.loggedInStatus === 'LOGGED_IN' ? ( 
+                    
+                    <a onClick={handleSignOut}>
+                        <FontAwesomeIcon icon='sign-out-alt' />
+                    </a>
+                
+                ) : null }
             </div>
 
         </div>

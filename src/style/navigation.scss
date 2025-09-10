@@ -27,11 +27,31 @@
     .right-side {
 
         display: flex;
-        left:78%;
+        left: 80%;
         position: absolute;
         color: $charcoal;
         text-transform: lowercase;
+
         font-family: 'Xanh Mono', monospace;
+        font-weight: bolder;
+        font-size: 1.5em;
+        
+        
+        a {
+
+            font-size: 1.5em;
+            margin-left: 15px;
+            cursor: pointer;
+            color: $BO-2;
+            transition: 0.5 ease-in-out;
+
+            &:hover {
+
+                color: $warning;
+
+            }
+
+        }
 
     }
 
