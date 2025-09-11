@@ -202,7 +202,15 @@ export default class PortfolioForm extends Component {
         })
 
             .then(response => {
+
+                if ( this.state.editMode ) {
+
+                    this.props.handleEditFormSubmission()
+
+                } else {
+
                 this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
+                }
 
                 this.setState({
                     name: "",
@@ -212,7 +220,10 @@ export default class PortfolioForm extends Component {
                     url: "",
                     thumb_image: "",
                     banner_image: "",
-                    logo: ""
+                    logo: "",
+                    editMode: false,
+                    apiUrl: `${miApi}/portfolio/portfolio-items`,
+                    apiAction: 'post'
                 });
 
                 [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
