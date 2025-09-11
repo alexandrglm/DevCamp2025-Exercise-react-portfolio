@@ -101,7 +101,7 @@ export default class PortfolioManager extends Component {
     }
     handleEditFormSubmission(){
 
-        this.getPortfolioItems
+        this.getPortfolioItems()
     }
 
     handleFormSubmissionError(error) {
@@ -155,7 +155,7 @@ export default class PortfolioManager extends Component {
                 handleEditFormSubmission={this.handleEditFormSubmission}
                 handleFormSubmissionError={this.handleFormSubmissionError}
                 clearPortfolioToEdit= {this.clearPortfolioToEdit}
-                portfolioToEdit= {this.portfolioToEdit}
+                portfolioToEdit= {this.state.portfolioToEdit}
             />
             </div>
 

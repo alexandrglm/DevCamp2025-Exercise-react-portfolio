@@ -94,7 +94,7 @@ export default class PortfolioForm extends Component {
     deleteImage(imageType) {
 
         axios
-            .delete(`${miApi}/portfolio/portfolio-delete-image/${this.state.id}=image_type=${imageType}`,
+            .delete(`${miApi}/portfolio/delete-portfolio-image/${this.state.id}=image_type=${imageType}`,
                 { withCredentials: true }
             )
             .then ( response => {
@@ -330,7 +330,7 @@ export default class PortfolioForm extends Component {
                 { /* THUMB */ }
                 <div className="image-uploaders">
 
-                    {this.state.thumb_image && this.state.editMode ? (
+                    {this.state.thumb_image_url && this.state.editMode ? (
                         <div className="portfolio-manager-image-wrapper">
                             
                             <img src={this.state.thumb_image_url} />
@@ -344,10 +344,10 @@ export default class PortfolioForm extends Component {
                     ) : (
 
                     <DropzoneComponent 
-                    ref={this.thumbRef}
-                    config={this.componentConfig()} 
-                    djsConfig={this.djsConfig()}
-                    eventHandlers={this.handleThumbDrop()}
+                        ref={this.thumbRef}
+                        config={this.componentConfig()} 
+                        djsConfig={this.djsConfig()}
+                        eventHandlers={this.handleThumbDrop()}
                     >
                         <div className="dz-message">
                             Upload Thumbnail
@@ -357,7 +357,7 @@ export default class PortfolioForm extends Component {
                     )}
 
 
-                    {this.state.banner_image && this.state.editMode ? (
+                    {this.state.banner_image_url && this.state.editMode ? (
                         
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.banner_image_url} />
@@ -372,10 +372,10 @@ export default class PortfolioForm extends Component {
                     ) : (
 
                     <DropzoneComponent 
-                    ref={this.bannerRef}
-                    config={this.componentConfig()} 
-                    djsConfig={this.djsConfig()} 
-                    eventHandlers={this.handleBannerDrop()} 
+                        ref={this.bannerRef}
+                        config={this.componentConfig()} 
+                        djsConfig={this.djsConfig()} 
+                        eventHandlers={this.handleBannerDrop()} 
                     >
                         <div className="dz-message">
                             Upload Banner
@@ -385,7 +385,7 @@ export default class PortfolioForm extends Component {
 
 
 
-                    {this.state.logo && this.state.editMode ? (
+                    {this.state.logo_url && this.state.editMode ? (
                         
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.logo_url} />
@@ -399,10 +399,10 @@ export default class PortfolioForm extends Component {
 
                     ) : (
                     <DropzoneComponent 
-                    ref={this.logoRef} 
-                    config={this.componentConfig()}  
-                    djsConfig={this.djsConfig()} 
-                    eventHandlers={this.handleLogoDrop()}
+                        ref={this.logoRef} 
+                        config={this.componentConfig()}  
+                        djsConfig={this.djsConfig()} 
+                        eventHandlers={this.handleLogoDrop()}
                     >
                         <div className="dz-message">
                             Upload Logo
