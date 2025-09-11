@@ -29,6 +29,8 @@ import NoMatch from './pages/no-match';
 library.add(faTrash, faSignOutAlt, faEdit)
 
 
+
+
 export default class App extends Component {
 
   /* De 08-073 - Adding debugging VISUAL component, creamos el constructor */

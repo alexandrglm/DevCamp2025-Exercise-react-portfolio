@@ -7,6 +7,9 @@ import DropzoneComponent from 'react-dropzone-component'
 import '../../../node_modules/react-dropzone-component/styles/filepicker.css'
 import '../../../node_modules/dropzone/dist/min/dropzone.min.css'
 
+const miApi = 'https://apialexandr.devcamp.space'
+
+
 export default class PortfolioForm extends Component {
 
     // De 08-087
@@ -22,7 +25,10 @@ export default class PortfolioForm extends Component {
             url: '',
             thumb_image: '',
             banner_image: '',
-            logo: ''
+            logo: '',
+            editMode: false,
+            apiURL: `${miApi}/portfolio/portfolio_items`,
+            apiAction: 'post'
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -40,6 +46,47 @@ export default class PortfolioForm extends Component {
         this.logoRef = React.createRef()
 
     }
+
+    // De 09-110
+    componentDidUpdate(){
+
+        // Si no añadimos verificacion if al propio this.props.portfolioToEdit, no funcionará
+        if ( this.props.portfolioToEdit && Object.keys( this.props.portfolioToEdit ).length > 0 ) {
+
+            // Esto es Destructuring Assignment para extraer datos
+            // evitamos reiterar lineas de  this.props.portfoliotToEdit.variable
+            const {
+
+                id,
+                name,
+                description,
+                category,
+                position,
+                url,
+                thumb_image,
+                banner_image,
+                logo
+
+            } = this.props.portfolioToEdit
+
+            this.props.clearPortfolioToEdit()
+
+            this.setState({
+
+                id: id,
+                name: name || '',
+                description: description || '',
+                category: category || 'Services',
+                position: position || '',
+                url: url || '',
+                editMode: true,
+                apiURL: `${miApi}/portfolio/portfolio_items`,
+                apiAction: 'patch'
+
+            });
+        }
+    }
+
 
         // De 09-098
     handleThumbDrop() {
@@ -146,13 +193,14 @@ export default class PortfolioForm extends Component {
     handleSubmit(event) {
         
         // MUCHISIMO CUIDADO CON LOS INDENTS DEL PUTO AXIOS DE LOS COJONES!
-        axios
+        axios({
 
-            .post(
-                "https://apialexandr.devcamp.space/portfolio/portfolio_items",
-                this.buildForm(),
-                { withCredentials: true }
-            )
+            method: this.state.apiAction,
+            url: this.state.url,
+            data: this.buildForm(),
+            withCredentials: true
+        })
+
             .then(response => {
                 this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
 
