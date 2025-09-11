@@ -93,7 +93,23 @@ export default class PortfolioForm extends Component {
 
     deleteImage(imageType) {
 
-        console.log('DELETE IMAGE PREVIA, pendiente agregar la logica ', imageType)
+        axios
+            .delete(`${miApi}/portfolio/portfolio-delete-image/${this.state.id}=image_type=${imageType}`,
+                { withCredentials: true }
+            )
+            .then ( response => {
+
+                this.setState({
+
+                    [`${imageType}_url`]: ''
+
+                })
+
+            })
+            .catch ( error =>{
+                console.log('IMG DELETE ERROR: ', error)
+            })
+
     }
 
 
