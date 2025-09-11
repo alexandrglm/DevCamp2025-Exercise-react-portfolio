@@ -309,9 +309,9 @@ export default class PortfolioForm extends Component {
                 <div className="image-uploaders">
 
                     {this.state.thumb_image && this.state.editMode ? (
-
-                        <img src={this.state.thumb_image} />
-
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={this.state.thumb_image} />
+                        </div>
                     ) : (
 
                     <DropzoneComponent 
@@ -327,6 +327,15 @@ export default class PortfolioForm extends Component {
 
                     )}
 
+
+                    {this.state.banner_image && this.state.editMode ? (
+                        
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={this.state.banner_image} />
+                        </div>
+
+                    ) : (
+
                     <DropzoneComponent 
                     ref={this.bannerRef}
                     config={this.componentConfig()} 
@@ -337,7 +346,17 @@ export default class PortfolioForm extends Component {
                             Upload Banner
                         </div>
                     </DropzoneComponent>
+                    )}
 
+
+
+                    {this.state.logo && this.state.editMode ? (
+                        
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={this.state.logo} />
+                        </div>
+
+                    ) : (
                     <DropzoneComponent 
                     ref={this.logoRef} 
                     config={this.componentConfig()}  
@@ -348,6 +367,8 @@ export default class PortfolioForm extends Component {
                             Upload Logo
                         </div>
                     </DropzoneComponent>
+                    )}
+                    
 
                 </div>
 
