@@ -38,6 +38,7 @@ export default class PortfolioForm extends Component {
         this.handleThumbDrop = this.handleThumbDrop.bind(this);
         this.handleBannerDrop = this.handleBannerDrop.bind(this);
         this.handleLogoDrop = this.handleLogoDrop.bind(this);
+        this.deleteImage = this.deleteImage.bind(this);
 
 
         // De 09-100, incluir REFs para clear form
@@ -88,6 +89,11 @@ export default class PortfolioForm extends Component {
 
             });
         }
+    }
+
+    deleteImage() {
+
+        return (console.log('DELETE IMAGE PREVIA, pendiente agregar la logica '))
     }
 
 
@@ -310,7 +316,14 @@ export default class PortfolioForm extends Component {
 
                     {this.state.thumb_image && this.state.editMode ? (
                         <div className="portfolio-manager-image-wrapper">
+                            
                             <img src={this.state.thumb_image} />
+
+                            <div className="image-removal-link">
+                                <a onClick={ () => this.deleteImage('thumb_image')}>
+                                    Remove Image
+                                </a>
+                            </div>    
                         </div>
                     ) : (
 
@@ -332,6 +345,12 @@ export default class PortfolioForm extends Component {
                         
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.banner_image} />
+
+                            <div className="image-removal-link">
+                                <a onClick={ () => this.deleteImage('banner_image')}>
+                                    Remove Image
+                                </a>
+                            </div>                              
                         </div>
 
                     ) : (
@@ -354,6 +373,12 @@ export default class PortfolioForm extends Component {
                         
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.logo} />
+
+                            <div className="image-removal-link">
+                                <a onClick={ () => this.deleteImage('logo')}>
+                                    Remove Image
+                                </a>
+                            </div>                              
                         </div>
 
                     ) : (
@@ -368,7 +393,7 @@ export default class PortfolioForm extends Component {
                         </div>
                     </DropzoneComponent>
                     )}
-                    
+
 
                 </div>
 
