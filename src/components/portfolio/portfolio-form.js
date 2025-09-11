@@ -27,7 +27,7 @@ export default class PortfolioForm extends Component {
             banner_image: '',
             logo: '',
             editMode: false,
-            apiURL: `${miApi}/portfolio/portfolio_items`,
+            apiUrl: `${miApi}/portfolio/portfolio_items`,
             apiAction: 'post'
         }
 
@@ -80,8 +80,11 @@ export default class PortfolioForm extends Component {
                 position: position || '',
                 url: url || '',
                 editMode: true,
-                apiURL: `${miApi}/portfolio/portfolio_items`,
-                apiAction: 'patch'
+                apiUrl: `${miApi}/portfolio/portfolio_items/${id}`,
+                apiAction: 'patch',
+                thumb_image: thumb_image || '',
+                banner_image: banner_image || '',
+                logo: logo   || ''
 
             });
         }
@@ -196,7 +199,7 @@ export default class PortfolioForm extends Component {
         axios({
 
             method: this.state.apiAction,
-            url: this.state.url,
+            url: this.state.apiUrl,
             data: this.buildForm(),
             withCredentials: true
         })
@@ -209,7 +212,7 @@ export default class PortfolioForm extends Component {
 
                 } else {
 
-                this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
+                this.props.handleNewFormSubmission(response.data.portfolio_item);
                 }
 
                 this.setState({
@@ -305,6 +308,12 @@ export default class PortfolioForm extends Component {
                 { /* THUMB */ }
                 <div className="image-uploaders">
 
+                    {this.state.thumb_image && this.state.editMode ? (
+
+                        <img src={this.state.thumb_image} />
+
+                    ) : (
+
                     <DropzoneComponent 
                     ref={this.thumbRef}
                     config={this.componentConfig()} 
@@ -315,6 +324,8 @@ export default class PortfolioForm extends Component {
                             Upload Thumbnail
                         </div>
                     </DropzoneComponent>
+
+                    )}
 
                     <DropzoneComponent 
                     ref={this.bannerRef}
