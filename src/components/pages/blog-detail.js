@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 import React, { Component } from "react";
 
 const miApi = 'https://apialexandr.devcamp.space'
@@ -25,7 +25,11 @@ export default class BlogDetail extends Component {
             .get(`${miApi}/portfolio/portfolio_blogs/${this.state.currentId}`)
             .then( response =>{
 
-                console.log(response)
+                this.setState({
+
+                    blogItem: response.data.portfolio_blog
+
+                })
 
             })
             .catch( error =>{
@@ -40,10 +44,19 @@ export default class BlogDetail extends Component {
 
     render(){
 
+        const {
+            title,
+            content,
+            featured_image_url,
+            blog_status
+        } = this.state.blogItem
+
         return (
 
             <div>
                 <h1>Blog Detail</h1>
+                <img src={featured_image_url} />
+                <div>{content}</div>
             </div>
 
         )
