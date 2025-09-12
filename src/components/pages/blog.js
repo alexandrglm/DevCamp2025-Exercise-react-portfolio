@@ -1,29 +1,73 @@
 // Desde 07-033 NavLink Styles
 import React, { Component } from "react";
-
 // Desde 07-034, (regular) Link component
 import { Link } from 'react-router-dom'
 
+// De 09-120 AXios API for blog
+import axios from 'axios'
+
+const miApi = 'https://apialexandr.devcamp.space'
+
+class Blog extends Component {
+
+    constructor() {
+
+        super()
+
+        this.state = {
+
+            blogItems: []
+
+        }
+
+        this.getBlogItems = this.getBlogItems.bind(this)
+
+    }
+
+    getBlogItems(){
+
+        axios
+            .get(`${miApi}/portfolio/portfolio_blogs`,
+                { withCredentials: true}
+            )
+            .then( response =>{
+
+                console.log('[AXIOS BLOG API GET] : ', response)
+
+                this.setState({
+
+                    blogItems: response.data.portfolio_blogs
+                    
+                })
+
+            })
+            .catch( error =>{
+                console.log('[AXIOS BLOG ERROR] -> ', error)
+            })
 
 
-const Blog = () => {
+    }
 
-    return(
+    componentDidMount(){
+        this.getBlogItems()
+    }
 
-        <div>
+    render() {
+
+        const blogRecords = this.state.blogItems.map( blogItem => {
+
+            return <h1>{blogItem.title}</h1>
+
+        })
+
+        return(
 
             <div>
-                <h2>Blog</h2>
-
-                <div>
-                    <Link to ="/about-me">
-                        Find more about myself
-                    </Link>
-                </div>
-
+                {blogRecords}
             </div>
-        </div>
-    )
+
+        )
+    }
 }
 
-export default Blog;
+export default Blog
