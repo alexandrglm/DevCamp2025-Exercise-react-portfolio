@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 // De 09-120 AXios API for blog
 import axios from 'axios'
 
+import BlogItem from "../blog/blog-item";
+
+
 const miApi = 'https://apialexandr.devcamp.space'
 
 class Blog extends Component {
@@ -56,7 +59,11 @@ class Blog extends Component {
 
         const blogRecords = this.state.blogItems.map( blogItem => {
 
-            return <h1>{blogItem.title}</h1>
+            return(
+
+                <BlogItem key={blogItem.id} blogItem={blogItem} />
+
+            )
 
         })
 
