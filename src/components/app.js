@@ -25,6 +25,9 @@ import Auth from './pages/auth';
 // De 07-036 Catch All Routes, No Match -> 404 alike
 import NoMatch from './pages/no-match';
 
+// De 09-123 Blog components
+import BlogDetail from './pages/blog-detail';
+
 // De 09-107 IMPORTATISIMO
 library.add(faTrash, faSignOutAlt, faEdit)
 
@@ -185,6 +188,7 @@ export default class App extends Component {
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog}  />
+              <Route path="/b/:slug" component={BlogDetail} />
               
               {/*   //De 08-077 ROUTE GUARDS */}
               { this.state.loggedInStatus === 'LOGGED_IN' ? ( this.authorisedPages() ) : null }
