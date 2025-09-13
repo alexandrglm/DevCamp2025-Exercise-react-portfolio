@@ -13,6 +13,27 @@
 
         width: 800px;
 
+
+        a {
+
+            text-decoration: none;
+            flex-direction: column;
+            width: 800px;
+
+            &:hover {
+
+                color: $dark-teal;
+
+            }
+
+        }
+
+        h1 {
+
+            font-size: $large-font ;
+
+        }
+
         .featured-image-wrapper{
 
             img {
