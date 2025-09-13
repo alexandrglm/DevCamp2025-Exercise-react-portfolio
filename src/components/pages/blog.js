@@ -23,8 +23,13 @@ class Blog extends Component {
 
         }
 
+        /* Atento,
+            no lo llamamos desde componentDidMount porque no lo queremos una vez,
+            sino presente siempre.
+            Por eso no necesita tampoco un contenxto this propio
+        */
         this.activateInfiniteScroll()
-        
+
         this.getBlogItems = this.getBlogItems.bind(this)
 
     }
@@ -33,7 +38,27 @@ class Blog extends Component {
 
         window.onscroll = () => {
 
-            console.log('[DEBUG onscroll]')
+            // Meto 3 debugs para ser consciente de los valores
+            console.log('[DEBUG onscroll] window inner height : ', window.innerHeight)
+            console.log(
+                '[DEBUG document.documentElement.scrollTop]: ', 
+                document.documentElement.scrollTop
+            )
+            console.log(
+                '[DEBUG document.documentElement.offsetHeight]: ',
+                document.documentElement.offsetHeight
+            )
+
+            // Ahora vamos al turron
+            if ( 
+                window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
+             ) {
+
+                console.log('[DEBUG infitescroll] -> GET MORE POSTS')
+
+             }
+
+
 
         }
 
