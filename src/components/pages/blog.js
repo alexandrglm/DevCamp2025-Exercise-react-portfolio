@@ -23,7 +23,19 @@ class Blog extends Component {
 
         }
 
+        this.activateInfiniteScroll()
+        
         this.getBlogItems = this.getBlogItems.bind(this)
+
+    }
+
+    activateInfiniteScroll() {
+
+        window.onscroll = () => {
+
+            console.log('[DEBUG onscroll]')
+
+        }
 
     }
 
