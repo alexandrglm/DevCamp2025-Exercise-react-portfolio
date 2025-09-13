@@ -53,10 +53,28 @@ export default class BlogDetail extends Component {
 
         return (
 
-            <div>
-                <h1>Blog Detail</h1>
-                <img src={featured_image_url} />
-                <div>{content}</div>
+            <div className="blog-container">
+                
+                <div className="content-container">
+
+                    <h1>{title}</h1>
+
+                    <div className="featured-image-wrapper">
+
+                        <img src={featured_image_url} />
+                    
+                    </div>
+
+
+                    <div className="content">
+
+                        <div>{content}</div>
+
+                    </div>
+                     
+                
+                </div>
+
             </div>
 
         )
