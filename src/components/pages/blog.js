@@ -170,7 +170,9 @@ class Blog extends Component {
                 />
 
                 <div className="new-blog-link">
-                    <a onClick={this.handleNewBlogClick}>Open MODAL!</a>
+                    <a onClick={this.handleNewBlogClick}>
+                        <FontAwesomeIcon icon="plus-circle" />
+                    </a>
                 </div>
 
                 <div className="content-container">
