@@ -51,8 +51,12 @@ class Blog extends Component {
 
         if (
 
-            window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight ){
-
+            // window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight ){
+            // Intento de arfreglo para cualquier cosa entre navbar y blog component
+        // Lo suyo seria integrar DebugComponent para este tipo de cosas, y aqui dejar codigo original
+            window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 5
+        ){ 
+                
                 this.getBlogItems()
 
             }
@@ -61,9 +65,11 @@ class Blog extends Component {
 
     getBlogItems(){
 
+        const correccionCurrentPage = this.state.currentPage + 1
+
         this.setState({
 
-            currentPage: this.state.currentPage + 1
+            currentPage: correccionCurrentPage, isLoading: true
 
         })
 
