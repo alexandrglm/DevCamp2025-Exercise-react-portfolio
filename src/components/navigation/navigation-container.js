@@ -98,6 +98,12 @@ const NavigationContainer = props => {
                     </NavLink>
                 </div>                
 
+                {/* // De... MeLoSacoDeLaMangaPorUtilidad */}
+                <div className="nav-link-wrapper">
+                    <NavLink exact to="/auth" activeClassName="nav-link-active">
+                        Auth
+                    </NavLink>
+                </div>      
                 
                 {props.loggedInStatus === 'LOGGED_IN' ? (dynamicLink('/portfolio-manager', 'Portfolio Manager')) : null}
 

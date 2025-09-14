@@ -154,8 +154,8 @@ export default class App extends Component {
 
             { /* De o8-076, tercera LOGICA del LINK CONDICIONAL a AUTH, pasando props al callback */}
             <NavigationContainer  
-            loggedInStatus={this.state.loggedInStatus}
-            handleSuccessfulLogout={this.state.handleSuccessfulLogout}
+              loggedInStatus={this.state.loggedInStatus}
+              handleSuccessfulLogout={this.handleSuccessfulLogout}
             />
 
             {/* De 08-073 - Adding debugging VISUAL component*/}
@@ -168,9 +168,9 @@ export default class App extends Component {
                 render={ props =>  (
 
                   <Auth
-                  {...props} 
-                  handleSuccessfulLogin={this.handleSuccessfulLogin} 
-                  handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} 
+                    {...props} 
+                    handleSuccessfulLogin={this.handleSuccessfulLogin} 
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} 
                   />
                 )}
               />
@@ -178,11 +178,39 @@ export default class App extends Component {
               
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route path="/blog" component={Blog}  />
+              
+              <Route 
+                path="/blog" 
+                render={ props  => (
+
+                  <Blog 
+                    {...props} 
+                    loggedInStatus={this.state.loggedInStatus}
+                  />
+                )}  
+              />
+
               <Route path="/b/:slug" component={BlogDetail} />
-              { this.state.loggedInStatus === 'LOGGED_IN' ? ( this.authorisedPages() ) : null }
-              {/* // De 07-035 - URL values,slug, sublinks propios */}
-              <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
+              { this.state.loggedInStatus === 'LOGGED_IN' ? ( 
+                this.authorisedPages() 
+              ) : null }
+              <Route  
+                exact path="/portfolio/:slug" 
+                component={PortfolioDetail}
+              />
+
+
+              {/* Esto ya lo quitaré, quiero acceso directo */}
+              <Route 
+                path="/auth"
+                render={ props =>{
+                  <Auth 
+                    {...props} 
+                    handleSuccessfulLogin={this.handleSuccessfulLogin} 
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
+                  />
+                }}
+              />
 
               {/* Los CATCH-ALL..:SIEMPRE AL FINAL */}
               <Route component={NoMatch} />
