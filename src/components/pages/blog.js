@@ -28,49 +28,34 @@ class Blog extends Component {
 
         }
 
-        /* Atento,
-            no lo llamamos desde componentDidMount porque no lo queremos una vez,
-            sino presente siempre.
-            Por eso no necesita tampoco un contenxto this propio
-        */
-        this.activateInfiniteScroll()
+
 
         this.getBlogItems = this.getBlogItems.bind(this)
 
+        this.onScroll = this.onScroll.bind(this)
+
+        window.addEventListener('scroll', this.onScroll, false)
+
     }
 
-    isLoading() {
 
+    // Refactorizado dese 09-133
+    onScroll() {
 
-    }
+        if (
 
-    activateInfiniteScroll() {
+            this.state.isLoading ||
+            this.state.blogItems.length === this.state.totalCount
 
-        window.onscroll = () => {
+        ) { return }
 
-            // Meto 3 debugs para ser consciente de los valores
-            console.log('[DEBUG onscroll] window inner height : ', window.innerHeight)
-            console.log(
-                '[DEBUG document.documentElement.scrollTop]: ', 
-                document.documentElement.scrollTop
-            )
-            console.log(
-                '[DEBUG document.documentElement.offsetHeight]: ',
-                document.documentElement.offsetHeight
-            )
+        if (
 
-            // Ahora vamos al turron
-            if ( 
-                window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
-             ) {
+            window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight ){
 
-                console.log('[DEBUG infitescroll] -> GET MORE POSTS')
+                this.getBlogItems()
 
-             }
-
-
-
-        }
+            }
 
     }
 
@@ -83,7 +68,7 @@ class Blog extends Component {
         })
 
         axios
-            .get(`${miApi}/portfolio/portfolio_blogs`,
+            .get(`${miApi}/portfolio/portfolio_blogs?page=${this.state.currentPage}`,
                 { withCredentials: true}
             )
             .then( response =>{
@@ -94,7 +79,7 @@ class Blog extends Component {
 
                 this.setState({
 
-                    blogItems: response.data.portfolio_blogs,
+                    blogItems: this.state.blogItems.concat( response.data.portfolio_blogs ),
                     totalCount: response.data.meta.total_records,
                     isLoading: false
                     
@@ -108,8 +93,15 @@ class Blog extends Component {
 
     }
 
-    componentDidMount(){
+    componentWillMount()  {
+
         this.getBlogItems()
+
+    }
+    componentWillUnmount() {
+
+        window.removeEventListener('scroll', this.onScroll, false)
+
     }
 
     render() {
