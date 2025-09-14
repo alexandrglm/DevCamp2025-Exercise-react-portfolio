@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 // De 09-120 AXios API for blog
 import axios from 'axios'
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import BlogItem from "../blog/blog-item";
 
 
@@ -21,7 +23,8 @@ class Blog extends Component {
 
             blogItems: [],
             totalCount: 0,
-            currentPage: 0
+            currentPage: 0,
+            isLoading: true
 
         }
 
@@ -33,6 +36,11 @@ class Blog extends Component {
         this.activateInfiniteScroll()
 
         this.getBlogItems = this.getBlogItems.bind(this)
+
+    }
+
+    isLoading() {
+
 
     }
 
@@ -87,7 +95,8 @@ class Blog extends Component {
                 this.setState({
 
                     blogItems: response.data.portfolio_blogs,
-                    totalCount: response.data.meta.total_records
+                    totalCount: response.data.meta.total_records,
+                    isLoading: false
                     
                 })
 
@@ -122,6 +131,14 @@ class Blog extends Component {
                 <div className="content-container">
                     {blogRecords}
                 </div>
+
+                {this.state.isLoading ? (
+
+                    <div className="content-loader">
+                        <FontAwesomeIcon icon="spinner" spin />
+                    </div>
+
+                ) : null }
 
             </div>
 
