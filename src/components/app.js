@@ -5,10 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // De 08-074 Cookies checking
 import axios from 'axios';
 
-// De 09-107
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt, faEdit, faSpinner, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+// De 09-107 a 10-147 HELPERS creados, primero para Icons
+import Icons from '../helpers/icon';
 
 // Desde 07-30 Elvis, para la creación del NavBar
 import NavigationContainer from './navigation/navigation-container';
@@ -28,9 +26,6 @@ import NoMatch from './pages/no-match';
 // De 09-123 Blog components
 import BlogDetail from './pages/blog-detail';
 
-// De 09-107 IMPORTATISIMO
-library.add(faTrash, faSignOutAlt, faEdit, faSpinner, faPlusCircle)
-
 
 
 
@@ -39,6 +34,8 @@ export default class App extends Component {
   /* De 08-073 - Adding debugging VISUAL component, creamos el constructor */
   constructor(props) {
     super(props);
+
+    Icons();
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN"
