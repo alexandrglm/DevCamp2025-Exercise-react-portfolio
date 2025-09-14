@@ -163,25 +163,16 @@ export default class App extends Component {
 
             <Switch>  
               <Route exact path="/" component={Home} />
+              <Route 
+                path="/auth"
+                render={ props =>  (
 
-
-              {/* 
-              Pasamos del compopnente basico prop, al RENDER PROPS
-              
-                - Patron RENDER PROPS ... pasa FUNCIONES a COMPONENTES
-                - ...props, el spread preserva toda la funcionalidad de Router
-               
-               
-               */}
-              <Route path="/auth"
-              render={ props =>  (
-
-                <Auth
-                {...props} 
-                handleSuccessfulLogin={this.handleSuccessfulLogin} 
-                handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} 
-                />
-              )}
+                  <Auth
+                  {...props} 
+                  handleSuccessfulLogin={this.handleSuccessfulLogin} 
+                  handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} 
+                  />
+                )}
               />
               
               
@@ -189,12 +180,7 @@ export default class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog}  />
               <Route path="/b/:slug" component={BlogDetail} />
-              
-              {/*   //De 08-077 ROUTE GUARDS */}
               { this.state.loggedInStatus === 'LOGGED_IN' ? ( this.authorisedPages() ) : null }
-              
-              
-              
               {/* // De 07-035 - URL values,slug, sublinks propios */}
               <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
 

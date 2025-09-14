@@ -26,7 +26,8 @@ class Blog extends Component {
             blogItems: [],
             totalCount: 0,
             currentPage: 0,
-            isLoading: true
+            isLoading: true,
+            blogModalIsOpen: false
 
         }
 
@@ -35,8 +36,31 @@ class Blog extends Component {
         this.getBlogItems = this.getBlogItems.bind(this)
 
         this.onScroll = this.onScroll.bind(this)
-
         window.addEventListener('scroll', this.onScroll, false)
+
+        this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
+        this.handleModalClose = this.handleModalClose.bind(this)
+
+    }
+
+    // 09-137 HAndle Modal Close, pero va a dar sufrimiento porq react tiene problemas con los modals que siguen renderizanmdo main app
+    handleModalClose() {
+
+        this.setState({
+
+            blogModalIsOpen: false
+
+        })
+    }
+
+    // 09-136 Modal attached al click
+    handleNewBlogClick() {
+
+        this.setState({
+
+            blogModalIsOpen: true
+
+        })
 
     }
 
@@ -128,7 +152,18 @@ class Blog extends Component {
 
             <div className="blog-container">
 
-                <BlogModal />
+                <BlogModal 
+                onRequestClose={ () => {
+                    
+                    //console.log('[DEBUG MODAL] -> Closing modal request OK')
+                    {this.props.handleModalClose()}
+                }}
+                modalIsOpen={this.state.blogModalIsOpen } 
+                />
+
+                <div className="new-blog-link">
+                    <a onClick={this.handleNewBlogClick}>Open MODAL!</a>
+                </div>
 
                 <div className="content-container">
                     {blogRecords}
