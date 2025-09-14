@@ -1,0 +1,22 @@
+// De 09-140, Initial blog-form component 
+import React, { Component } from 'react'
+
+export default class BlogForm extends Component {
+
+    render() {
+
+        return(
+
+            <form>
+
+                <input type="text" />
+                <input type="text" />
+                <button>Save</button>
+
+            </form>
+
+        )
+    }
+
+
+}

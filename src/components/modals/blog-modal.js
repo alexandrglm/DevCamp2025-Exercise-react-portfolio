@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import ReactModal from 'react-modal'
 
+import BlogForm from "../blog/blog-form";
+
 /*
 IMPORTANTISIMO:
     Arreglamos el warning de :
@@ -50,7 +52,9 @@ export default class BlogModal extends Component {
                 style={this.customStyles} 
                 onRequestClose={ () => { this.props.handleModalClose() } }
                 isOpen={this.props.modalIsOpen} >
-                <h1> I am a MODAL!</h1>
+
+                    <BlogForm />
+                
             </ReactModal>
         )
 
