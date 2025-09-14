@@ -9,7 +9,6 @@ import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import BlogItem from "../blog/blog-item";
-
 import BlogModal from "../modals/blog-modal";
 
 
@@ -40,7 +39,22 @@ class Blog extends Component {
         this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
         this.handleModalClose = this.handleModalClose.bind(this)
 
+        this.handleSuccessfulNewBlogSubmission = this.handleSuccessfulNewBlogSubmission.bind(this)
+
     }
+
+    // 09-173
+    handleSuccessfulNewBlogSubmission(blog) {
+
+        this.setState({
+
+            blogModalIsOpen: false,
+            blogItems: [blog].concat(this.state.blogItems)
+
+        })
+
+    }
+
 
     // 09-137 HAndle Modal Close, pero va a dar sufrimiento porq react tiene problemas con los modals que siguen renderizanmdo main app
     handleModalClose() {
@@ -138,9 +152,11 @@ class Blog extends Component {
     render() {
 
         const blogRecords = this.state.blogItems.map( blogItem => {
+            
             return(
                 <BlogItem key={blogItem.id} blogItem={blogItem} />
             )
+        
         })
 
         return(
@@ -148,6 +164,7 @@ class Blog extends Component {
             <div className="blog-container">
 
                 <BlogModal
+                handleSuccessfulNewBlogSubmission={this.handleSuccessfulNewBlogSubmission}
                 handleModalClose={this.handleModalClose}
                 modalIsOpen={this.state.blogModalIsOpen}
                 />

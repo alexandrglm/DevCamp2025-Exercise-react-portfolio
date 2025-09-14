@@ -41,6 +41,14 @@ export default class BlogForm extends Component {
 
                 this.props.handleSuccessfulFormSubmission(this.state)
 
+                // limpiando form a lo facil
+                this.setState({
+
+                    title: '',
+                    blog_status: ''
+
+                })
+
             })
             .catch ( error => {
 

@@ -48,13 +48,8 @@ export default class BlogModal extends Component {
 
     handleSuccessfulFormSubmission(blog) {
 
-        //this.setState({
-
-            console.log('[DEBUG BLOG-FORM] -> blog from blog-form: ', blog)
-
-        //})
-
-
+        //console.log('[DEBUG BLOG-FORM] -> blog from blog-form: ', blog)
+        this.props.handleSuccessfulFormSubmission(blog)
 
     }
 
