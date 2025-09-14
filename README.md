@@ -27,3 +27,6 @@ Because of modern system security hardening, you need to adjust Chokidar watcher
     "preinstall": "npm set audit false",
     "start": "CHOKIDAR_USEPOLLING=true webpack-dev-server --config webpack/dev.config.js --watch",
 ```
+
+#### 3. `axios` updated to 1.12.0 (no breaking changes)
+
