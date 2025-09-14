@@ -16,9 +16,37 @@ export default class RichTextEditor extends Component {
             editorState: EditorState.createEmpty()
 
         }
+
+        this.onEditorStateChange = this.onEditorStateChange.bind(this)
+    }
+
+    onEditorStateChange(editorState){
+
+        this.setState(
+            { editorState },
+            () => {
+
+                this.props.handleRichTextEditorChange(
+
+                    draftToHtml(convertToRaw( this.state.editorState.getCurrentContent() ))
+                )
+            }
+        )
     }
 
     render() {
+
+        /*
+        WORKFLOW:
+            
+            this.state.editorState.getCurrentContent()
+                ↓
+            convertToRaw(contentState)
+                ↓
+            draftToHtml(rawObject)
+                ↓
+            Saved as "<p>Hello <strong>world</strong></p>"
+        */
 
         return(
 
@@ -27,7 +55,8 @@ export default class RichTextEditor extends Component {
                 <Editor 
                     editorState={this.state.editorState} 
                     wrapperClassName='demo-wrapper' 
-                    editorClassName='demo-editor'
+                    editorClassName='demo-editor' 
+                    onEditorStateChange={this.onEditorStateChange}
                 />
 
             </div>
