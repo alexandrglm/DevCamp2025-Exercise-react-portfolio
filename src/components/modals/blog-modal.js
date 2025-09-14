@@ -38,7 +38,7 @@ export default class BlogModal extends Component {
             },
             overlay: {
 
-                backgroundColor: 'rgba(1,1,1,0.75'
+                backgroundColor: 'rgba(1,1,1,0.75)'
 
             }
         }
@@ -49,7 +49,8 @@ export default class BlogModal extends Component {
     handleSuccessfulFormSubmission(blog) {
 
         //console.log('[DEBUG BLOG-FORM] -> blog from blog-form: ', blog)
-        this.props.handleSuccessfulFormSubmission(blog)
+        
+        this.props.handleSuccessfulNewBlogSubmission(blog)
 
     }
 

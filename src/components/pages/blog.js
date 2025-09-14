@@ -104,11 +104,12 @@ class Blog extends Component {
 
     getBlogItems(){
 
-        const correccionCurrentPage = this.state.currentPage + 1
+        // const correccionCurrentPage = this.state.currentPage + 1
 
         this.setState({
 
-            currentPage: correccionCurrentPage, isLoading: true
+            currentPage: this.state.currentPage + 1
+            // , isLoading: true
 
         })
 

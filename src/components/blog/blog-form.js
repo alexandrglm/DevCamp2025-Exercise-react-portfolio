@@ -160,7 +160,7 @@ export default class BlogForm extends Component {
 
             <form onSubmit={this.handleSubmit} className='blog-form-wrapper'>
 
-                <div className='two-columns'>
+                <div className='two-column'>
 
                     <input 
                         type="text" 
