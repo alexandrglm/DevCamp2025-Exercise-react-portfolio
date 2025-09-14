@@ -1,0 +1,18 @@
+// De 09-144
+
+
+.blog-form-wrapper {
+
+    @include base-grid();
+
+    grid-template-columns: 1fr;
+    padding: 42px;
+
+    @include input-element();
+
+    input {
+
+        margin-bottom: 0px;
+    }
+
+}
