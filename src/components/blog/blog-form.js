@@ -15,23 +15,42 @@ export default class BlogForm extends Component {
         this.state = {
 
             title: '',
-            blog_status: ''
+            blog_status: '',
+            content: ''
 
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this)
     }
 
-    handleChange(event) {
+    handleRichTextEditorChange(content) {
 
+        /*
+        Vamos a empezar a subir syntax; content: content es lo mismo que content a secas en syntax moderna */
         this.setState({
 
-            [event.target.name]: event.target.value
+            content
 
         })
+        console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked succesfully!')
 
     }
+
+    buildForm() {
+
+        let formData = new FormData()
+
+        formData.append('portfolio_blog[title]', this.state.title)
+        formData.append('portfolio_blog[blog_status]', this.state.blog_status)
+        formData.append('portfolio_blog[content]', this.state.content )
+
+        return formData
+
+    }
+
+
     handleSubmit(event) {
 
         axios
@@ -41,7 +60,8 @@ export default class BlogForm extends Component {
             )
             .then( response => {
 
-                this.props.handleSuccessfulFormSubmission(this.state)
+                // console.log("Form data includes:", this.state);
+                this.props.handleSuccessfulFormSubmission(response.data.portfolio_blog)
 
                 // limpiando form a lo facil
                 this.setState({
@@ -62,16 +82,16 @@ export default class BlogForm extends Component {
 
     }
 
-    buildForm() {
+    handleChange(event) {
 
-        let formData = new FormData()
+        this.setState({
 
-        formData.append('portfolio_blog[title]', this.state.title)
-        formData.append('portfolio_blog[blog_status]', this.state.blog_status)
+            [event.target.name]: event.target.value
 
-        return formData
+        })
 
     }
+
 
 
 
@@ -103,11 +123,13 @@ export default class BlogForm extends Component {
 
                 <div className='one-column'>
 
-                    <RichTextEditor />
+                    <RichTextEditor
+                        handleRichTextEditorChange={this.handleRichTextEditorChange}    
+                    />
 
                 </div>
 
-                <button className="btn" type="submit">Save</button>
+                <button className="btn" >Save</button>
 
             </form>
 
