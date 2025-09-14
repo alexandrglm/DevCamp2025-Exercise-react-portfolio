@@ -1,5 +1,8 @@
 // De 09-140, Initial blog-form component 
 import React, { Component } from 'react'
+import axios from 'axios'
+
+const miApi = 'https://apialexandr.devcamp.space'
 
 export default class BlogForm extends Component {
 
@@ -29,9 +32,34 @@ export default class BlogForm extends Component {
     }
     handleSubmit(event) {
 
+        axios
+            .post(`${miApi}/portfolio/portfolio_blogs`,
+                this.buildForm(),
+                { withCredentials: true}
+            )
+            .then( response => {
 
-        this.props.handleSuccessfulFormSubmission(this.state)
+                this.props.handleSuccessfulFormSubmission(this.state)
+
+            })
+            .catch ( error => {
+
+                console.log('[AXIOS BLOG-FORM] Error: ', error)
+            })
+
+
         event.preventDefault()
+
+    }
+
+    buildForm() {
+
+        let formData = new FormData()
+
+        formData.append('portfolio_blog[title]', this.state.title)
+        formData.append('portfolio_blog[blog_status]', this.state.blog_status)
+
+        return formData
 
     }
 
