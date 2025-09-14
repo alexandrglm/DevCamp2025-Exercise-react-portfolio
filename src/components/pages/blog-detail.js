@@ -1,5 +1,9 @@
 import axios from "axios";
 import React, { Component } from "react";
+// De 10-154
+import ReactHtmlParser from 'react-html-parser'
+
+import BlogFeaturedImage from "../blog/blog-featured-image";
 
 const miApi = 'https://apialexandr.devcamp.space'
 
@@ -49,6 +53,7 @@ export default class BlogDetail extends Component {
             content,
             featured_image_url,
             blog_status
+
         } = this.state.blogItem
 
         return (
@@ -59,16 +64,27 @@ export default class BlogDetail extends Component {
 
                     <h1>{title}</h1>
 
-                    <div className="featured-image-wrapper">
 
+                {/* 
+
+                Hemos pasado tan limpiamente un elvis al propio componente
+                de featured-image, ya que este incorpora la verificacion 
+                
+                { featured_image_url ? (
+
+                    <div className="featured-image-wrapper">
                         <img src={featured_image_url} />
-                    
                     </div>
+
+                ): null } 
+                */}
+                <BlogFeaturedImage img={featured_image_url} />
+
 
 
                     <div className="content">
 
-                        <div>{content}</div>
+                        <div>{ReactHtmlParser(content)}</div>
 
                     </div>
                      

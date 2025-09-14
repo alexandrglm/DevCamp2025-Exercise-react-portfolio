@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+// De 10-154
+import ReactHtmlParser from 'react-html-parser'
 
 const BlogItem = props =>{
 
@@ -22,7 +24,7 @@ const BlogItem = props =>{
                 <h1>{title}</h1>
             </Link>
 
-            <div>{content}</div>
+            <div>{ReactHtmlParser(content)}</div>
 
         </div>
 
