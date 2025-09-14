@@ -34,7 +34,7 @@ export default class BlogForm extends Component {
             content
 
         })
-        console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked succesfully!')
+        console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked successfully!')
 
     }
 
@@ -60,9 +60,6 @@ export default class BlogForm extends Component {
             )
             .then( response => {
 
-                // console.log("Form data includes:", this.state);
-                this.props.handleSuccessfulFormSubmission(response.data.portfolio_blog)
-
                 // limpiando form a lo facil
                 this.setState({
 
@@ -70,6 +67,10 @@ export default class BlogForm extends Component {
                     blog_status: ''
 
                 })
+
+                // console.log("Form data includes:", this.state);
+                this.props.handleSuccessfullFormSubmission(response.data.portfolio_blog)
+
 
             })
             .catch ( error => {

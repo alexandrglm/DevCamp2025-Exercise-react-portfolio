@@ -43,13 +43,13 @@ export default class BlogModal extends Component {
             }
         }
 
-        this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
+        this.handleSuccessfullFormSubmission = this.handleSuccessfullFormSubmission.bind(this)
     }
 
-    handleSuccessfulFormSubmission(blog) {
+    handleSuccessfullFormSubmission(blog) {
 
         //console.log('[DEBUG BLOG-FORM] -> blog from blog-form: ', blog)
-        this.props.handleSuccessfulFormSubmission(blog)
+        this.props.handleSuccessfullFormSubmission(blog)
 
     }
 
@@ -59,11 +59,14 @@ export default class BlogModal extends Component {
 
             <ReactModal 
                 style={this.customStyles} 
-                onRequestClose={ () => { this.props.handleModalClose() } }
+                onRequestClose={ () => { 
+                    this.props.handleModalClose();
+                }}
                 isOpen={this.props.modalIsOpen} >
 
-                    <BlogForm handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} />
-                
+                    <BlogForm 
+                        handleSuccessfullFormSubmission={this.handleSuccessfullFormSubmission} 
+                    />
             </ReactModal>
         )
 
