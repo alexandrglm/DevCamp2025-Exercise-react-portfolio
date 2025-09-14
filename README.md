@@ -30,3 +30,20 @@ Because of modern system security hardening, you need to adjust Chokidar watcher
 
 #### 3. `axios` updated to 1.12.0 (no breaking changes)
 
+#### 4. Update `html-webpack-plugin` to 4.5.2, which updates `loader-utils` to 1.4.2
+
+#### Notice: Prototype Pollution in `js-extend`, used as example: 
+
+**Package:** `js-extend`  
+**Version:** 1.0.1 (transitive dependency via `babel-plugin-async-to-promises@1.0.5`)  
+**Vulnerability:** Prototype Pollution
+
+`js-extend` versions ≤ 1.0.1 allow attackers to manipulate the prototype of base objects, potentially causing denial of service or remote code execution.  
+
+**Impact:**  
+- Only relevant if compiling untrusted or external code.  
+- **If your project only compiles trusted code, the risk is minimal**.  
+
+**Project will be migrated to newer react-babel-etc when finished, including breaking changes**
+
+
