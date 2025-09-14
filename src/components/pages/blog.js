@@ -32,7 +32,6 @@ class Blog extends Component {
         }
 
 
-
         this.getBlogItems = this.getBlogItems.bind(this)
 
         this.onScroll = this.onScroll.bind(this)
@@ -139,26 +138,18 @@ class Blog extends Component {
     render() {
 
         const blogRecords = this.state.blogItems.map( blogItem => {
-
             return(
-
                 <BlogItem key={blogItem.id} blogItem={blogItem} />
-
             )
-
         })
 
         return(
 
             <div className="blog-container">
 
-                <BlogModal 
-                onRequestClose={ () => {
-                    
-                    //console.log('[DEBUG MODAL] -> Closing modal request OK')
-                    {this.props.handleModalClose()}
-                }}
-                modalIsOpen={this.state.blogModalIsOpen } 
+                <BlogModal
+                handleModalClose={this.handleModalClose}
+                modalIsOpen={this.state.blogModalIsOpen}
                 />
 
                 <div className="new-blog-link">
