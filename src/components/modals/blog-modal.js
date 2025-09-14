@@ -2,6 +2,19 @@
 import React, { Component } from "react";
 import ReactModal from 'react-modal'
 
+/*
+IMPORTANTISIMO:
+    Arreglamos el warning de :
+
+        Warning: react-modal: App element is not defined. 
+        Please use `Modal.setAppElement(el)` or set `appElement={el}`.
+
+    Lo hacemos, sobre todo, por indicativo de ACCESIBILIDAD.
+    Esto se ha revisado en EU en 2025, este tipo de implementaciones es MUST.
+*/
+ReactModal.setAppElement('.app-wrapper')
+
+
 export default class BlogModal extends Component {
 
     constructor(props){
