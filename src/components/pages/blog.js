@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import BlogItem from "../blog/blog-item";
 
+import BlogModal from "../modals/blog-modal";
+
 
 const miApi = 'https://apialexandr.devcamp.space'
 
@@ -125,6 +127,8 @@ class Blog extends Component {
         return(
 
             <div className="blog-container">
+
+                <BlogModal />
 
                 <div className="content-container">
                     {blogRecords}
