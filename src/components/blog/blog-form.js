@@ -29,6 +29,8 @@ export default class BlogForm extends Component {
         this.componentConfig = this.componentConfig.bind(this)
         this.djsConfig = this.djsConfig.bind(this)
         this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this)
+
+        this.featuredImageRef = React.createRef()
     }
 
     componentConfig(){
@@ -86,6 +88,12 @@ export default class BlogForm extends Component {
         formData.append('portfolio_blog[blog_status]', this.state.blog_status)
         formData.append('portfolio_blog[content]', this.state.content )
 
+        if ( this.state.featured_image ) {
+
+            formData.append('portfolio_blog[featured_image]', this.state.featured_image)
+
+        }
+
         return formData
 
     }
@@ -100,18 +108,27 @@ export default class BlogForm extends Component {
             )
             .then( response => {
 
+                // limpiando DropZone ya no tan facil
+                if (  this.state.featured_image ) {
+
+                    this.featuredImageRef.current.dropzone.removeAllFiles()
+
+                }
+
                 // limpiando form a lo facil
                 this.setState({
 
                     title: '',
                     blog_status: '',
-                    content: ''
+                    content: '',
+                    featured_image: ''
 
-                })
+                });
 
                 // console.log("Form data includes:", this.state);
-                this.props.handleSuccessfullFormSubmission(response.data.portfolio_blog)
-
+                this.props.handleSuccessfullFormSubmission(
+                    response.data.portfolio_blog
+                );
 
             })
             .catch ( error => {
@@ -173,7 +190,8 @@ export default class BlogForm extends Component {
                     <DropzoneComponent 
                         config={this.componentConfig} 
                         djsConfig={this.djsConfig} 
-                        eventHandlers={this.handleFeaturedImageDrop()}
+                        eventHandlers={this.handleFeaturedImageDrop()} 
+                        ref={this.featuredImageRef}
                     >
                         <div className="dz-message">Featured Image</div>
                     </DropzoneComponent>
