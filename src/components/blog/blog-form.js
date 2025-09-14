@@ -188,10 +188,10 @@ export default class BlogForm extends Component {
 
                 <div className="image-uploaders">
                     <DropzoneComponent 
+                        ref={this.featuredImageRef}
                         config={this.componentConfig()} 
                         djsConfig={this.djsConfig()} 
                         eventHandlers={this.handleFeaturedImageDrop()} 
-                        ref={this.featuredImageRef}
                     >
                         <div className="dz-message">Featured Image</div>
                     </DropzoneComponent>
