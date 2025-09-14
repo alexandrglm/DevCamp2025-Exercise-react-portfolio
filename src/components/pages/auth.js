@@ -16,14 +16,14 @@ export default class Auth extends Component {
 
     handleSuccessfulAuth() {
     
-        this.props.handleSuccessfulLogin();
+        this.props.Successful();
         this.props.history.push("/");
     
     }
 
     handleUnsuccessfulAuth() {
     
-        this.props.handleUnsuccessfulLogin();
+        this.props.Successful();
     
     }
 

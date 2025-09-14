@@ -76,7 +76,7 @@ export default class BlogForm extends Component {
             content
 
         })
-        console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked successfully!')
+        console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked Successfuly!')
 
     }
 
@@ -126,7 +126,7 @@ export default class BlogForm extends Component {
                 });
 
                 // console.log("Form data includes:", this.state);
-                this.props.handleSuccessfullFormSubmission(
+                this.props.handleSuccessfulFormSubmission(
                     response.data.portfolio_blog
                 );
 
@@ -188,8 +188,8 @@ export default class BlogForm extends Component {
 
                 <div className="image-uploaders">
                     <DropzoneComponent 
-                        config={this.componentConfig} 
-                        djsConfig={this.djsConfig} 
+                        config={this.componentConfig()} 
+                        djsConfig={this.djsConfig()} 
                         eventHandlers={this.handleFeaturedImageDrop()} 
                         ref={this.featuredImageRef}
                     >

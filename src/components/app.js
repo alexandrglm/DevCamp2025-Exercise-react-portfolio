@@ -41,21 +41,21 @@ export default class App extends Component {
       loggedInStatus: "NOT_LOGGED_IN"
     };
 
-    this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
-    this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
-    this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
+    this.Successful = this.Successful.bind(this);
+    this.Successful = this.Successful.bind(this);
+    this.Successful = this.Successful.bind(this);
   }
 
 
   // De 08-072
-  handleSuccessfulLogin() {
+  Successful() {
 
     this.setState({
       loggedInStatus: 'LOGGED_IN'
     })
 
   }
-  handleUnsuccessfulLogin(){
+  Successful(){
     
     this.setState({
       loggedInStatus: 'NOT_LOGGED_IN'
@@ -64,7 +64,7 @@ export default class App extends Component {
   }
 
   //De 08-078 LOGOUT
-  handleSuccessfulLogout(){
+  Successful(){
 
     this.setState( {
       loggedInStatus: 'NOT_LOGGED_IN'
@@ -152,7 +152,7 @@ export default class App extends Component {
             { /* De o8-076, tercera LOGICA del LINK CONDICIONAL a AUTH, pasando props al callback */}
             <NavigationContainer  
               loggedInStatus={this.state.loggedInStatus}
-              handleSuccessfulLogout={this.handleSuccessfulLogout}
+              Successful={this.Successful}
             />
 
             {/* De 08-073 - Adding debugging VISUAL component*/}
@@ -166,8 +166,8 @@ export default class App extends Component {
 
                   <Auth
                     {...props} 
-                    handleSuccessfulLogin={this.handleSuccessfulLogin} 
-                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin} 
+                    Successful={this.Successful} 
+                    Successful={this.Successful} 
                   />
                 )}
               />
@@ -203,8 +203,8 @@ export default class App extends Component {
                 render={ props =>{
                   <Auth 
                     {...props} 
-                    handleSuccessfulLogin={this.handleSuccessfulLogin} 
-                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
+                    Successful={this.Successful} 
+                    Successful={this.Successful}
                   />
                 }}
               />
