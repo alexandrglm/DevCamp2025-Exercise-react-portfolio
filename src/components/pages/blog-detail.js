@@ -76,7 +76,11 @@ export default class BlogDetail extends Component {
 
             if ( this.state.editMode ) {
 
-                return <BlogForm />
+                return( 
+                <BlogForm 
+                    editMode={this.state.editMode} 
+                    blog={this.state.blogItem}
+                />)
 
             } else {
                 return (
