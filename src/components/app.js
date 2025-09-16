@@ -157,8 +157,9 @@ export default class App extends Component {
               handleSuccessfulLogout={this.handleSuccessfulLogout }
             />
 
-            {/* De 08-073 - Adding debugging VISUAL component*/}
-            <h2>{this.state.loggedInStatus}</h2>
+            {/* De 08-073 - Adding debugging VISUAL component, 
+            fue precioso usarlo pero... bye*/}
+            {/* <h2>{this.state.loggedInStatus}</h2> */}
 
             <Switch>  
               <Route exact path="/" component={Home} />
