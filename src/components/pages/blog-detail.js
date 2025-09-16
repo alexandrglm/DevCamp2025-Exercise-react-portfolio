@@ -4,8 +4,10 @@ import React, { Component } from "react";
 import ReactHtmlParser from 'react-html-parser'
 
 import BlogFeaturedImage from "../blog/blog-featured-image";
+import BlogForm from '../blog/blog-form'
 
 const miApi = 'https://apialexandr.devcamp.space'
+
 
 export default class BlogDetail extends Component {
 
@@ -16,11 +18,24 @@ export default class BlogDetail extends Component {
         this.state = {
 
             currentId: this.props.match.params.slug,
-            blogItem: {}
+            blogItem: {},
+            editMode: false
 
         }
 
         this.getBlogItem = this.getBlogItem.bind(this)
+        this.handleEditClick = this.handleEditClick.bind(this)
+
+    }
+
+    handleEditClick() {
+
+        this.setState({
+
+            editMode: true
+
+        })
+
     }
 
     getBlogItem(){
@@ -56,43 +71,42 @@ export default class BlogDetail extends Component {
 
         } = this.state.blogItem
 
-        return (
 
-            <div className="blog-container">
-                
-                <div className="content-container">
+        const contentManager = () => {
 
-                    <h1>{title}</h1>
+            if ( this.state.editMode ) {
 
+                return <BlogForm />
 
-                {/* 
+            } else {
+                return (
 
-                Hemos pasado tan limpiamente un elvis al propio componente
-                de featured-image, ya que este incorpora la verificacion 
-                
-                { featured_image_url ? (
+                    <div className="content-container">
 
-                    <div className="featured-image-wrapper">
-                        <img src={featured_image_url} />
+                        <h1 onClick={this.handleEditClick}>{title}</h1>
+
+                        <BlogFeaturedImage img={featured_image_url} />
+
+                        <div className="content">
+
+                            <div>{ReactHtmlParser(content)}</div>
+
+                        </div>
+                                     
                     </div>
+                )
 
-                ): null } 
-                */}
-                <BlogFeaturedImage img={featured_image_url} />
+            }
 
+        }
 
-
-                    <div className="content">
-
-                        <div>{ReactHtmlParser(content)}</div>
-
-                    </div>
-                     
-                
-                </div>
-
-            </div>
+        return(
+            // /* Y aqui es donde llamamos al contentcontainter *
+            <div className="blog-container">{ contentManager() }</div>
 
         )
+
+
+        
     }
 }
