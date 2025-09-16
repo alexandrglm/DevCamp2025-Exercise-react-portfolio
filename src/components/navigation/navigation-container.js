@@ -46,7 +46,7 @@ const NavigationContainer = props => {
                 if ( response.status === 200 ) {
 
                     props.history.push("/")
-                    props.Successful();
+                    props.handleSuccessfulLogout();
 
                 }
                 return response.data

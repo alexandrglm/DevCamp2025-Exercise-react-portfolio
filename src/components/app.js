@@ -41,21 +41,23 @@ export default class App extends Component {
       loggedInStatus: "NOT_LOGGED_IN"
     };
 
-    this.Successful = this.Successful.bind(this);
-    this.Successful = this.Successful.bind(this);
-    this.Successful = this.Successful.bind(this);
+    this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
+    this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
+    this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
+    // this.checkLoginStatus = this.checkLoginStatus.bind(this)
+
   }
 
 
   // De 08-072
-  Successful() {
+  handleSuccessfulLogin() {
 
     this.setState({
       loggedInStatus: 'LOGGED_IN'
     })
 
   }
-  Successful(){
+  handleUnsuccessfulLogin(){
     
     this.setState({
       loggedInStatus: 'NOT_LOGGED_IN'
@@ -64,7 +66,7 @@ export default class App extends Component {
   }
 
   //De 08-078 LOGOUT
-  Successful(){
+  handleSuccessfulLogout(){
 
     this.setState( {
       loggedInStatus: 'NOT_LOGGED_IN'
@@ -152,7 +154,7 @@ export default class App extends Component {
             { /* De o8-076, tercera LOGICA del LINK CONDICIONAL a AUTH, pasando props al callback */}
             <NavigationContainer  
               loggedInStatus={this.state.loggedInStatus}
-              Successful={this.Successful}
+              handleSuccessfulLogout={this.handleSuccessfulLogout }
             />
 
             {/* De 08-073 - Adding debugging VISUAL component*/}
@@ -166,8 +168,8 @@ export default class App extends Component {
 
                   <Auth
                     {...props} 
-                    Successful={this.Successful} 
-                    Successful={this.Successful} 
+                    handleSuccessfulLogin={this.handleSuccessfulLogin}
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
                   />
                 )}
               />
@@ -198,13 +200,13 @@ export default class App extends Component {
 
 
               {/* Esto ya lo quitaré, quiero acceso directo */}
-              <Route 
+              <Route
                 path="/auth"
                 render={ props =>{
-                  <Auth 
-                    {...props} 
-                    Successful={this.Successful} 
-                    Successful={this.Successful}
+                  <Auth
+                    {...props}
+                    handleSuccessfulLogin={this.handleSuccessfulLogin}
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
                   />
                 }}
               />
