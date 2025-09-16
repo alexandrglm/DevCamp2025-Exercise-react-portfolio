@@ -198,7 +198,9 @@ export default class BlogForm extends Component {
 
                 <div className='one-column'>
                     <RichTextEditor
-                        handleRichTextEditorChange={this.handleRichTextEditorChange}    
+                        handleRichTextEditorChange={this.handleRichTextEditorChange}
+                        editMode={this.props.editMode} 
+                        contentToEdit={this.props.blog && this.props.blog.content} 
                     />
                 </div>
 
