@@ -1,136 +1,187 @@
-// De 09-140, Initial blog-form component 
-import React, { Component } from 'react'
-import axios from 'axios'
-import DropzoneComponent from 'react-dropzone-component'
+    // De 09-140, Initial blog-form component 
+    import React, { Component } from 'react'
+    import axios from 'axios'
+    import DropzoneComponent from 'react-dropzone-component'
 
-import RichTextEditor from '../forms/rich-text-editor'
+    import RichTextEditor from '../forms/rich-text-editor'
+    import htmlToDraft from 'html-to-draftjs'
+    import { ContentState, EditorState } from 'draft-js'
 
-const miApi = 'https://apialexandr.devcamp.space'
+    const miApi = 'https://apialexandr.devcamp.space'
 
-export default class BlogForm extends Component {
+    export default class BlogForm extends Component {
 
-    constructor(props){
+        constructor(props){
 
-        super(props)
+            super(props)
 
-        this.state = {
+            this.state = {
 
-            id: '',
-            title: '',
-            blog_status: '',
-            content: '',
-            featured_image: ''
+                id: '',
+                title: '',
+                blog_status: '',
+                content: '',
+                featured_image: '',
+                apiUrl: `${miApi}/portfolio/portfolio_blogs`,
+                apiAction: 'post'
+
+            }
+
+            this.handleChange = this.handleChange.bind(this)
+            this.handleSubmit = this.handleSubmit.bind(this)
+            this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this)
+
+            this.componentConfig = this.componentConfig.bind(this)
+            this.djsConfig = this.djsConfig.bind(this)
+            this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this)
+            this.deleteImage = this.deleteImage.bind(this)
+
+            this.featuredImageRef = React.createRef()
+
+        
+        }
+
+
+        deleteImage(imageType){
+
+            axios
+                .delete(
+                    `${miApi}/portfolio/delete-portfolio-blog-image/${
+                        this.props.blog.id
+                    }?image_type=${imageType}`,
+                    { withCredentials: true}
+                
+                )
+                .then( response => {
+
+                    this.props.handleFeaturedImageDelete();
+
+                })
+                .catch ( error => {
+
+                    console.log('[DEBUG DELETE FEATURED_IMG]:', error)
+
+                })
+
 
         }
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this)
+        componentWillMount(){
 
-        this.componentConfig = this.componentConfig.bind(this)
-        this.djsConfig = this.djsConfig.bind(this)
-        this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this)
-        this.deleteImage = this.deleteImage.bind(this)
+            if ( this.props.editMode ) {
 
-        this.featuredImageRef = React.createRef()
+                this.setState({
 
-       
-    }
+                    id: this.props.blog.id,
+                    title: this.props.blog.title,
+                    blog_status: this.props.blog.blog_status,
+                    content: this.props.blog.content,
+                    apiUrl: `${miApi}/portfolio/portfolio_blogs/${this.props.blog.id}`,
+                    apiAction: 'patch'
 
-    componentWillMount(){
+                })
 
-        if ( this.props.editMode ) {
+                // if ( this.props.blog.content ) {
+
+                //     const blocksFromHTML = htmlToDraft(this.props.blog.content)
+                //     const { contentBlocks, entityMap } = blocksFromHTML
+
+                //     const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap)
+
+                //     const editorState = EditorState.createWithContent(contentState)
+
+                //     this.state({
+
+                //         editorState
+
+                //     })
+
+                // }
+
+            }        
+
+        }
+        componentConfig(){
+
+            return{
+
+                iconFiletypes: ['.jpg', '.png', '.gif'],
+                showFiletypeIcon: true,
+                postUrl: "https://httpbin.org/post"
+
+            }
+
+        }
+
+        djsConfig() {
+
+            return{
+
+                addRemoveLinks: true,
+                maxFiles: 1
+
+            }
+
+
+        }
+
+        handleFeaturedImageDrop() {
+
+            return {
+
+                addedfile: file => this.setState({ featured_image: file })
+
+            }
+
+        }
+
+        handleRichTextEditorChange(content) {
 
             this.setState({
 
-                id: this.props.blog.id,
-                title: this.props.blog.title,
-                status: this.props.blog.status
+                content
 
             })
-
-        }        
-
-    }
-    componentConfig(){
-
-        return{
-
-            iconFiletypes: ['.jpg', '.png', '.gif'],
-            showFiletypeIcon: true,
-            postUrl: "https://httpbin.org/post"
+            console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked Successfuly!')
 
         }
 
-    }
+        buildForm() {
 
-    djsConfig() {
+            let formData = new FormData()
 
-        return{
+            formData.append('portfolio_blog[title]', this.state.title)
+            formData.append('portfolio_blog[blog_status]', this.state.blog_status)
+            formData.append('portfolio_blog[content]', this.state.content )
 
-            addRemoveLinks: true,
-            maxFiles: 1
+            if ( this.state.featured_image ) {
+
+                formData.append('portfolio_blog[featured_image]', this.state.featured_image)
+
+            }
+
+            return formData
 
         }
 
 
-    }
+        handleSubmit(event) {
 
-    handleFeaturedImageDrop() {
+            // De 10-168, refactorizamos toda la axios
+            axios({
 
-        return {
-
-            addedfile: file => this.setState({ featured_image: file })
-
-        }
-
-    }
-
-    handleRichTextEditorChange(content) {
-
-        this.setState({
-
-            content
-
-        })
-        console.log('[DEBUG DraftJS Blog-Form] -> Content change handler is being invoked Successfuly!')
-
-    }
-
-    buildForm() {
-
-        let formData = new FormData()
-
-        formData.append('portfolio_blog[title]', this.state.title)
-        formData.append('portfolio_blog[blog_status]', this.state.blog_status)
-        formData.append('portfolio_blog[content]', this.state.content )
-
-        if ( this.state.featured_image ) {
-
-            formData.append('portfolio_blog[featured_image]', this.state.featured_image)
-
-        }
-
-        return formData
-
-    }
-
-
-    handleSubmit(event) {
-
-        axios
-            .post(`${miApi}/portfolio/portfolio_blogs`,
-                this.buildForm(),
-                { withCredentials: true}
-            )
+                method: this.state.apiAction,
+                url: this.state.apiUrl,
+                data: this.buildForm(),
+                withCredentials: true
+            
+            })
             .then( response => {
 
-                // limpiando DropZone ya no tan facil
                 if (  this.state.featured_image ) {
                     this.featuredImageRef.current.dropzone.removeAllFiles()
                 }
 
-                // limpiando form a lo facil
                 this.setState({
 
                     title: '',
@@ -140,10 +191,20 @@ export default class BlogForm extends Component {
 
                 });
 
-                // console.log("Form data includes:", this.state);
-                this.props.handleSuccessfulFormSubmission(
-                    response.data.portfolio_blog
-                );
+                if ( this.props.editMode ) {
+
+                    this.props.handleUpdateFormSubmission(
+                        response.data.portfolio_blog
+                    );
+
+
+                } else {
+
+                    this.props.handleSuccessfulFormSubmission(
+                        response.data.portfolio_blog
+                    )
+
+                }
 
             })
             .catch ( error => {
@@ -151,113 +212,92 @@ export default class BlogForm extends Component {
                 console.log('[AXIOS BLOG-FORM SUBMIT] Error: ', error)
             })
 
+            event.preventDefault()
 
-        event.preventDefault()
+        }
 
-    }
 
-    deleteImage(imageType){
 
-        axios
-            .delete(`${miApi}/portfolio/delete-portfolio-image/${this.props.blog.id}?image_type=${imageType}`,
-            
-                { withCredentials: true}
-            
-            )
-            .then( response => {
+        handleChange(event) {
 
-                this.props.handleFeaturedImageDelete();
+            this.setState({
 
-            })
-            .error ( error => {
-
-                console.log('[DEBUG DELETE FEATURED_IMG]:', error)
+                [event.target.name]: event.target.value
 
             })
 
-
-    }
-
-    handleChange(event) {
-
-        this.setState({
-
-            [event.target.name]: event.target.value
-
-        })
-
-    }
+        }
 
 
 
 
-    render() {
-        return (
+        render() {
+            return (
 
-        <form onSubmit={this.handleSubmit} className="blog-form-wrapper">
-            
-            <div className="two-column">
-            
-            <input
-                type="text"
-                onChange={this.handleChange}
-                name="title"
-                placeholder="Blog Title"
-                value={this.state.title}
-            />
-
-            <input
-                type="text"
-                onChange={this.handleChange}
-                name="blog_status"
-                placeholder="Blog status"
-                value={this.state.blog_status}
-            />
-            </div>
-
-            <div className="one-column">
-                <RichTextEditor
-                    handleRichTextEditorChange={this.handleRichTextEditorChange}
-                    editMode={this.props.editMode}
-                    contentToEdit={
-                    this.props.editMode && this.props.blog.content
-                        ? this.props.blog.content
-                        : null
-                    }
-                />
-            </div>
-
-            <div className="image-uploaders">
-                {this.props.editMode && this.props.blog.featured_image_url ? (
-                    <div className="portfolio-manager-image-wrapper">
-                        <img src={this.props.blog.featured_image_url} />
-
-                        <div className="image-removal-link">
-                            <a onClick={ () => this.deleteImage('featured_image') }>
-                                Remove file
-                            </a>
-                        </div>
-                    </div>
-            ) : (
-                <DropzoneComponent
-                    ref={this.featuredImageRef}
-                    config={this.componentConfig()}
-                    djsConfig={this.djsConfig()}
-                    eventHandlers={this.handleFeaturedImageDrop()}
-                >
-
-                <div className="dz-message">
-                    Featured Image
-                </div>
+            <form onSubmit={this.handleSubmit} className="blog-form-wrapper">
                 
-                </DropzoneComponent>
-            )}
-            </div>
+                <div className="two-column">
+                
+                <input
+                    type="text"
+                    onChange={this.handleChange}
+                    name="title"
+                    placeholder="Blog Title"
+                    value={this.state.title}
+                />
 
-            <button className="btn">
-                Save Post
-            </button>
-        </form>
-        );
+                <input
+                    type="text"
+                    onChange={this.handleChange}
+                    name="blog_status"
+                    placeholder="Blog status"
+                    value={this.state.blog_status}
+                />
+                </div>
+
+                <div className="one-column">
+                    <RichTextEditor
+                        handleRichTextEditorChange={this.handleRichTextEditorChange}
+                        editMode={this.props.editMode}
+                        contentToEdit={
+                        this.props.editMode && this.props.blog.content
+                            ? this.props.blog.content
+                            : null
+                        }
+                    />
+                </div>
+
+                <div className="image-uploaders">
+                    {this.props.editMode && this.props.blog.featured_image_url ? (
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={this.props.blog.featured_image_url} />
+
+                            <div className="image-removal-link">
+                                <a onClick={ () => this.deleteImage('featured_image') }>
+                                    Remove file
+                                </a>
+                            </div>
+                        </div>
+                ) : (
+                    <DropzoneComponent
+                        ref={this.featuredImageRef}
+                        config={this.componentConfig()}
+                        djsConfig={this.djsConfig()}
+                        eventHandlers={this.handleFeaturedImageDrop()}
+                    >
+
+                    <div className="dz-message">
+                        Featured Image
+                    </div>
+                    
+                    </DropzoneComponent>
+                )}
+                </div>
+
+                <button className="btn">
+                    Save Post
+                </button>
+            </form>
+            );
+        }
     }
-}
