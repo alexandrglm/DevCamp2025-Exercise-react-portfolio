@@ -23,19 +23,27 @@ export default class BlogDetail extends Component {
 
         }
 
-        this.getBlogItem = this.getBlogItem.bind(this)
+        // this.getBlogItem = this.getBlogItem.bind(this)
         this.handleEditClick = this.handleEditClick.bind(this)
+        this.handleFeaturedImageDelete = this.handleFeaturedImageDelete.bind(this)    
+    }
 
+    handleFeaturedImageDelete() {
+        
+        this.setState({
+        
+            blogItem: {
+                featured_image_url: ""
+            }
+        
+        });
     }
 
     handleEditClick() {
-
-        this.setState({
-
-            editMode: true
-
-        })
-
+        
+        console.log("handle edit clicked");
+        
+        this.setState({ editMode: true });
     }
 
     getBlogItem(){
@@ -79,7 +87,8 @@ export default class BlogDetail extends Component {
                 return( 
                 <BlogForm 
                     editMode={this.state.editMode} 
-                    blog={this.state.blogItem}
+                    blog={this.state.blogItem} 
+                    handleFeaturedImageDelete={this.handleFeaturedImageDelete}
                 />)
 
             } else {

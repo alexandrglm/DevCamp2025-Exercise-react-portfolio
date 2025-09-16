@@ -30,8 +30,11 @@ export default class BlogForm extends Component {
         this.componentConfig = this.componentConfig.bind(this)
         this.djsConfig = this.djsConfig.bind(this)
         this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this)
+        this.deleteImage = this.deleteImage.bind(this)
 
         this.featuredImageRef = React.createRef()
+
+       
     }
 
     componentWillMount(){
@@ -85,8 +88,6 @@ export default class BlogForm extends Component {
 
     handleRichTextEditorChange(content) {
 
-        /*
-        Vamos a empezar a subir syntax; content: content es lo mismo que content a secas en syntax moderna */
         this.setState({
 
             content
@@ -126,9 +127,7 @@ export default class BlogForm extends Component {
 
                 // limpiando DropZone ya no tan facil
                 if (  this.state.featured_image ) {
-
                     this.featuredImageRef.current.dropzone.removeAllFiles()
-
                 }
 
                 // limpiando form a lo facil
@@ -154,6 +153,28 @@ export default class BlogForm extends Component {
 
 
         event.preventDefault()
+
+    }
+
+    deleteImage(imageType){
+
+        axios
+            .delete(`${miApi}/portfolio/delete-portfolio-image/${this.props.blog.id}?image_type=${imageType}`,
+            
+                { withCredentials: true}
+            
+            )
+            .then( response => {
+
+                this.props.handleFeaturedImageDelete();
+
+            })
+            .error ( error => {
+
+                console.log('[DEBUG DELETE FEATURED_IMG]:', error)
+
+            })
+
 
     }
 
@@ -212,7 +233,9 @@ export default class BlogForm extends Component {
                         <img src={this.props.blog.featured_image_url} />
 
                         <div className="image-removal-link">
-                            <a>Remove file</a>
+                            <a onClick={ () => this.deleteImage('featured_image') }>
+                                Remove file
+                            </a>
                         </div>
                     </div>
             ) : (
